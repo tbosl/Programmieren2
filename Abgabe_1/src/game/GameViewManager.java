@@ -1,9 +1,9 @@
 package game;
 
 public class GameViewManager extends GameView {
-    Lander lander;
-    Astronaut astronaut;
-    Score score;
+    private Lander lander;
+    private Astronaut astronaut;
+    private Score score;
 
     @Override
     public void initialize() {
