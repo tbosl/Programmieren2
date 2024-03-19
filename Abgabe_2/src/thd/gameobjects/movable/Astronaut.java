@@ -53,6 +53,6 @@ public class Astronaut {
      * Adds the corresponding object to the canvas.
      */
     public void addToCanvas() {
-        gameView.addImageToCanvas("astronaut.png", position.getX(), position.getY(), 2, rotation);
+        gameView.addImageToCanvas("astronaut.png", position.getX(), position.getY(), 1, rotation);
     }
 }
