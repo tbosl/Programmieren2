@@ -1,9 +1,7 @@
 package thd.gameobjects.movable;
 
-import thd.gameobjects.base.Position;
 import thd.game.utilities.GameView;
-
-import java.awt.*;
+import thd.gameobjects.base.Position;
 
 /**
  * A gameobject that represents the first type of alien invader.
