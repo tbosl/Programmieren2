@@ -16,6 +16,7 @@ public class Score {
     private final double size;
     private final double width;
     private final double height;
+    private final ScoreBlockImages scoreBlockImages;
 
     /**
      * Creates a Score with a reference of the gameview.
@@ -29,7 +30,8 @@ public class Score {
         rotation = 0;
         width = 150;
         height = 33;
-        position = new Position(GameView.WIDTH - width, -8);
+        position = new Position(GameView.WIDTH - width, 3);
+        scoreBlockImages = new ScoreBlockImages();
     }
 
     /**
@@ -46,6 +48,13 @@ public class Score {
      * Adds the corresponding object to the canvas.
      */
     public void addToCanvas() {
-        gameView.addTextToCanvas("1500", position.getX(), position.getY(), size, true, Color.GREEN, rotation);
+        addScoreToCanvas();
+    }
+
+    private void addScoreToCanvas() {
+        gameView.addBlockImageToCanvas(scoreBlockImages.generateOne('r'), position.getX(), position.getY(), 1, rotation);
+        gameView.addBlockImageToCanvas(scoreBlockImages.generateFive('r'), position.getX() + 30, position.getY(), 1, rotation);
+        gameView.addBlockImageToCanvas(scoreBlockImages.generateZero('r'), position.getX() + 60, position.getY(), 1, rotation);
+        gameView.addBlockImageToCanvas(scoreBlockImages.generateZero('r'), position.getX() + 90, position.getY(), 1, rotation);
     }
 }

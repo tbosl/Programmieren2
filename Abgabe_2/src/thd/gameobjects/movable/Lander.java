@@ -52,6 +52,6 @@ public class Lander {
      * Adds the corresponding object to the canvas.
      */
     public void addToCanvas() {
-        gameView.addImageToCanvas("lander.png", position.getX(), position.getY(), 2, rotation);
+        gameView.addImageToCanvas("lander.png", position.getX(), position.getY(), 0.08, rotation);
     }
 }

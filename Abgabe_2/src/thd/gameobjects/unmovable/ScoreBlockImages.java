@@ -1,7 +1,7 @@
 package thd.gameobjects.unmovable;
 
 class ScoreBlockImages {
-    static String generateZero(char colorCode) {
+    String generateZero(char colorCode) {
         String flag = """
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
@@ -19,14 +19,14 @@ class ScoreBlockImages {
                 XXX       XXXXXXX
                 XXX       XXXXXXX
                 XXX       XXXXXXX
-                XXX       XXXXXXX                   
-                XXXXXXXXXXXXXXXXX                        
-                XXXXXXXXXXXXXXXXX                        
+                XXX       XXXXXXX
+                XXXXXXXXXXXXXXXXX
+                XXXXXXXXXXXXXXXXX
                 """;
         return flag.replace('X', colorCode);
     }
 
-    static String generateOne(char colorCode) {
+    String generateOne(char colorCode) {
         String flag = """
                           XXXXXXX
                          XXXXXXXX
@@ -51,7 +51,7 @@ class ScoreBlockImages {
         return flag.replace('X', colorCode);
     }
 
-    static String generateTwo(char colorCode) {
+    private String generateTwo(char colorCode) {
         String flag = """
                   XXXXXXXXXXXXXX
                  XXXXXXXXXXXXXXXX
@@ -63,12 +63,12 @@ class ScoreBlockImages {
                            XXXXXX
                            XXXXX
                          XXXXX
-                        XXXX   
+                        XXXX
                        XXXX
                       XXX
                     XXX
                   XXX
-                 XXX                            
+                 XXX
                 XXXXXXXXXXXXXXXXX
                  XXXXXXXXXXXXXXXX
                   XXXXXXXXXXXXXXX
@@ -76,7 +76,7 @@ class ScoreBlockImages {
         return flag.replace('X', colorCode);
     }
 
-    static String generateThree(char colorCode) {
+    private String generateThree(char colorCode) {
         String flag = """
                 XXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
@@ -88,20 +88,20 @@ class ScoreBlockImages {
                            XXXXXX
                     XXXXXXXXXXXXX
                     XXXXXXXXXXXXX
-                    XXXXXXXXXXXXX  
+                    XXXXXXXXXXXXX
                            XXXXXX
                            XXXXXX
                            XXXXXX
                            XXXXXX
                            XXXXXX
-                XXXXXXXXXXXXXXXXX                            
+                XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXX
                 """;
         return flag.replace('X', colorCode);
     }
 
-    static String generateFour(char colorCode) {
+    private String generateFour(char colorCode) {
         String flag = """
                           XXXXXXX
                          XXXXXXXX
@@ -126,7 +126,7 @@ class ScoreBlockImages {
         return flag.replace('X', colorCode);
     }
 
-    static String generateFive(char colorCode) {
+    String generateFive(char colorCode) {
         String flag = """
                  XXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
@@ -138,20 +138,20 @@ class ScoreBlockImages {
                 XXXXXX
                 XXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
-                 XXXXXXXXXXXXXXXX   
+                 XXXXXXXXXXXXXXXX
                            XXXXXX
                            XXXXXX
                            XXXXXX
                            XXXXXX
                            XXXXXX
-                XXXXXXXXXXXXXXXXX                            
+                XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXX
                 """;
         return flag.replace('X', colorCode);
     }
 
-    static String generateSix(char colorCode) {
+    private String generateSix(char colorCode) {
         String flag = """
                  XXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
@@ -163,20 +163,20 @@ class ScoreBlockImages {
                 XXXXXX
                 XXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX   
+                XXXXXXXXXXXXXXXXX
                 XXXXXX        XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
-                XXXXXXXXXXXXXXXXX                            
+                XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXX
                 """;
         return flag.replace('X', colorCode);
     }
 
-    static String generateSeven(char colorCode) {
+    private String generateSeven(char colorCode) {
         String flag = """
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
@@ -195,13 +195,13 @@ class ScoreBlockImages {
                    XXXX
                   XXXX
                  XXXX
-                XXXX                   
+                XXXX
                 XXXX
                 """;
         return flag.replace('X', colorCode);
     }
 
-    static String generateEight(char colorCode) {
+    private String generateEight(char colorCode) {
         String flag = """
                  XXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXX
@@ -213,20 +213,20 @@ class ScoreBlockImages {
                  XXXXX       XXX
                    XXXXXXXXXXX
                    XXXXXXXXXXX
-                 XXXXX       XXX   
+                 XXXXX       XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
                 XXXXXX        XXX
-                XXXXXXXXXXXXXXXXX                            
+                XXXXXXXXXXXXXXXXX
                  XXXXXXXXXXXXXXXX
                   XXXXXXXXXXXXXX
                 """;
         return flag.replace('X', colorCode);
     }
 
-    static String generateNine(char colorCode) {
+    private String generateNine(char colorCode) {
         String flag = """
                  XXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
@@ -238,13 +238,13 @@ class ScoreBlockImages {
                 XXXXXX        XXX
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX   
+                XXXXXXXXXXXXXXXXX
                               XXX
                               XXX
                               XXX
                               XXX
                               XXX
-                XXXXXXXXXXXXXXXXX                            
+                XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXXX
                 XXXXXXXXXXXXXXXX
                 """;
