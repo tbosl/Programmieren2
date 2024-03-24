@@ -4,7 +4,13 @@ import thd.game.utilities.GameView;
 
 /**
  * The Position refers to the location of objects in the {@link GameView}.
- * The coordinate (0 | 0) is the left upper corner. Greater x means more rightly. Greater y means lower.
+ * The following shows the coordinates of each corner:
+ * <pre>
+ * (0,0)___________(1279,0)
+ * |                      |
+ * |                      |
+ * (0,719)_______(1279,719)
+ * </pre>
  *
  * @see GameView
  */

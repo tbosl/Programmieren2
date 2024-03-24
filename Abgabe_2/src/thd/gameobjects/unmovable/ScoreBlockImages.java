@@ -1,253 +1,267 @@
 package thd.gameobjects.unmovable;
 
+/**
+ * These block images can be used for the representation of the user score.
+ * The default color of the images is red.
+ */
 class ScoreBlockImages {
-    String generateZero(char colorCode) {
-        String flag = """
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXX       XXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number zero.
+     * The color is red.
+     */
+    public static final String ZERO = """
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrr       rrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            """;
 
-    String generateOne(char colorCode) {
-        String flag = """
-                          XXXXXXX
-                         XXXXXXXX
-                        XXXXXXXXX
-                       XXXX XXXXX
-                      XXXX  XXXXX
-                     XXXX   XXXXX
-                    XXXX    XXXXX
-                   XXXX     XXXXX
-                  XXXX      XXXXX
-                 XXXX       XXXXX
-                XXXX        XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                      """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number one.
+     * The color is red.
+     */
+    public static final String ONE = """
+                      rrrrrrr
+                     rrrrrrrr
+                    rrrrrrrrr
+                   rrrr rrrrr
+                  rrrr  rrrrr
+                 rrrr   rrrrr
+                rrrr    rrrrr
+               rrrr     rrrrr
+              rrrr      rrrrr
+             rrrr       rrrrr
+            rrrr        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                  """;
 
-    private String generateTwo(char colorCode) {
-        String flag = """
-                  XXXXXXXXXXXXXX
-                 XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXX        XXXXXX
-                XX         XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXX
-                         XXXXX
-                        XXXX
-                       XXXX
-                      XXX
-                    XXX
-                  XXX
-                 XXX
-                XXXXXXXXXXXXXXXXX
-                 XXXXXXXXXXXXXXXX
-                  XXXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number two.
+     * The color is red.
+     */
+    public static final String TWO = """
+              rrrrrrrrrrrrrr
+             rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrr        rrrrrr
+            rr         rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrr
+                     rrrrr
+                    rrrr
+                   rrrr
+                  rrr
+                rrr
+              rrr
+             rrr
+            rrrrrrrrrrrrrrrrr
+             rrrrrrrrrrrrrrrr
+              rrrrrrrrrrrrrrr
+            """;
 
-    private String generateThree(char colorCode) {
-        String flag = """
-                XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                    XXXXXXXXXXXXX
-                    XXXXXXXXXXXXX
-                    XXXXXXXXXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number three.
+     * The color is red.
+     */
+    public static final String THREE = """
+            rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                rrrrrrrrrrrrr
+                rrrrrrrrrrrrr
+                rrrrrrrrrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrr
+            """;
 
-    private String generateFour(char colorCode) {
-        String flag = """
-                          XXXXXXX
-                         XXXXXXXX
-                        XXXXXXXXX
-                       XXX  XXXXX
-                      XXX   XXXXX
-                     XXX    XXXXX
-                    XXX     XXXXX
-                   XXX      XXXXX
-                  XXX       XXXXX
-                 XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                            XXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number four.
+     * The color is red.
+     */
+    public static final String FOUR = """
+                      rrrrrrr
+                     rrrrrrrr
+                    rrrrrrrrr
+                   rrr  rrrrr
+                  rrr   rrrrr
+                 rrr    rrrrr
+                rrr     rrrrr
+               rrr      rrrrr
+              rrr       rrrrr
+             rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+                        rrrrr
+            """;
 
-    String generateFive(char colorCode) {
-        String flag = """
-                 XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                 XXXXXXXXXXXXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                           XXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number five.
+     * The color is red.
+     */
+    public static final String FIVE = """
+             rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+             rrrrrrrrrrrrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+                       rrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrr
+            """;
 
-    private String generateSix(char colorCode) {
-        String flag = """
-                 XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXX
-                XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number six.
+     * The color is red.
+     */
+    public static final String SIX = """
+             rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrr
+            rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrL
+            """;
 
-    private String generateSeven(char colorCode) {
-        String flag = """
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                             XXXX
-                             XXXX
-                            XXXXX
-                            XXXX
-                           XXXX
-                         XXXX
-                        XXXX
-                       XXXX
-                      XXXX
-                     XXXX
-                    XXXX
-                   XXXX
-                  XXXX
-                 XXXX
-                XXXX
-                XXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number seven.
+     * The color is red.
+     */
+    public static final String SEVEN = """
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+                         rrrr
+                         rrrr
+                        rrrrr
+                        rrrr
+                       rrrr
+                     rrrr
+                    rrrr
+                   rrrr
+                  rrrr
+                 rrrr
+                rrrr
+               rrrr
+              rrrr
+             rrrr
+            rrrr
+            rrrr
+            """;
 
-    private String generateEight(char colorCode) {
-        String flag = """
-                 XXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                 XXXXX       XXX
-                   XXXXXXXXXXX
-                   XXXXXXXXXXX
-                 XXXXX       XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXXXXXXXXXXXXX
-                 XXXXXXXXXXXXXXXX
-                  XXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number eight.
+     * The color is red.
+     */
+    public static final String EIGHT = """
+             rrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+             rrrrr       rrr
+               rrrrrrrrrrr
+               rrrrrrrrrrr
+             rrrrr       rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrrrrrrrrrrrrr
+             rrrrrrrrrrrrrrrr
+              rrrrrrrrrrrrrr
+            """;
 
-    private String generateNine(char colorCode) {
-        String flag = """
-                 XXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXX        XXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                              XXX
-                              XXX
-                              XXX
-                              XXX
-                              XXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXXX
-                XXXXXXXXXXXXXXXX
-                """;
-        return flag.replace('X', colorCode);
-    }
+    /**
+     * Blockimage representation of the number nine.
+     * The color is red.
+     */
+    public static final String NINE = """
+             rrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrr        rrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+                          rrr
+                          rrr
+                          rrr
+                          rrr
+                          rrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrrr
+            rrrrrrrrrrrrrrrr
+            """;
 }
