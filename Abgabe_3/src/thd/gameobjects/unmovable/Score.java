@@ -65,8 +65,8 @@ public class Score extends GameObject {
     private String generateColorizedNumber(int number) {
         int validatedNumber = number;
         if (number < 0 || number > 9) {
-            System.err.println(String.format("Invalid number for score: %d\n"
-                                             + "Default value (0) will be used.", number));
+            System.err.printf("Invalid number for score: %d\n"
+                              + "Default value (0) will be used.%n", number);
             validatedNumber = 0;
         }
         return scoreBlockImages[validatedNumber].replace('r', colors[colorIndex]);
