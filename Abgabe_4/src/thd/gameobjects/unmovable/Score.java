@@ -18,7 +18,7 @@ public class Score extends GameObject {
      */
     public Score(GameView gameView) {
         super(gameView);
-        position.updateCoordinates(GameView.WIDTH - 120, 3);
+        position.updateCoordinates(100, 75);
         rotation = 0;
         size = 1;
         colors = new char[]{'r', 'P', 'B', 'b', 'C', 'W', 'y', 'Y', 'O'};

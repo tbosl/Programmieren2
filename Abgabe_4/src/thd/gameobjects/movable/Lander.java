@@ -38,7 +38,7 @@ public class Lander extends GameObject {
 
     @Override
     public void updatePosition() {
-        if (targetPosition.getY() != 0) {
+        if (targetPosition.getY() != 120) {
             targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(nearestAstronaut.getPosition(), position));
         }
         position.moveToPosition(targetPosition, speedInPixel);
