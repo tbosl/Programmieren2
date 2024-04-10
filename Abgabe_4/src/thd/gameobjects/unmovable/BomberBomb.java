@@ -10,13 +10,13 @@ import java.util.Random;
  * A gameobject used to represent a bomb placed by a bomber.
  */
 public class BomberBomb extends GameObject {
+    private final ColorCycleManager colorCycleManager;
+
     /**
      * Creates a bomber bomb with a reference of the gameview.
      *
      * @param gameView The GameView.
      */
-    private final ColorCycleManager colorCycleManager;
-
     public BomberBomb(GameView gameView) {
         super(gameView);
         colorCycleManager = new ColorCycleManager(gameView, 150);

@@ -5,10 +5,6 @@ import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
 class LaserProjectileMovementPattern extends MovementPattern {
-
-    LaserProjectileMovementPattern() {
-    }
-
     @Override
     protected Position startPosition(Position... referencePositions) {
         return new Position(referencePositions[0].getX() + 75, referencePositions[0].getY() + 20);

@@ -2,9 +2,6 @@ package thd.gameobjects.movable;
 
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.base.MovementPattern;
-
-import java.awt.*;
 
 /**
  * A gameobject that represents the alien invader called Mutant.
@@ -12,7 +9,6 @@ import java.awt.*;
 public class Mutant extends GameObject {
     private final MutantMovementPatterns movementPattern;
     private final Spaceship spaceship;
-    boolean shaking;
 
 
     /**
