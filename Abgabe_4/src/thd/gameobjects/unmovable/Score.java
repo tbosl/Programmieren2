@@ -1,27 +1,28 @@
 package thd.gameobjects.unmovable;
 
 import thd.game.utilities.GameView;
+import thd.gameobjects.base.ColorCycleManager;
 import thd.gameobjects.base.GameObject;
 
 /**
  * A gameobject used to represent the current score of the user.
  */
 public class Score extends GameObject {
-    private final char[] colors;
     private int colorIndex;
     private final String[] scoreBlockImages;
+    private final ColorCycleManager colorCycleManager;
 
     /**
      * Creates a Score with a reference of the gameview.
      *
-     * @param gameView The GameView
+     * @param gameView The GameView.
      */
     public Score(GameView gameView) {
         super(gameView);
         position.updateCoordinates(100, 75);
         rotation = 0;
         size = 1;
-        colors = new char[]{'r', 'P', 'B', 'b', 'C', 'W', 'y', 'Y', 'O'};
+        colorCycleManager = new ColorCycleManager(gameView, 500);
         scoreBlockImages = new String[]{
                 ScoreBlockImages.ZERO,
                 ScoreBlockImages.ONE,
@@ -42,7 +43,6 @@ public class Score extends GameObject {
 
     @Override
     public void addToCanvas() {
-        updateColor();
         addScoreNumbersToCanvas();
     }
 
@@ -53,15 +53,6 @@ public class Score extends GameObject {
         gameView.addBlockImageToCanvas(generateColorizedNumber(0), position.getX() + 90, position.getY(), size, rotation);
     }
 
-    private void updateColor() {
-        if (gameView.timer(500, this)) {
-            colorIndex++;
-        }
-        if (colorIndex > colors.length - 1) {
-            colorIndex = 0;
-        }
-    }
-
     private String generateColorizedNumber(int number) {
         int validatedNumber = number;
         if (number < 0 || number > 9) {
@@ -69,6 +60,6 @@ public class Score extends GameObject {
                               + "Default value (0) will be used.%n", number);
             validatedNumber = 0;
         }
-        return scoreBlockImages[validatedNumber].replace('r', colors[colorIndex]);
+        return scoreBlockImages[validatedNumber].replace('r', colorCycleManager.findCurrentColorCode());
     }
 }

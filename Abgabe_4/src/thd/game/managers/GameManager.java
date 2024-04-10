@@ -28,5 +28,6 @@ class GameManager extends UserControlledGameObjectPool {
         bomber.addToCanvas();
         mutant.updatePosition();
         mutant.addToCanvas();
+        bomberBomb.addToCanvas();
     }
 }

@@ -26,7 +26,7 @@ public class Mutant extends GameObject {
     public Mutant(GameView gameView, Spaceship spaceship, Lander preMutation) {
         super(gameView);
         this.spaceship = spaceship;
-        movementPattern = new MutantMovementPatterns(this);
+        movementPattern = new MutantMovementPatterns(gameView);
         position.updateCoordinates(movementPattern.startPosition(preMutation.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
         rotation = 0;

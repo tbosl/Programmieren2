@@ -1,19 +1,23 @@
 package thd.gameobjects.movable;
 
+import thd.game.utilities.GameView;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
+import java.awt.*;
 import java.util.Random;
 
 public class MutantMovementPatterns extends MovementPattern {
-    private final Mutant mutant;
-    private int shakeCounterX;
-    private int shakeCounterY;
+    private final GameView gameView;
+    private boolean shakeLeft;
+    private boolean shakeUp;
+    private final int shakeFrequencyInMs;
 
-    MutantMovementPatterns(Mutant mutant) {
-        shakeCounterX = 0;
-        shakeCounterY = 0;
-        this.mutant = mutant;
+    MutantMovementPatterns(GameView gameView) {
+        this.gameView = gameView;
+        shakeLeft = false;
+        shakeUp = false;
+        shakeFrequencyInMs = 150;
     }
 
     @Override
@@ -44,56 +48,43 @@ public class MutantMovementPatterns extends MovementPattern {
         int verticalCenterAlign = 0;
         int horizontalCenterAlign = 10;
         return new Position[]{
-                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign - 120),
-                new Position(spaceship.getX() + horizontalCenterAlign + 150, spaceship.getY() + verticalCenterAlign),
-                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign + 120),
-                new Position(spaceship.getX() + horizontalCenterAlign - 130, spaceship.getY() + verticalCenterAlign)
-        };
+                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign - 100),
+                new Position(spaceship.getX() + horizontalCenterAlign + 130, spaceship.getY() + verticalCenterAlign),
+                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign + 100),
+                new Position(spaceship.getX() + horizontalCenterAlign - 110, spaceship.getY() + verticalCenterAlign)};
     }
 
     Position shake(Position... referencePositions) {
         Position spaceship = referencePositions[0];
         Position mutant = referencePositions[1];
         Position shakingOutcome = new Position(mutant);
-        addShaking(spaceship, mutant, shakingOutcome, true);
-        addShaking(spaceship, mutant, shakingOutcome, false);
+        updateShakeDirections();
+        addShaking(spaceship, mutant, shakingOutcome);
         return shakingOutcome;
     }
 
-    private void addShaking(Position spaceshipPosition, Position mutantPosition, Position shakingOutcome, boolean horizontal) {
-        double spaceshipAxis = horizontal ? spaceshipPosition.getX() : spaceshipPosition.getY();
-        double mutantAxis = horizontal ? mutantPosition.getX() : mutantPosition.getY();
-        int shakeCounter = horizontal ? shakeCounterX : shakeCounterY;
-        if (shakeCounter == 0 && spaceshipAxis < mutantAxis) {
-            shakeCounter = 5;
+    private void updateShakeDirections() {
+        if (gameView.timer(shakeFrequencyInMs, this)) {
+            shakeLeft = !shakeLeft;
+            shakeUp = !shakeUp;
         }
-        if (spaceshipAxis <= mutantAxis + 50 && spaceshipAxis >= mutantAxis - 50) {
-            mutant.shaking = true;
-            if ((shakeCounter / 5) % 2 == 0) {
-                if (horizontal) {
-                    shakingOutcome.right(4);
-                } else {
-                    shakingOutcome.up(4);
-                }
-            } else {
-                if (horizontal) {
-                    shakingOutcome.left(4);
-                } else {
-                    shakingOutcome.down(4);
-                }
-            }
+    }
 
-            if (horizontal) {
-                shakeCounterX = shakeCounter + 1;
+    private void addShaking(Position spaceshipPosition, Position mutantPosition, Position shakingOutcome) {
+        int threshold = 50;
+        int shakeSpeed = 5;
+        if (Math.abs(mutantPosition.getX() - spaceshipPosition.getX()) < threshold) {
+            if (shakeLeft) {
+                shakingOutcome.left(shakeSpeed);
             } else {
-                shakeCounterY = shakeCounter + 1;
+                shakingOutcome.right(shakeSpeed);
             }
-        } else {
-            mutant.shaking = false;
-            if (horizontal) {
-                shakeCounterX = 0;
+        }
+        if (Math.abs(mutantPosition.getY() - spaceshipPosition.getY()) < threshold) {
+            if (shakeUp) {
+                shakingOutcome.up(shakeSpeed);
             } else {
-                shakeCounterY = 0;
+                shakingOutcome.down(shakeSpeed);
             }
         }
     }
