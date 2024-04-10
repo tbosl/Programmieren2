@@ -24,5 +24,9 @@ class GameManager extends UserControlledGameObjectPool {
         smartBombReserve.addToCanvas();
         laserProjectile.updatePosition();
         laserProjectile.addToCanvas();
+        bomber.updatePosition();
+        bomber.addToCanvas();
+        mutant.updatePosition();
+        mutant.addToCanvas();
     }
 }

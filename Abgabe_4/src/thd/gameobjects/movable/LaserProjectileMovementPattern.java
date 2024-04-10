@@ -5,10 +5,8 @@ import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
 class LaserProjectileMovementPattern extends MovementPattern {
-    private final GameView gameView;
 
-    LaserProjectileMovementPattern(GameView gameView) {
-        this.gameView = gameView;
+    LaserProjectileMovementPattern() {
     }
 
     @Override
@@ -19,6 +17,6 @@ class LaserProjectileMovementPattern extends MovementPattern {
     @Override
     protected Position nextTargetPosition(Position... referencePositions) {
         Position laserPosition = referencePositions[0];
-        return laserPosition.getX() < 0 ? new Position(gameView.WIDTH - 50, laserPosition.getY()) : new Position(-50, laserPosition.getY());
+        return laserPosition.getX() < 0 ? new Position(GameView.WIDTH - 50, laserPosition.getY()) : new Position(-50, laserPosition.getY());
     }
 }

@@ -1,10 +1,7 @@
 package thd.game.managers;
 
 import thd.game.utilities.GameView;
-import thd.gameobjects.movable.Astronaut;
-import thd.gameobjects.movable.Lander;
-import thd.gameobjects.movable.LaserProjectile;
-import thd.gameobjects.movable.Spaceship;
+import thd.gameobjects.movable.*;
 import thd.gameobjects.unmovable.HeaderFrame;
 import thd.gameobjects.unmovable.ScannerFrame;
 import thd.gameobjects.unmovable.Score;
@@ -23,6 +20,8 @@ class UserControlledGameObjectPool {
     protected final ScannerFrame scannerFrame;
     protected final SmartBombReserve smartBombReserve;
     protected final LaserProjectile laserProjectile;
+    protected final Bomber bomber;
+    protected final Mutant mutant;
 
     protected UserControlledGameObjectPool(GameView gameView) {
         this.gameView = gameView;
@@ -34,6 +33,8 @@ class UserControlledGameObjectPool {
         smartBombReserve = new SmartBombReserve(gameView);
         headerFrame = new HeaderFrame(gameView);
         laserProjectile = new LaserProjectile(gameView, spaceship);
+        bomber = new Bomber(gameView);
+        mutant = new Mutant(gameView, spaceship, lander);
     }
 
     protected void gameLoopUpdate() {

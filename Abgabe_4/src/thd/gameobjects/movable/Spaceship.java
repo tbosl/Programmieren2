@@ -21,7 +21,7 @@ public class Spaceship extends GameObject {
         position.updateCoordinates(GameView.WIDTH * 0.3, GameView.HEIGHT * 0.5);
         rotation = 0;
         size = 0.1;
-        speedInPixel = 5;
+        speedInPixel = 7;
         width = 50;
         height = 50;
         shotInProgress = false;
@@ -75,7 +75,7 @@ public class Spaceship extends GameObject {
     @Override
     public void updateStatus() {
         if (gameView.timer(5000, this)) {
-            size++;
+            //size++;
         }
     }
 

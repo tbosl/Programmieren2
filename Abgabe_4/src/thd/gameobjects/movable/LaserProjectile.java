@@ -12,11 +12,12 @@ public class LaserProjectile extends GameObject {
     /**
      * Creates a laser projectile with a reference of the gameview.
      *
-     * @param gameView The GameView
+     * @param gameView  The GameView.
+     * @param spaceship The spaceship, from which the laser got fired.
      */
     public LaserProjectile(GameView gameView, Spaceship spaceship) {
         super(gameView);
-        movementPattern = new LaserProjectileMovementPattern(gameView);
+        movementPattern = new LaserProjectileMovementPattern();
         position.updateCoordinates(movementPattern.startPosition(spaceship.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
         rotation = 0;

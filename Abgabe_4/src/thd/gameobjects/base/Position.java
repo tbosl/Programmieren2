@@ -15,7 +15,6 @@ import thd.game.utilities.GameView;
  * @see GameView
  */
 public class Position {
-
     private double x;
     private double y;
 
