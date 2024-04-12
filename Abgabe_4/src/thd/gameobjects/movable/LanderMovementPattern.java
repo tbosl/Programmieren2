@@ -16,6 +16,6 @@ class LanderMovementPattern extends MovementPattern {
         if (referencePositions[1].getY() < GameView.HEIGHT - 50) {
             return new Position(referencePositions[0]);
         }
-        return new Position(referencePositions[1].getX(), 0);
+        return new Position(referencePositions[1].getX(), 120);
     }
 }
