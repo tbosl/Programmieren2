@@ -75,7 +75,7 @@ public class Spaceship extends GameObject {
     @Override
     public void updateStatus() {
         if (gameView.timer(5000, this)) {
-            //size++;
+            size++;
         }
     }
 

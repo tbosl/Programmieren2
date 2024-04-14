@@ -21,6 +21,8 @@ class UserControlledGameObjectPool {
     protected final Mutant mutant;
     protected final BomberBomb bomberBomb;
     protected final Pod pod;
+    protected final Swarmer swarmer;
+    protected final Baiter baiter;
 
     protected UserControlledGameObjectPool(GameView gameView) {
         this.gameView = gameView;
@@ -36,6 +38,8 @@ class UserControlledGameObjectPool {
         mutant = new Mutant(gameView, spaceship, lander);
         bomberBomb = new BomberBomb(gameView);
         pod = new Pod(gameView);
+        swarmer = new Swarmer(gameView, spaceship, pod);
+        baiter = new Baiter(gameView, spaceship);
     }
 
     protected void gameLoopUpdate() {

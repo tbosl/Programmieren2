@@ -31,5 +31,9 @@ class GameManager extends UserControlledGameObjectPool {
         bomberBomb.addToCanvas();
         pod.updatePosition();
         pod.addToCanvas();
+        swarmer.updatePosition();
+        swarmer.addToCanvas();
+        baiter.updatePosition();
+        baiter.addToCanvas();
     }
 }
