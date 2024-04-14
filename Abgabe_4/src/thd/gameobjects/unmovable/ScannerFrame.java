@@ -7,7 +7,7 @@ import thd.gameobjects.base.GameObject;
  * Represents the frame of the scanner.
  */
 public class ScannerFrame extends GameObject {
-    String blockImage = ScannerBlockImage.SCANNER_FRAME;
+    private final String blockImage;
 
     /**
      * Creates a scanner frame with a reference of the gameview.
@@ -17,6 +17,7 @@ public class ScannerFrame extends GameObject {
     public ScannerFrame(GameView gameView) {
         super(gameView);
         position.updateCoordinates(610, 0);
+        blockImage = ScannerBlockImage.SCANNER_FRAME;
         rotation = 0;
         size = 5;
     }

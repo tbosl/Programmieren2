@@ -4,10 +4,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
-import java.awt.*;
-import java.util.Random;
-
-public class MutantMovementPatterns extends MovementPattern {
+class MutantMovementPatterns extends MovementPattern {
     private final GameView gameView;
     private boolean shakeLeft;
     private boolean shakeUp;

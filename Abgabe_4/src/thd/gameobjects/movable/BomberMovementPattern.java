@@ -4,14 +4,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
-import java.util.Random;
-
 class BomberMovementPattern extends MovementPattern {
-    private final Random random;
-
-    BomberMovementPattern() {
-        random = new Random();
-    }
 
     @Override
     protected Position startPosition(Position... referencePositions) {
@@ -24,6 +17,6 @@ class BomberMovementPattern extends MovementPattern {
     }
 
     private int generateYCoordinate() {
-        return random.nextInt(230, GameView.HEIGHT-100);
+        return random.nextInt(UPPER_BOUNDARY, LOWER_BOUNDARY);
     }
 }

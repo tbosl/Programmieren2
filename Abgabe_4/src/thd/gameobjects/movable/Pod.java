@@ -3,9 +3,6 @@ package thd.gameobjects.movable;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 
-import java.awt.*;
-import java.util.Random;
-
 /**
  * A gameobject used to represent a Pod.
  */
@@ -19,7 +16,7 @@ public class Pod extends GameObject {
      */
     public Pod(GameView gameView) {
         super(gameView);
-        randomMovementPattern = new RandomMovementPattern(150, GameView.WIDTH - 50, GameView.HEIGHT - 100, 50);
+        randomMovementPattern = new RandomMovementPattern();
         position.updateCoordinates(randomMovementPattern.startPosition());
         targetPosition.updateCoordinates(randomMovementPattern.nextTargetPosition());
         size = 0.06;

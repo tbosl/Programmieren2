@@ -8,24 +8,24 @@ class ScannerBlockImage {
             WWWWWWWWWWWW
             W          W
             W          W
-                        
-                        
-                        
-                        
-                    
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             W          W
             W          W
             WWWWWWWWWWWW

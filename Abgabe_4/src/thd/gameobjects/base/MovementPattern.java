@@ -8,8 +8,16 @@ import java.util.Random;
  * Represents a movement pattern of the objects in the game.
  */
 public class MovementPattern {
-    protected static final int UPPER_BOUNDARY = 120;
-    protected static final int LOWER_BOUNDARY = GameView.WIDTH - 50;
+
+    /**
+     * The upper boundary of the game screen.
+     */
+    public static final int UPPER_BOUNDARY = 120;
+
+    /**
+     * The lower boundary of the game screen.
+     */
+    public static final int LOWER_BOUNDARY = GameView.HEIGHT - 50;
     protected final Random random;
 
     protected MovementPattern() {

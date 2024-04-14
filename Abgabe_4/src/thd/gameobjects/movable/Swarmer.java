@@ -2,7 +2,6 @@ package thd.gameobjects.movable;
 
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.base.Position;
 
 /**
  * A gameobject that represents the alien invader called Swarmer.

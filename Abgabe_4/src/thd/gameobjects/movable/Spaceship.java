@@ -2,6 +2,7 @@ package thd.gameobjects.movable;
 
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.MovementPattern;
 
 import java.awt.*;
 
@@ -46,6 +47,9 @@ public class Spaceship extends GameObject {
      */
     public void up() {
         position.up(speedInPixel);
+        if (position.getY() < MovementPattern.UPPER_BOUNDARY) {
+            position.updateCoordinates(position.getX(), MovementPattern.UPPER_BOUNDARY);
+        }
     }
 
     /**
@@ -53,6 +57,9 @@ public class Spaceship extends GameObject {
      */
     public void down() {
         position.down(speedInPixel);
+        if (position.getY() > MovementPattern.LOWER_BOUNDARY) {
+            position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
+        }
     }
 
     /**

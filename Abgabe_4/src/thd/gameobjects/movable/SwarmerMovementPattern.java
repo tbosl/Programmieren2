@@ -1,21 +1,18 @@
 package thd.gameobjects.movable;
 
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.AlienInvadersMovementPattern;
 import thd.gameobjects.base.Position;
 
-import java.util.Random;
-
-class SwarmerMovementPattern extends MovementPattern {
-    private final Random random;
-    private final int spawnMargin = 50;
+class SwarmerMovementPattern extends AlienInvadersMovementPattern {
+    private final int spawnMargin;
     private boolean left;
     private final Position lastSpaceshipPosition;
 
     SwarmerMovementPattern(Position spaceship) {
-        random = new Random();
         left = spaceship.getX() <= GameView.WIDTH / 2;
         lastSpaceshipPosition = new Position(spaceship);
+        spawnMargin = 50;
     }
 
     @Override
@@ -25,7 +22,7 @@ class SwarmerMovementPattern extends MovementPattern {
         double rightXBoundary = pod.getX() <= GameView.WIDTH - spawnMargin ? pod.getX() + spawnMargin : GameView.WIDTH;
         double upYBoundary = pod.getY() >= spawnMargin + UPPER_BOUNDARY ? pod.getY() - spawnMargin : UPPER_BOUNDARY;
         double lowYBoundary = pod.getY() <= LOWER_BOUNDARY ? pod.getY() + spawnMargin : LOWER_BOUNDARY;
-        return new Position(random.nextDouble(leftXBoundary, rightXBoundary), random.nextDouble(upYBoundary, lowYBoundary));
+        return generateRandomPosition(upYBoundary, rightXBoundary, lowYBoundary, leftXBoundary);
     }
 
     @Override

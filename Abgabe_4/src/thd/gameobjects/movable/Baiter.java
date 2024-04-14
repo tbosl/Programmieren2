@@ -40,7 +40,7 @@ public class Baiter extends GameObject {
     @Override
     public void updatePosition() {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
-        speedInPixel = position.distance(spaceship.getPosition()) < thresholdToSpaceship ? 7 : 5;
+        speedInPixel = position.distance(spaceship.getPosition()) < thresholdToSpaceship ? 8 : 5;
         position.moveToPosition(targetPosition, speedInPixel);
     }
 

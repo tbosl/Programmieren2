@@ -1,14 +1,14 @@
 package thd.gameobjects.movable;
 
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.AlienInvadersMovementPattern;
 import thd.gameobjects.base.Position;
 
-class LanderMovementPattern extends MovementPattern {
+class LanderMovementPattern extends AlienInvadersMovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        return new Position(GameView.WIDTH + 200, 150);
+        return generateRandomPosition(-50, GameView.WIDTH + 50);
     }
 
     @Override

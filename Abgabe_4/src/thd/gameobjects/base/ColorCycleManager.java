@@ -33,9 +33,7 @@ public class ColorCycleManager {
     /**
      * Finds the current color code in the cycle.
      *
-     * @return the current color code as char to be used
-     * in {@link GameView#addBlockImageToCanvas(String, double, double, double, double)}.
-     * @see GameView#addBlockImageToCanvas(String, double, double, double, double).
+     * @return the current color code as char to be used in blockimages.
      */
     public char findCurrentColorCode() {
         updateColor();
