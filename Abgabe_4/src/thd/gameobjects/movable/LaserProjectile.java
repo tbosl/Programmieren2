@@ -22,7 +22,7 @@ public class LaserProjectile extends GameObject {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
         rotation = 0;
         size = 0.08;
-        speedInPixel = 40;
+        speedInPixel = 20;
     }
 
     @Override

@@ -25,6 +25,7 @@ class GameManager extends UserControlledGameObjectPool {
         pod = new Pod(gameView);
         swarmer = new Swarmer(gameView, spaceship, pod);
         baiter = new Baiter(gameView, spaceship);
+        enemyProjectile = new EnemyProjectile(gameView, lander, spaceship.getPosition());
         gameObjectManager.add(astronaut);
         gameObjectManager.add(lander);
         gameObjectManager.add(score);
@@ -39,6 +40,7 @@ class GameManager extends UserControlledGameObjectPool {
         gameObjectManager.add(pod);
         gameObjectManager.add(swarmer);
         gameObjectManager.add(baiter);
+        gameObjectManager.add(enemyProjectile);
     }
 
     @Override
