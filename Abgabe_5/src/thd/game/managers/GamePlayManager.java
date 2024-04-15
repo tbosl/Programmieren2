@@ -12,6 +12,11 @@ public class GamePlayManager extends UserControlledGameObjectPool {
      * Represents the amount of smart bombs that the user has available.
      */
     public int amountOfSmartBombs;
+
+    /**
+     * Represents the amount of remaining lives that the user has available.
+     */
+    public int amountOfRemainingLives;
     private final GameObjectManager gameObjectManager;
     private int currentNumberOfVisibleSquares;
 
@@ -19,6 +24,7 @@ public class GamePlayManager extends UserControlledGameObjectPool {
         super(gameView);
         this.gameObjectManager = new GameObjectManager();
         amountOfSmartBombs = 0;
+        amountOfRemainingLives = 0;
     }
 
     /**

@@ -25,6 +25,9 @@ class GameManager extends GamePlayManager {
         for (int spawnedSmartBombs = 0; spawnedSmartBombs < SmartBomb.AMOUNT_OF_SMART_BOMBS_AT_START; spawnedSmartBombs++) {
             spawnGameObject(new SmartBomb(gameView, this));
         }
+        for (int spawnedRemainingLives = 0; spawnedRemainingLives < RemainingLive.AMOUNT_OF_LIVES_START; spawnedRemainingLives++) {
+            spawnGameObject((new RemainingLive(gameView, this)));
+        }
         spawnGameObject(bomber);
         spawnGameObject(pod);
         spawnGameObject(baiter);
