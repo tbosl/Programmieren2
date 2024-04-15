@@ -9,9 +9,11 @@ import thd.gameobjects.base.GameObject;
  * A gameobject used to represent the current score of the user.
  */
 public class Score extends GameObject {
-    private int colorIndex;
     private final String[] scoreBlockImages;
     private final ColorCycleManager colorCycleManager;
+    private static final int COLOR_CYCLE_DURATION = 500;
+    private static final int MARGIN_PER_NUMBER = 30;
+
 
     /**
      * Creates a Score with a reference of the gameview.
@@ -22,9 +24,8 @@ public class Score extends GameObject {
     public Score(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
         position.updateCoordinates(100, 75);
-        rotation = 0;
         size = 1;
-        colorCycleManager = new ColorCycleManager(gameView, 500);
+        colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
         scoreBlockImages = new String[]{
                 ScoreBlockImages.ZERO,
                 ScoreBlockImages.ONE,
@@ -49,10 +50,11 @@ public class Score extends GameObject {
     }
 
     private void addScoreNumbersToCanvas() {
-        gameView.addBlockImageToCanvas(generateColorizedNumber(1), position.getX(), position.getY(), size, rotation);
-        gameView.addBlockImageToCanvas(generateColorizedNumber(5), position.getX() + 30, position.getY(), size, rotation);
-        gameView.addBlockImageToCanvas(generateColorizedNumber(0), position.getX() + 60, position.getY(), size, rotation);
-        gameView.addBlockImageToCanvas(generateColorizedNumber(0), position.getX() + 90, position.getY(), size, rotation);
+        int[] demoNumbers = {1, 5, 0, 0};
+        for (int addedNumbers = 0; addedNumbers < demoNumbers.length; addedNumbers++) {
+            int offset = addedNumbers * MARGIN_PER_NUMBER;
+            gameView.addBlockImageToCanvas(generateColorizedNumber(demoNumbers[addedNumbers]), position.getX() + offset, position.getY(), size, rotation);
+        }
     }
 
     private String generateColorizedNumber(int number) {

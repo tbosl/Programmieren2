@@ -20,8 +20,9 @@ public class Spaceship extends GameObject implements MainCharacter {
      */
     public Spaceship(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
-        position.updateCoordinates(GameView.WIDTH * 0.3, GameView.HEIGHT * 0.5);
-        rotation = 0;
+        double horizontalPositionFactor = 0.3;
+        double verticalPositionFactor = 0.5;
+        position.updateCoordinates(GameView.WIDTH * horizontalPositionFactor, GameView.HEIGHT * verticalPositionFactor);
         size = 0.1;
         speedInPixel = 7;
         width = 50;

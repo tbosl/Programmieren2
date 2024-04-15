@@ -12,6 +12,7 @@ import thd.gameobjects.base.Position;
 class EnemyProjectile extends Projectile {
     private final EnemyProjectileMovementPattern movementPattern;
     private final ColorCycleManager colorCycleManager;
+    private static final int COLOR_CYCLE_DURATION = 500;
 
     /**
      * Creates a laser projectile with a reference of the gameview.
@@ -24,10 +25,9 @@ class EnemyProjectile extends Projectile {
     EnemyProjectile(GameView gameView, GamePlayManager gamePlayManager, GameObject enemy, Position spaceshipPosition) {
         super(gameView, gamePlayManager);
         movementPattern = new EnemyProjectileMovementPattern();
-        colorCycleManager = new ColorCycleManager(gameView, 500);
+        colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
         position.updateCoordinates(movementPattern.startPosition(enemy.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceshipPosition, enemy.getPosition()));
-        rotation = 0;
         size = 15;
         speedInPixel = 10;
     }

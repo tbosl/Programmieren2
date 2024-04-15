@@ -9,12 +9,17 @@ class RandomMovementPattern extends MovementPattern {
     private final int lowerBoundary;
     private final int rightBoundary;
     private final int leftBoundary;
+    private static final int INNER_MARGIN_TO_SIDE_BORDERS = 50;
+
+    RandomMovementPattern(int upperBoundary, int rightBoundary, int lowerBoundary, int leftBoundary) {
+        this.upperBoundary = upperBoundary;
+        this.rightBoundary = rightBoundary;
+        this.lowerBoundary = lowerBoundary;
+        this.leftBoundary = leftBoundary;
+    }
 
     RandomMovementPattern() {
-        upperBoundary = UPPER_BOUNDARY;
-        rightBoundary = GameView.WIDTH - 50;
-        lowerBoundary = LOWER_BOUNDARY;
-        leftBoundary = 50;
+        this(UPPER_BOUNDARY, GameView.WIDTH - INNER_MARGIN_TO_SIDE_BORDERS, LOWER_BOUNDARY, INNER_MARGIN_TO_SIDE_BORDERS);
     }
 
     @Override

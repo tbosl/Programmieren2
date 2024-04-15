@@ -16,6 +16,7 @@ class Mutant extends GameObject {
     private int currentDoubleShootIntervallInMilliseconds;
     private static final int LOWER_INTERVALL_BOUND = 1000;
     private static final int UPPER_INTERVALL_BOUND = 2000;
+    private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
 
 
     /**
@@ -31,11 +32,10 @@ class Mutant extends GameObject {
         super(gameView, gamePlayManager);
         this.spaceship = spaceship;
         movementPattern = new MutantMovementPatterns(gameView);
+        random = new Random();
         position.updateCoordinates(movementPattern.startPosition(preMutation.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
-        random = new Random();
         currentDoubleShootIntervallInMilliseconds = generateNewShootIntervall();
-        rotation = 0;
         size = 0.08;
         speedInPixel = 4;
         width = 50;
@@ -50,8 +50,8 @@ class Mutant extends GameObject {
     @Override
     public void updatePosition() {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
-        position.moveToPosition(movementPattern.shake(spaceship.getPosition(), position), 4);
-        if (position.distance(targetPosition) > 30) {
+        position.moveToPosition(movementPattern.shake(spaceship.getPosition(), position), speedInPixel);
+        if (position.distance(targetPosition) > SPACESHIP_DISTANCE_THRESHOLD) {
             position.moveToPosition(targetPosition, speedInPixel);
         }
     }

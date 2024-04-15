@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Represents a movement pattern of the objects in the game.
  */
-public class MovementPattern {
+public abstract class MovementPattern {
 
     /**
      * The upper boundary of the game screen.

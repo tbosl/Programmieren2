@@ -11,7 +11,7 @@ class Swarmer extends GameObject {
     private final SwarmerMovementPattern movementPattern;
     private final Spaceship spaceship;
     static final int MINIMUM_SWARMERS_PER_SWARM = 5;
-    static final int MAXIMUM_SWARMERS_PER_SWARM = 10;
+    static final int MAXIMUM_SWARMERS_PER_SWARM = 8;
 
 
     /**
@@ -29,7 +29,6 @@ class Swarmer extends GameObject {
         movementPattern = new SwarmerMovementPattern(spaceship.getPosition());
         position.updateCoordinates(movementPattern.startPosition(pod.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position, targetPosition));
-        rotation = 0;
         size = 0.05;
         speedInPixel = 8;
         width = 50;

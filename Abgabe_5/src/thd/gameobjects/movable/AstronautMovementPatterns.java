@@ -15,16 +15,15 @@ class AstronautMovementPatterns extends MovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        return new Position(new Random().nextDouble(100, GameView.WIDTH - 100), GameView.HEIGHT - 50);
+        int marginToSideBorders = 100;
+        return new Position(new Random().nextDouble(marginToSideBorders, GameView.WIDTH - marginToSideBorders), LOWER_BOUNDARY);
     }
 
     @Override
     protected Position nextTargetPosition(Position... referencePositions) {
-        if (walkingRight) {
-            walkingRight = false;
-            return new Position(referencePositions[0].getX() + 50, referencePositions[0].getY());
-        }
-        walkingRight = true;
-        return new Position(referencePositions[0].getX() - 50, referencePositions[0].getY());
+        int distanceToWalkInPixel = 50;
+        double targetXCoordinate = walkingRight ? referencePositions[0].getX() + distanceToWalkInPixel : referencePositions[0].getX() - distanceToWalkInPixel;
+        walkingRight = !walkingRight;
+        return new Position(targetXCoordinate, referencePositions[0].getY());
     }
 }

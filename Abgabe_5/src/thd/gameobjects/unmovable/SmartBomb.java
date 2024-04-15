@@ -27,7 +27,9 @@ public class SmartBomb extends GameObject {
     }
 
     private int calculateYCoordinate() {
-        return 95 - 20 * gamePlayManager.amountOfSmartBombs;
+        int startCoordinate = 95;
+        int offsetPerSmartBomb = 20;
+        return startCoordinate - offsetPerSmartBomb * gamePlayManager.amountOfSmartBombs;
     }
 
     @Override

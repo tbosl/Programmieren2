@@ -20,7 +20,6 @@ public class ScannerFrame extends GameObject {
         super(gameView, gamePlayManager);
         position.updateCoordinates(610, 0);
         blockImage = ScannerBlockImage.SCANNER_FRAME;
-        rotation = 0;
         size = 5;
     }
 

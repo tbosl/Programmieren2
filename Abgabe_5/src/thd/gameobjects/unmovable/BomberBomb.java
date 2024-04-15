@@ -11,6 +11,11 @@ import thd.gameobjects.movable.Bomber;
  */
 public class BomberBomb extends GameObject {
     private final ColorCycleManager colorCycleManager;
+    private static final int COLOR_CYCLE_DURATION = 150;
+    private static final int ROTATION_INTERVALL = 250;
+    private static final int DEFAULT_ROTATION = 0;
+    private static final int ANGLED_ROTATION = 45;
+
 
     /**
      * Creates a bomber bomb with a reference of the gameview.
@@ -21,10 +26,9 @@ public class BomberBomb extends GameObject {
      */
     public BomberBomb(GameView gameView, GamePlayManager gamePlayManager, Bomber bomber) {
         super(gameView, gamePlayManager);
-        colorCycleManager = new ColorCycleManager(gameView, 150);
+        colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
         position.updateCoordinates(bomber.getPosition());
         size = 20;
-        rotation = 0;
     }
 
     @Override
@@ -39,8 +43,8 @@ public class BomberBomb extends GameObject {
     }
 
     private void updateRotation() {
-        if (gameView.timer(250, this)) {
-            rotation = rotation != 0 ? 0 : 45;
+        if (gameView.timer(ROTATION_INTERVALL, this)) {
+            rotation = rotation != DEFAULT_ROTATION ? DEFAULT_ROTATION : ANGLED_ROTATION;
         }
     }
 }

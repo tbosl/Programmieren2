@@ -12,8 +12,6 @@ class GameManager extends GamePlayManager {
         score = new Score(gameView, this);
         spaceship = new Spaceship(gameView, this);
         lander = new Lander(gameView, this, astronaut, spaceship);
-        scannerFrame = new ScannerFrame(gameView, this);
-        headerFrame = new HeaderFrame(gameView, this);
         bomber = new Bomber(gameView, this);
         pod = new Pod(gameView, this, spaceship);
         baiter = new Baiter(gameView, this, spaceship);
@@ -22,8 +20,8 @@ class GameManager extends GamePlayManager {
         spawnGameObject(lander);
         spawnGameObject(score);
         spawnGameObject(spaceship);
-        spawnGameObject(headerFrame);
-        spawnGameObject(scannerFrame);
+        spawnGameObject(new HeaderFrame(gameView, this));
+        spawnGameObject(new ScannerFrame(gameView, this));
         for (int spawnedSmartBombs = 0; spawnedSmartBombs < SmartBomb.AMOUNT_OF_SMART_BOMBS_AT_START; spawnedSmartBombs++) {
             spawnGameObject(new SmartBomb(gameView, this));
         }

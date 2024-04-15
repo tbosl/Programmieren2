@@ -10,7 +10,9 @@ import thd.gameobjects.base.GameObject;
 public class Baiter extends GameObject {
     private final BaiterMovementPattern movementPattern;
     private final Spaceship spaceship;
-    private final int thresholdToSpaceship;
+    private static final int THRESHOLD_TO_SPACESHIP = 200;
+    private static final int SLOW_SPEED_IN_PIXEL = 5;
+    private static final int FAST_SPEED_IN_PIXEL = 8;
 
 
     /**
@@ -26,12 +28,10 @@ public class Baiter extends GameObject {
         movementPattern = new BaiterMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
-        rotation = 0;
         size = 0.08;
-        speedInPixel = 6;
+        setupSpeedInPixelDependingOnDistanceToSpaceship();
         width = 50;
         height = 50;
-        thresholdToSpaceship = 200;
     }
 
     @Override
@@ -42,12 +42,16 @@ public class Baiter extends GameObject {
     @Override
     public void updatePosition() {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
-        speedInPixel = position.distance(spaceship.getPosition()) < thresholdToSpaceship ? 8 : 5;
+        setupSpeedInPixelDependingOnDistanceToSpaceship();
         position.moveToPosition(targetPosition, speedInPixel);
     }
 
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("baiter.png", position.getX(), position.getY(), size, rotation);
+    }
+
+    private void setupSpeedInPixelDependingOnDistanceToSpaceship() {
+        speedInPixel = position.distance(spaceship.getPosition()) < THRESHOLD_TO_SPACESHIP ? FAST_SPEED_IN_PIXEL : SLOW_SPEED_IN_PIXEL;
     }
 }

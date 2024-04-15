@@ -30,7 +30,6 @@ public class Bomber extends GameObject {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
         random = new Random();
         currentBombDroppingIntervallInMilliseconds = generateNewBombDroppingIntervall();
-        rotation = 0;
         size = 0.1;
         speedInPixel = 2;
         width = 50;
@@ -47,7 +46,8 @@ public class Bomber extends GameObject {
         if (position.similarTo(targetPosition)) {
             targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
         }
-        position.down(Math.round(Math.sin(0.5 * Math.toRadians(position.getX()))));
+        double sinusScale = 0.5;
+        position.down(Math.round(Math.sin(sinusScale * Math.toRadians(position.getX()))));
         position.moveToPosition(targetPosition, speedInPixel);
     }
 

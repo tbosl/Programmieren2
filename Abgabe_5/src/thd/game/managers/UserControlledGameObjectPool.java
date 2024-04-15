@@ -12,8 +12,6 @@ class UserControlledGameObjectPool {
     protected Lander lander;
     protected Score score;
     protected Spaceship spaceship;
-    protected HeaderFrame headerFrame;
-    protected ScannerFrame scannerFrame;
     protected Bomber bomber;
     protected Pod pod;
     protected Baiter baiter;

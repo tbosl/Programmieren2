@@ -14,7 +14,8 @@ class EnemyProjectileMovementPattern extends ProjectileMovementPattern {
     private Position calculateStraightEndpoint(Position spaceship, Position enemy) {
         double m = (spaceship.getY() - enemy.getY()) / (spaceship.getX() - enemy.getX());
         double t = enemy.getY() - (enemy.getX() * m);
-        double targetX = spaceship.getX() < enemy.getX() ? -50 : GameView.WIDTH + 50;
+        int marginToSideBorders = 50;
+        double targetX = spaceship.getX() < enemy.getX() ? -marginToSideBorders : GameView.WIDTH + marginToSideBorders;
         return new Position(targetX, m * targetX + t);
     }
 }

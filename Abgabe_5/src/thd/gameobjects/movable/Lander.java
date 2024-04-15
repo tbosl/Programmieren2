@@ -29,7 +29,6 @@ public class Lander extends GameObject {
         landerMovementPattern = new LanderMovementPattern();
         position.updateCoordinates(landerMovementPattern.startPosition());
         targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(nearestAstronaut.getPosition(), position));
-        rotation = 0;
         size = 0.08;
         speedInPixel = 5;
         width = 50;
@@ -43,7 +42,7 @@ public class Lander extends GameObject {
 
     @Override
     public void updatePosition() {
-        if (targetPosition.getY() != 120) {
+        if (targetPosition.getY() != MovementPattern.UPPER_BOUNDARY) {
             targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(nearestAstronaut.getPosition(), position));
         }
         position.moveToPosition(targetPosition, speedInPixel);

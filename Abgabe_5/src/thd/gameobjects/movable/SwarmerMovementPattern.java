@@ -1,10 +1,9 @@
 package thd.gameobjects.movable;
 
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.AlienInvadersMovementPattern;
 import thd.gameobjects.base.Position;
 
-class SwarmerMovementPattern extends AlienInvadersMovementPattern {
+class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
     private final int spawnMargin;
     private boolean left;
     private final Position lastSpaceshipPosition;
@@ -42,11 +41,9 @@ class SwarmerMovementPattern extends AlienInvadersMovementPattern {
     }
 
     private Position generatePositionAtOtherSide(Position spaceship) {
-        if (left) {
-            return new Position(0, generateYCoordinate(spaceship, 200));
-        } else {
-            return new Position(GameView.WIDTH, generateYCoordinate(spaceship, 200));
-        }
+        int targetXCoordinate = left ? 0 : GameView.WIDTH;
+        int verticalVariationInPixel = 300;
+        return new Position(targetXCoordinate, generateYCoordinate(spaceship, verticalVariationInPixel));
     }
 
     private void validateNewTargetPosition(Position currentTarget) {

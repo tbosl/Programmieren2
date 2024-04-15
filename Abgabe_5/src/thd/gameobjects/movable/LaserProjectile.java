@@ -18,8 +18,10 @@ class LaserProjectile extends Projectile {
      */
     LaserProjectile(GameView gameView, GamePlayManager gamePlayManager, Position spaceshipPosition) {
         super(gameView, gamePlayManager);
-        position.updateCoordinates(spaceshipPosition.getX() + 60, spaceshipPosition.getY() + 20);
-        rotation = 0;
+        // TODO Adjust alignment when spaceship is facing in the other direction.
+        int horizontalAlignment = 60;
+        int verticalAlignment = 20;
+        position.updateCoordinates(spaceshipPosition.getX() + horizontalAlignment, spaceshipPosition.getY() + verticalAlignment);
         size = 0.08;
         speedInPixel = 20;
     }

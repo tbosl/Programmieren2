@@ -19,7 +19,7 @@ class MutantMovementPatterns extends MovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        return new Position(referencePositions[0].getX(), 120);
+        return new Position(referencePositions[0].getX(), MovementPattern.UPPER_BOUNDARY);
     }
 
     @Override
@@ -29,6 +29,11 @@ class MutantMovementPatterns extends MovementPattern {
 
     private Position findClosestTargetPosition(Position spaceship, Position mutant) {
         Position[] targets = initializePossibleTargetPositions(spaceship);
+        int indexOfClosestTarget = findIndexOfClosestTargetPosition(targets, mutant);
+        return targets[indexOfClosestTarget];
+    }
+
+    private int findIndexOfClosestTargetPosition(Position[] targets, Position mutant) {
         int closestIndex = 0;
         double shortestDistance = -1;
         for (int index = 0; index < targets.length; index++) {
@@ -38,17 +43,19 @@ class MutantMovementPatterns extends MovementPattern {
                 shortestDistance = distance;
             }
         }
-        return targets[closestIndex];
+        return closestIndex;
     }
 
     private Position[] initializePossibleTargetPositions(Position spaceship) {
-        int verticalCenterAlign = 0;
+        int verticalCenterAlign = 100;
         int horizontalCenterAlign = 10;
+        int rightHorizontalMargin = 130;
+        int leftHorizontalMargin = 110;
         return new Position[]{
-                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign - 100),
-                new Position(spaceship.getX() + horizontalCenterAlign + 130, spaceship.getY() + verticalCenterAlign),
-                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign + 100),
-                new Position(spaceship.getX() + horizontalCenterAlign - 110, spaceship.getY() + verticalCenterAlign)};
+                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() - verticalCenterAlign),
+                new Position(spaceship.getX() + horizontalCenterAlign + rightHorizontalMargin, spaceship.getY()),
+                new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign),
+                new Position(spaceship.getX() + horizontalCenterAlign - leftHorizontalMargin, spaceship.getY())};
     }
 
     Position shake(Position... referencePositions) {
