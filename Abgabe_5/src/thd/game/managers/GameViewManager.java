@@ -2,8 +2,6 @@ package thd.game.managers;
 
 import thd.game.utilities.GameView;
 
-import java.awt.*;
-
 /**
  * The Manager of the GameView.
  * It manages the initialization ({@link #initialize()}) and the game loop ({@link #gameLoop()}) of the gameview.

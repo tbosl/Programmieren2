@@ -4,7 +4,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.Position;
 
 class BomberMovementPattern extends AlienInvadersRandomMovementPattern {
-    private int outerMarginToBorders;
+    private final int outerMarginToBorders;
 
     BomberMovementPattern() {
         outerMarginToBorders = 100;
