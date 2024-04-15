@@ -1,5 +1,6 @@
 package thd.gameobjects.unmovable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.ColorCycleManager;
 import thd.gameobjects.base.GameObject;
@@ -15,10 +16,11 @@ public class Score extends GameObject {
     /**
      * Creates a Score with a reference of the gameview.
      *
-     * @param gameView The GameView.
+     * @param gameView        The GameView.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the score.
      */
-    public Score(GameView gameView) {
-        super(gameView);
+    public Score(GameView gameView, GamePlayManager gamePlayManager) {
+        super(gameView, gamePlayManager);
         position.updateCoordinates(100, 75);
         rotation = 0;
         size = 1;

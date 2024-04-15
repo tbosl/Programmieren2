@@ -14,15 +14,9 @@ class UserControlledGameObjectPool {
     protected Spaceship spaceship;
     protected HeaderFrame headerFrame;
     protected ScannerFrame scannerFrame;
-    protected SmartBombReserve smartBombReserve;
-    protected LaserProjectile laserProjectile;
     protected Bomber bomber;
-    protected Mutant mutant;
-    protected BomberBomb bomberBomb;
     protected Pod pod;
-    protected Swarmer swarmer;
     protected Baiter baiter;
-    protected EnemyProjectile enemyProjectile;
 
     protected UserControlledGameObjectPool(GameView gameView) {
         this.gameView = gameView;

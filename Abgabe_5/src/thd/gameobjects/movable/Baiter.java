@@ -1,5 +1,6 @@
 package thd.gameobjects.movable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 
@@ -15,11 +16,12 @@ public class Baiter extends GameObject {
     /**
      * Creates a Baiter with a reference of the gameview.
      *
-     * @param gameView  The GameView.
-     * @param spaceship The player spaceship - the target of the mutant.
+     * @param gameView        The GameView.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the baiter.
+     * @param spaceship       The player spaceship - the target of the mutant.
      */
-    public Baiter(GameView gameView, Spaceship spaceship) {
-        super(gameView);
+    public Baiter(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
+        super(gameView, gamePlayManager);
         this.spaceship = spaceship;
         movementPattern = new BaiterMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());

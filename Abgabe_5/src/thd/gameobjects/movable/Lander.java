@@ -1,7 +1,9 @@
 package thd.gameobjects.movable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.MovementPattern;
 
 /**
  * A gameobject that represents the first type of alien invader.
@@ -9,18 +11,21 @@ import thd.gameobjects.base.GameObject;
 public class Lander extends GameObject {
     private final LanderMovementPattern landerMovementPattern;
     private final Astronaut nearestAstronaut;
+    private final Spaceship spaceship;
 
 
     /**
      * Creates a Lander with a reference of the gameview.
      *
      * @param gameView         The GameView
+     * @param gamePlayManager  The manager which is responsible for the occurrence of the lander.
      * @param nearestAstronaut The nearest astronaut - the target of the lander.
-     *                         (This will later come from GameManager or Astronaut)
+     * @param spaceship        The player's spaceship.
      */
-    public Lander(GameView gameView, Astronaut nearestAstronaut) {
-        super(gameView);
+    public Lander(GameView gameView, GamePlayManager gamePlayManager, Astronaut nearestAstronaut, Spaceship spaceship) {
+        super(gameView, gamePlayManager);
         this.nearestAstronaut = nearestAstronaut;
+        this.spaceship = spaceship;
         landerMovementPattern = new LanderMovementPattern();
         position.updateCoordinates(landerMovementPattern.startPosition());
         targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(nearestAstronaut.getPosition(), position));
@@ -42,6 +47,15 @@ public class Lander extends GameObject {
             targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(nearestAstronaut.getPosition(), position));
         }
         position.moveToPosition(targetPosition, speedInPixel);
+    }
+
+    @Override
+    public void updateStatus() {
+        // TODO Check if astronaut is grabbed
+        if (position.getY() <= MovementPattern.UPPER_BOUNDARY) {
+            gamePlayManager.destroyGameObject(this);
+            gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 class GameObjectManager {
+    private static final int MAXIMUM_NUMBER_OF_GAME_OBJECTS = 500;
     private final List<GameObject> gameObjects;
     private final List<GameObject> gameObjectsToBeAdded;
     private final List<GameObject> gameObjectsToBeRemoved;
@@ -46,6 +47,9 @@ class GameObjectManager {
     private void updateLists() {
         removeFromGameObjects();
         addToGameObjects();
+        if (gameObjects.size() > MAXIMUM_NUMBER_OF_GAME_OBJECTS) {
+            throw new TooManyGameObjectsException(String.format("The maximum number of game objects (%d) has been exceeded (%d).", MAXIMUM_NUMBER_OF_GAME_OBJECTS, gameObjects.size()));
+        }
     }
 
     private void removeFromGameObjects() {

@@ -1,25 +1,24 @@
 package thd.gameobjects.movable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.Position;
 
 /**
  * A gameobject that represents a laser projectile.
  */
-public class LaserProjectile extends GameObject {
-    private final LaserProjectileMovementPattern movementPattern;
+class LaserProjectile extends Projectile {
 
     /**
      * Creates a laser projectile with a reference of the gameview.
      *
-     * @param gameView  The GameView.
-     * @param spaceship The spaceship, from which the laser got fired.
+     * @param gameView          The GameView.
+     * @param gamePlayManager   The manager which is responsible for the occurrence of the laser projectile.
+     * @param spaceshipPosition The position of the spaceship, from which the laser got fired.
      */
-    public LaserProjectile(GameView gameView, Spaceship spaceship) {
-        super(gameView);
-        movementPattern = new LaserProjectileMovementPattern();
-        position.updateCoordinates(movementPattern.startPosition(spaceship.getPosition()));
-        targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
+    LaserProjectile(GameView gameView, GamePlayManager gamePlayManager, Position spaceshipPosition) {
+        super(gameView, gamePlayManager);
+        position.updateCoordinates(spaceshipPosition.getX() + 60, spaceshipPosition.getY() + 20);
         rotation = 0;
         size = 0.08;
         speedInPixel = 20;
@@ -27,10 +26,7 @@ public class LaserProjectile extends GameObject {
 
     @Override
     public void updatePosition() {
-        if (position.similarTo(targetPosition)) {
-            targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
-        }
-        position.moveToPosition(targetPosition, speedInPixel);
+        position.right(speedInPixel);
     }
 
     @Override

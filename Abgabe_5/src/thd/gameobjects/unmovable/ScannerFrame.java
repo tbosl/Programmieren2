@@ -1,5 +1,6 @@
 package thd.gameobjects.unmovable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 
@@ -12,10 +13,11 @@ public class ScannerFrame extends GameObject {
     /**
      * Creates a scanner frame with a reference of the gameview.
      *
-     * @param gameView The GameView
+     * @param gameView        The GameView.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the scanner frame.
      */
-    public ScannerFrame(GameView gameView) {
-        super(gameView);
+    public ScannerFrame(GameView gameView, GamePlayManager gamePlayManager) {
+        super(gameView, gamePlayManager);
         position.updateCoordinates(610, 0);
         blockImage = ScannerBlockImage.SCANNER_FRAME;
         rotation = 0;

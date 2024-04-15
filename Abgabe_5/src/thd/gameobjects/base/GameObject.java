@@ -1,13 +1,15 @@
 package thd.gameobjects.base;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 
 /**
  * Represents an object in the game.
  */
-public class GameObject {
+public abstract class GameObject {
 
     protected final GameView gameView;
+    protected final GamePlayManager gamePlayManager;
     protected final Position position;
     protected final Position targetPosition;
     protected double speedInPixel;
@@ -19,10 +21,12 @@ public class GameObject {
     /**
      * Crates a new GameObject.
      *
-     * @param gameView GameView to show the game object on.
+     * @param gameView        GameView to show the game object on.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the game object.
      */
-    public GameObject(GameView gameView) {
+    public GameObject(GameView gameView, GamePlayManager gamePlayManager) {
         this.gameView = gameView;
+        this.gamePlayManager = gamePlayManager;
         position = new Position();
         targetPosition = new Position();
     }
@@ -36,8 +40,7 @@ public class GameObject {
     /**
      * Draws the game object to the canvas.
      */
-    public void addToCanvas() {
-    }
+    public abstract void addToCanvas();
 
     /**
      * Returns the current position of the game object.

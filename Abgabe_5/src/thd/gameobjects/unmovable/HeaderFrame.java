@@ -1,5 +1,6 @@
 package thd.gameobjects.unmovable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 
@@ -12,10 +13,11 @@ public class HeaderFrame extends GameObject {
     /**
      * Creates the header frame with a reference of the gameview.
      *
-     * @param gameView The GameView
+     * @param gameView        The GameView
+     * @param gamePlayManager The manager which is responsible for the occurrence of the header frame.
      */
-    public HeaderFrame(GameView gameView) {
-        super(gameView);
+    public HeaderFrame(GameView gameView, GamePlayManager gamePlayManager) {
+        super(gameView, gamePlayManager);
         size = 5;
         rotation = 0;
     }

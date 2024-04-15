@@ -1,5 +1,6 @@
 package thd.gameobjects.movable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 
@@ -13,9 +14,10 @@ public class Astronaut extends GameObject {
      * Creates an Astronaut with a reference of the gameview.
      *
      * @param gameView The GameView
+     * @param gamePlayManager The manager which is responsible for the occurrence of the astronaut.
      */
-    public Astronaut(GameView gameView) {
-        super(gameView);
+    public Astronaut(GameView gameView, GamePlayManager gamePlayManager) {
+        super(gameView, gamePlayManager);
         astronautMovementPatterns = new AstronautMovementPatterns();
         position.updateCoordinates(astronautMovementPatterns.startPosition());
         targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
