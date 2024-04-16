@@ -11,6 +11,7 @@ import thd.gameobjects.base.MovementPattern;
  */
 public class Spaceship extends GameObject implements MainCharacter {
     private final int shotDurationInMilliseconds;
+    private boolean shotAvailable;
 
     /**
      * Creates the spaceship with a reference of the gameview.
@@ -28,6 +29,7 @@ public class Spaceship extends GameObject implements MainCharacter {
         width = 50;
         height = 50;
         shotDurationInMilliseconds = 300;
+        shotAvailable = true;
     }
 
     /**
@@ -69,9 +71,15 @@ public class Spaceship extends GameObject implements MainCharacter {
      */
     @Override
     public void shoot() {
-        if (gameView.timer(shotDurationInMilliseconds, this)) {
+        updateShotAvailable();
+        if (shotAvailable) {
             gamePlayManager.spawnGameObject(new LaserProjectile(gameView, gamePlayManager, position));
+            shotAvailable = false;
         }
+    }
+
+    private void updateShotAvailable() {
+        shotAvailable = shotAvailable || gameView.timer(shotDurationInMilliseconds, this);
     }
 
     @Override
