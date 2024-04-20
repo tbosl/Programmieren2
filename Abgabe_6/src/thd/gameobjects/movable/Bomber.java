@@ -2,7 +2,7 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.unmovable.BomberBomb;
 
 import java.util.Random;
@@ -10,12 +10,14 @@ import java.util.Random;
 /**
  * A gameobject that represents the alien invader called Bomber.
  */
-public class Bomber extends GameObject {
+public class Bomber extends EnemyGameObject {
     private final BomberMovementPattern movementPattern;
     private int currentBombDroppingIntervallInMilliseconds;
     private final Random random;
     private static final int LOWER_INTERVALL_BOUND = 4000;
     private static final int UPPER_INTERVAL_BOUND = 8000;
+    private static final int POINTS_ON_DESTRUCTION = 250;
+
 
     /**
      * Creates a Bomber with a reference of the gameview.
@@ -24,7 +26,7 @@ public class Bomber extends GameObject {
      * @param gamePlayManager The manager which is responsible for the occurrence of the game object.
      */
     public Bomber(GameView gameView, GamePlayManager gamePlayManager) {
-        super(gameView, gamePlayManager);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
         movementPattern = new BomberMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
@@ -32,8 +34,9 @@ public class Bomber extends GameObject {
         currentBombDroppingIntervallInMilliseconds = generateNewBombDroppingIntervall();
         size = 0.1;
         speedInPixel = 2;
-        width = 50;
-        height = 50;
+        width = 23;
+        height = 23;
+        hitBoxOffsets(0, 0, 0, 0);
     }
 
     @Override
@@ -47,8 +50,10 @@ public class Bomber extends GameObject {
             targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
         }
         double sinusScale = 0.5;
+        positionBeforeMoving.updateCoordinates(position);
         position.down(Math.round(Math.sin(sinusScale * Math.toRadians(position.getX()))));
         position.moveToPosition(targetPosition, speedInPixel);
+        super.updatePosition();
     }
 
     @Override
@@ -59,12 +64,17 @@ public class Bomber extends GameObject {
         }
     }
 
+    private int generateNewBombDroppingIntervall() {
+        return random.nextInt(LOWER_INTERVALL_BOUND, UPPER_INTERVAL_BOUND);
+    }
+
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("bomber_animation_1.png", position.getX(), position.getY(), size, rotation);
     }
 
-    private int generateNewBombDroppingIntervall() {
-        return random.nextInt(LOWER_INTERVALL_BOUND, UPPER_INTERVAL_BOUND);
+    @Override
+    public void reactToCollisionWith(CollidingGameObject other) {
+        super.reactToCollisionWith(other);
     }
 }

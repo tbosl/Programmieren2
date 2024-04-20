@@ -12,6 +12,7 @@ public class SmartBomb extends GameObject {
      * The amount of smart bombs the player has at the beginning of a new game.
      */
     public static final int AMOUNT_OF_SMART_BOMBS_AT_START = 3;
+    private final int smartBombIndex;
 
     /**
      * Creates a smart bomb with a reference of the gameview.
@@ -23,13 +24,13 @@ public class SmartBomb extends GameObject {
         super(gameView, gamePlayManager);
         position.updateCoordinates(245, calculateYCoordinate());
         size = 0.05;
-        gamePlayManager.amountOfSmartBombs++;
+        smartBombIndex = gamePlayManager.getAmountOfSmartBombs();
     }
 
     private int calculateYCoordinate() {
-        int startCoordinate = 95;
+        int startCoordinate = 55;
         int offsetPerSmartBomb = 20;
-        return startCoordinate - offsetPerSmartBomb * gamePlayManager.amountOfSmartBombs;
+        return startCoordinate + offsetPerSmartBomb * (gamePlayManager.getAmountOfSmartBombs() - 1);
     }
 
     @Override
@@ -40,5 +41,14 @@ public class SmartBomb extends GameObject {
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("smart_bomb.png", position.getX(), position.getY(), size, rotation);
+    }
+
+    /**
+     * Get the index of the smart bomb.
+     *
+     * @return The index of the smart bomb.
+     */
+    public int getSmartBombIndex() {
+        return smartBombIndex;
     }
 }

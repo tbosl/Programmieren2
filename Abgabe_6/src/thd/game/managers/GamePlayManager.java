@@ -1,30 +1,35 @@
 package thd.game.managers;
 
 import thd.game.utilities.GameView;
+import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.movable.Square;
+import thd.gameobjects.movable.Astronaut;
+import thd.gameobjects.movable.EnemyGameObject;
+import thd.gameobjects.unmovable.RemainingLive;
+import thd.gameobjects.unmovable.SmartBomb;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Manages the creation and destruction of game objects.
  */
 public class GamePlayManager extends UserControlledGameObjectPool {
-    /**
-     * Represents the amount of smart bombs that the user has available.
-     */
-    public int amountOfSmartBombs;
+
+    private int amountOfSmartBombs;
 
     /**
-     * Represents the amount of remaining lives that the user has available.
+     * Represents the amount of lives that the user has available at the beginning.
      */
-    public int amountOfRemainingLives;
+    public final int LIVES = 3;
+    private int lives;
+    private int points;
     private final GameObjectManager gameObjectManager;
-    private int currentNumberOfVisibleSquares;
 
     protected GamePlayManager(GameView gameView) {
         super(gameView);
         this.gameObjectManager = new GameObjectManager();
         amountOfSmartBombs = 0;
-        amountOfRemainingLives = 0;
     }
 
     /**
@@ -56,10 +61,100 @@ public class GamePlayManager extends UserControlledGameObjectPool {
         gamePlayManagement();
     }
 
+
+    /**
+     * Provides a list of all enemies that are currently active.
+     *
+     * @return A LinkedList with all currently active enemies.
+     */
+    public List<CollidingGameObject> provideAllActiveEnemies() {
+        return gameObjectManager.provideAllActiveEnemies();
+    }
+
+    /**
+     * Provides a list of all astronauts that are currently active.
+     *
+     * @return A LinkedList with all currently active astronauts.
+     */
+    public List<Astronaut> provideAllAstronauts() {
+        return gameObjectManager.provideAllAstronauts();
+    }
+
     private void gamePlayManagement() {
-        if (currentNumberOfVisibleSquares < 5 && gameView.timer(1000, this)) {
-            spawnGameObject(new Square(gameView, this));
-            currentNumberOfVisibleSquares++;
+    }
+
+    public void addPoints(int amount) {
+        points += amount;
+    }
+
+    /**
+     * Get the current points.
+     *
+     * @return The current amount of points.
+     */
+    public int getScore() {
+        return points;
+    }
+
+    /**
+     * Removes a life of the player's spaceship.
+     */
+    public void lifeLost() {
+        destroyGameObject(findLastAddedLive());
+        lives--;
+    }
+
+    private RemainingLive findLastAddedLive() {
+        for (RemainingLive remainingLive : gameObjectManager.provideAllRemainingLives()) {
+            if (remainingLive.getLiveIndex() == lives) {
+                return remainingLive;
+            }
         }
+        return null;
+    }
+
+    void lifeGained() {
+        lives++;
+        spawnGameObject(new RemainingLive(gameView, this));
+    }
+
+    /**
+     * Get the current amount of lives the player's spaceship has remaining.
+     *
+     * @return The amount of lives.
+     */
+    public int getLives() {
+        return lives;
+    }
+
+    void smartBombGained() {
+        amountOfSmartBombs++;
+        spawnGameObject(new SmartBomb(gameView, this));
+    }
+
+    /**
+     * Removes the detonated smart bomb from the available smart bombs.
+     */
+    public void detonateSmartBomb() {
+        destroyGameObject(findLastAddedSmartBomb());
+        amountOfSmartBombs--;
+    }
+
+    private SmartBomb findLastAddedSmartBomb() {
+        for (SmartBomb smartBomb : gameObjectManager.provideAllRemainingSmartBombs()) {
+            if (smartBomb.getSmartBombIndex() == amountOfSmartBombs) {
+                return smartBomb;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get the current amount of remaining smart bombs.
+     *
+     * @return The current amount of remaining smart bombs.
+     */
+    public int getAmountOfSmartBombs() {
+        return amountOfSmartBombs;
     }
 }

@@ -5,6 +5,9 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.ColorCycleManager;
 import thd.gameobjects.base.GameObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A gameobject used to represent the current score of the user.
  */
@@ -23,7 +26,7 @@ public class Score extends GameObject {
      */
     public Score(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
-        position.updateCoordinates(100, 75);
+        position.updateCoordinates(200, 75);
         size = 1;
         colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
         scoreBlockImages = new String[]{
@@ -50,11 +53,26 @@ public class Score extends GameObject {
     }
 
     private void addScoreNumbersToCanvas() {
-        int[] demoNumbers = {1, 5, 0, 0};
-        for (int addedNumbers = 0; addedNumbers < demoNumbers.length; addedNumbers++) {
+        List<Integer> scoreValues = createDigitsOfScoreInReversedOrder();
+        for (int addedNumbers = 0; addedNumbers < scoreValues.size(); addedNumbers++) {
             int offset = addedNumbers * MARGIN_PER_NUMBER;
-            gameView.addBlockImageToCanvas(generateColorizedNumber(demoNumbers[addedNumbers]), position.getX() + offset, position.getY(), size, rotation);
+            gameView.addBlockImageToCanvas(generateColorizedNumber(scoreValues.get(addedNumbers)), position.getX() - offset, position.getY(), size, rotation);
         }
+    }
+
+    private List<Integer> createDigitsOfScoreInReversedOrder() {
+        var digits = new ArrayList<Integer>();
+        int score = gamePlayManager.getScore();
+        if (score == 0) {
+            digits.add(0);
+            digits.add(0);
+            return digits;
+        }
+        while (score > 0) {
+            digits.add(score % 10);
+            score /= 10;
+        }
+        return digits;
     }
 
     private String generateColorizedNumber(int number) {

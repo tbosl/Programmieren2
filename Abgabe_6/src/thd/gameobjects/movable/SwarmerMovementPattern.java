@@ -11,7 +11,7 @@ class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
     SwarmerMovementPattern(Position spaceship) {
         left = spaceship.getX() <= GameView.WIDTH / 2;
         lastSpaceshipPosition = new Position(spaceship);
-        spawnMargin = 50;
+        spawnMargin = 100;
     }
 
     @Override
@@ -34,7 +34,7 @@ class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
             lastSpaceshipPosition.updateCoordinates(spaceship);
             return generatePositionAtOtherSide(spaceship);
         }
-        targetPosition.up(-(spaceship.getY() - lastSpaceshipPosition.getY()));
+//        targetPosition.up(-(spaceship.getY() - lastSpaceshipPosition.getY()));
         validateNewTargetPosition(targetPosition);
         lastSpaceshipPosition.updateCoordinates(spaceship);
         return targetPosition;

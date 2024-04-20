@@ -2,18 +2,23 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.CollidingGameObject;
+import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.Position;
 
 /**
  * A gameobject that represents the astronauts that get kidnapped by the alien invaders.
  */
-public class Astronaut extends GameObject {
+public class Astronaut extends CollidingGameObject {
     private final AstronautMovementPatterns astronautMovementPatterns;
+    private final int FALL_SPEED_IN_PIXEL = 1;
+    boolean pickedUp;
+    Lander lander;
 
     /**
      * Creates an Astronaut with a reference of the gameview.
      *
-     * @param gameView The GameView
+     * @param gameView        The GameView
      * @param gamePlayManager The manager which is responsible for the occurrence of the astronaut.
      */
     public Astronaut(GameView gameView, GamePlayManager gamePlayManager) {
@@ -21,9 +26,13 @@ public class Astronaut extends GameObject {
         astronautMovementPatterns = new AstronautMovementPatterns();
         position.updateCoordinates(astronautMovementPatterns.startPosition());
         targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
-        rotation = 0;
         size = 0.08;
         speedInPixel = 0.25;
+        height = 40;
+        width = 15;
+        pickedUp = false;
+        int hitBoxOffsetWidth = 5;
+        hitBoxOffsets(hitBoxOffsetWidth, 0, 0, 0);
     }
 
     @Override
@@ -33,14 +42,30 @@ public class Astronaut extends GameObject {
 
     @Override
     public void updatePosition() {
-        if (position.similarTo(targetPosition)) {
-            targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
+        if (!pickedUp) {
+            if (position.similarTo(targetPosition) || position.getY() < MovementPattern.LOWER_BOUNDARY) {
+                targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
+            }
+            double speedToBeUsed = position.getY() < MovementPattern.LOWER_BOUNDARY ? FALL_SPEED_IN_PIXEL : speedInPixel;
+            position.moveToPosition(targetPosition, speedToBeUsed);
+        } else {
+            if (lander != null) {
+                int horizontalOffset = 2;
+                int verticalOffset = 30;
+                position.moveToPosition(new Position(lander.getPosition().getX() + horizontalOffset, lander.getPosition().getY() + verticalOffset), lander.getSpeedInPixel());
+            }
         }
-        position.moveToPosition(targetPosition, speedInPixel);
     }
 
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("astronaut.png", position.getX(), position.getY(), size, rotation);
+    }
+
+    @Override
+    public void reactToCollisionWith(CollidingGameObject other) {
+        if (other instanceof LaserProjectile) {
+            gamePlayManager.destroyGameObject(this);
+        }
     }
 }

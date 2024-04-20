@@ -3,6 +3,8 @@ package thd.gameobjects.base;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 
+import java.util.Objects;
+
 /**
  * Represents an object in the game.
  */
@@ -73,6 +75,28 @@ public abstract class GameObject {
      * Updates the status of the game object.
      */
     public void updateStatus() {
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        GameObject other = (GameObject) o;
+        return position.equals(other.position)
+               && targetPosition.equals(other.targetPosition)
+               && speedInPixel == other.speedInPixel
+               && rotation == other.rotation
+               && size == other.size
+               && width == other.width
+               && height == other.height;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position, targetPosition, speedInPixel, rotation, size, width, height);
     }
 }

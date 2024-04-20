@@ -2,6 +2,7 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
+import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.Position;
 
 /**
@@ -24,6 +25,9 @@ class LaserProjectile extends Projectile {
         position.updateCoordinates(spaceshipPosition.getX() + horizontalAlignment, spaceshipPosition.getY() + verticalAlignment);
         size = 0.08;
         speedInPixel = 20;
+        height = 3;
+        width = 40;
+        hitBoxOffsets(0, -2, 0, 0);
     }
 
     @Override
@@ -39,5 +43,12 @@ class LaserProjectile extends Projectile {
     @Override
     public String toString() {
         return "LASER PROJECTILE: " + position;
+    }
+
+    @Override
+    public void reactToCollisionWith(CollidingGameObject other) {
+        if (other instanceof EnemyGameObject || other instanceof Astronaut) {
+            gamePlayManager.destroyGameObject(this);
+        }
     }
 }

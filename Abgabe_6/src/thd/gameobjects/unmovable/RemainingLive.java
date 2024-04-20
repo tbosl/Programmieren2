@@ -19,6 +19,8 @@ public class RemainingLive extends GameObject {
      */
     public static final int AMOUNT_OF_LIVES_START = 3;
 
+    private final int liveIndex;
+
     /**
      * Creates a remaining life with a reference of the gameview.
      *
@@ -29,16 +31,16 @@ public class RemainingLive extends GameObject {
         super(gameView, gamePlayManager);
         position.updateCoordinates(calculateXCoordinate(), 30);
         size = 0.05;
-        gamePlayManager.amountOfRemainingLives++;
-        if (gamePlayManager.amountOfRemainingLives > MAXIMUM_AMOUNT_OF_LIVES) {
-            throw new TooManyRemainingLivesException(String.format("The maximum number of lives (%d) has been exceeded (%d).", MAXIMUM_AMOUNT_OF_LIVES, gamePlayManager.amountOfRemainingLives));
+        this.liveIndex = gamePlayManager.getLives();
+        if (gamePlayManager.getLives() > MAXIMUM_AMOUNT_OF_LIVES) {
+            throw new TooManyRemainingLivesException(String.format("The maximum number of lives (%d) has been exceeded (%d).", MAXIMUM_AMOUNT_OF_LIVES, gamePlayManager.getLives()));
         }
     }
 
     private double calculateXCoordinate() {
         int startCoordinate = 50;
         int offsetPerSmartBomb = 50;
-        return startCoordinate + offsetPerSmartBomb * gamePlayManager.amountOfRemainingLives;
+        return startCoordinate + offsetPerSmartBomb * (gamePlayManager.getLives() - 1);
     }
 
     @Override
@@ -49,5 +51,14 @@ public class RemainingLive extends GameObject {
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("spaceship_right.png", position.getX(), position.getY(), size, rotation);
+    }
+
+    /**
+     * Get the index of the live.
+     *
+     * @return The index of the live.
+     */
+    public int getLiveIndex() {
+        return liveIndex;
     }
 }

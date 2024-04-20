@@ -1,11 +1,16 @@
 package thd.game.managers;
 
+import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.movable.Astronaut;
+import thd.gameobjects.movable.EnemyGameObject;
+import thd.gameobjects.unmovable.RemainingLive;
+import thd.gameobjects.unmovable.SmartBomb;
 
 import java.util.LinkedList;
 import java.util.List;
 
-class GameObjectManager {
+class GameObjectManager extends CollisionManager {
     private static final int MAXIMUM_NUMBER_OF_GAME_OBJECTS = 500;
     private final List<GameObject> gameObjects;
     private final List<GameObject> gameObjectsToBeAdded;
@@ -42,6 +47,47 @@ class GameObjectManager {
             gameObject.updatePosition();
             gameObject.addToCanvas();
         }
+        manageCollisions(true);
+    }
+
+    List<CollidingGameObject> provideAllActiveEnemies() {
+        var enemies = new LinkedList<CollidingGameObject>();
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof EnemyGameObject enemyGameObject) {
+                enemies.add(enemyGameObject);
+            }
+        }
+        return enemies;
+    }
+
+    List<Astronaut> provideAllAstronauts() {
+        var astronauts = new LinkedList<Astronaut>();
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Astronaut astronaut) {
+                astronauts.add(astronaut);
+            }
+        }
+        return astronauts;
+    }
+
+    List<RemainingLive> provideAllRemainingLives() {
+        var remainingLives = new LinkedList<RemainingLive>();
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof RemainingLive remainingLive) {
+                remainingLives.add(remainingLive);
+            }
+        }
+        return remainingLives;
+    }
+
+    List<SmartBomb> provideAllRemainingSmartBombs() {
+        var smartBombs = new LinkedList<SmartBomb>();
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof SmartBomb SmartBomb) {
+                smartBombs.add(SmartBomb);
+            }
+        }
+        return smartBombs;
     }
 
     private void updateLists() {
@@ -53,12 +99,18 @@ class GameObjectManager {
     }
 
     private void removeFromGameObjects() {
-        gameObjects.removeAll(gameObjectsToBeRemoved);
+        for (GameObject gameObject : gameObjectsToBeRemoved) {
+            gameObjects.remove(gameObject);
+            removeFromCollisionManagement(gameObject);
+        }
         gameObjectsToBeRemoved.clear();
     }
 
     private void addToGameObjects() {
-        gameObjects.addAll(gameObjectsToBeAdded);
+        for (GameObject gameObject : gameObjectsToBeAdded) {
+            gameObjects.add(gameObject);
+            addToCollisionManagement(gameObject);
+        }
         gameObjectsToBeAdded.clear();
     }
 }

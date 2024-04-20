@@ -2,13 +2,13 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.MovementPattern;
 
 /**
  * Used as a base class for the laser and enemy projectile.
  */
-abstract class Projectile extends GameObject {
+abstract class Projectile extends CollidingGameObject {
 
     /**
      * Creates a projectile with a reference of the gameview.
@@ -22,7 +22,7 @@ abstract class Projectile extends GameObject {
 
     @Override
     public void updateStatus() {
-        if (position.getX() < 0 || position.getX() > GameView.WIDTH || position.getY() < MovementPattern.UPPER_BOUNDARY || position.getY() > MovementPattern.LOWER_BOUNDARY) {
+        if (position.getX() < 0 || position.getX() > GameView.WIDTH || position.getY() < MovementPattern.UPPER_BOUNDARY || position.getY() > GameView.HEIGHT) {
             gamePlayManager.destroyGameObject(this);
         }
     }

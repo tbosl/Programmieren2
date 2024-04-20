@@ -21,6 +21,9 @@ class AstronautMovementPatterns extends MovementPattern {
 
     @Override
     protected Position nextTargetPosition(Position... referencePositions) {
+        if (referencePositions[0].getY() < LOWER_BOUNDARY) {
+            return new Position(referencePositions[0].getX(), LOWER_BOUNDARY);
+        }
         int distanceToWalkInPixel = 50;
         double targetXCoordinate = walkingRight ? referencePositions[0].getX() + distanceToWalkInPixel : referencePositions[0].getX() - distanceToWalkInPixel;
         walkingRight = !walkingRight;

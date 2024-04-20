@@ -38,6 +38,8 @@ class UserControlledGameObjectPool {
             spaceship.down();
         } else if (keyCode == KeyEvent.VK_SPACE) {
             spaceship.shoot();
+        }else if(keyCode == KeyEvent.VK_B){
+            spaceship.detonateSmartBomb();
         }
     }
 }
