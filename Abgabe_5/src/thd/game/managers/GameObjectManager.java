@@ -18,9 +18,7 @@ class GameObjectManager {
     }
 
     void add(GameObject gameObject) {
-        if (!gameObjects.contains(gameObject)) {
             gameObjectsToBeAdded.add(gameObject);
-        }
     }
 
     void remove(GameObject gameObject) {

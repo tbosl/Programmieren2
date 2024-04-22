@@ -23,9 +23,7 @@ class GameObjectManager extends CollisionManager {
     }
 
     void add(GameObject gameObject) {
-        if (!gameObjects.contains(gameObject)) {
             gameObjectsToBeAdded.add(gameObject);
-        }
     }
 
     void remove(GameObject gameObject) {
