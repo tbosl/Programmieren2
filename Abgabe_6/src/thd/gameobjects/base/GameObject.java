@@ -88,11 +88,11 @@ public abstract class GameObject {
         GameObject other = (GameObject) o;
         return position.equals(other.position)
                && targetPosition.equals(other.targetPosition)
-               && speedInPixel == other.speedInPixel
-               && rotation == other.rotation
-               && size == other.size
-               && width == other.width
-               && height == other.height;
+               && Double.compare(speedInPixel, other.speedInPixel) == 0
+               && Double.compare(rotation, other.rotation) == 0
+               && Double.compare(size, other.size) == 0
+               && Double.compare(width, other.width) == 0
+               && Double.compare(height, other.height) == 0;
     }
 
     @Override

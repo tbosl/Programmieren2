@@ -2,6 +2,8 @@ package thd.gameobjects.base;
 
 import thd.game.utilities.GameView;
 
+import java.util.Objects;
+
 /**
  * The Position refers to the location of objects in the {@link GameView}.
  * The following shows the coordinates of each corner:
@@ -189,5 +191,23 @@ public class Position {
     @Override
     public String toString() {
         return "Position (" + (int) Math.round(x) + ", " + (int) Math.round(y) + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Position other = (Position) o;
+        return Double.compare(x, other.x) == 0
+               && Double.compare(y, other.y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

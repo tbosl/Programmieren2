@@ -14,11 +14,6 @@ public class RemainingLive extends GameObject {
      */
     public static final int MAXIMUM_AMOUNT_OF_LIVES = 5;
 
-    /**
-     * The amount of lives the player has at the beginning of a new game.
-     */
-    public static final int AMOUNT_OF_LIVES_START = 3;
-
     private final int liveIndex;
 
     /**
@@ -26,12 +21,13 @@ public class RemainingLive extends GameObject {
      *
      * @param gameView        The GameView.
      * @param gamePlayManager The manager which is responsible for the occurrence of the bomber bomb.
+     * @param liveIndex       The index of the live which will be created.
      */
-    public RemainingLive(GameView gameView, GamePlayManager gamePlayManager) {
+    public RemainingLive(GameView gameView, GamePlayManager gamePlayManager, int liveIndex) {
         super(gameView, gamePlayManager);
-        position.updateCoordinates(calculateXCoordinate(), 30);
         size = 0.05;
-        this.liveIndex = gamePlayManager.getLives();
+        this.liveIndex = liveIndex;
+        position.updateCoordinates(calculateXCoordinate(), 30);
         if (gamePlayManager.getLives() > MAXIMUM_AMOUNT_OF_LIVES) {
             throw new TooManyRemainingLivesException(String.format("The maximum number of lives (%d) has been exceeded (%d).", MAXIMUM_AMOUNT_OF_LIVES, gamePlayManager.getLives()));
         }
@@ -40,7 +36,7 @@ public class RemainingLive extends GameObject {
     private double calculateXCoordinate() {
         int startCoordinate = 50;
         int offsetPerSmartBomb = 50;
-        return startCoordinate + offsetPerSmartBomb * (gamePlayManager.getLives() - 1);
+        return startCoordinate + offsetPerSmartBomb * liveIndex;
     }
 
     @Override

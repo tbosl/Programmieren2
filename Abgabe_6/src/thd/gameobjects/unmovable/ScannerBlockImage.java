@@ -1,5 +1,6 @@
 package thd.gameobjects.unmovable;
 
+@SuppressWarnings("SpellCheckingInspection")
 class ScannerBlockImage {
     /**
      * Blockimage white frame of the scanner

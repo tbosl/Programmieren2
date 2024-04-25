@@ -11,7 +11,7 @@ import thd.gameobjects.base.Position;
  */
 public class Astronaut extends CollidingGameObject {
     private final AstronautMovementPatterns astronautMovementPatterns;
-    private final int FALL_SPEED_IN_PIXEL = 1;
+    private static final int FALL_SPEED_IN_PIXEL = 1;
     boolean pickedUp;
     Lander lander;
 

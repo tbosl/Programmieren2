@@ -4,6 +4,7 @@ package thd.gameobjects.unmovable;
  * These block images can be used for the representation of the user score.
  * The default color of the images is red.
  */
+@SuppressWarnings("ALL")
 class ScoreBlockImages {
     /**
      * Blockimage representation of the number zero.

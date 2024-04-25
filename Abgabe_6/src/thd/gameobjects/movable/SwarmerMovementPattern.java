@@ -34,7 +34,6 @@ class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
             lastSpaceshipPosition.updateCoordinates(spaceship);
             return generatePositionAtOtherSide(spaceship);
         }
-//        targetPosition.up(-(spaceship.getY() - lastSpaceshipPosition.getY()));
         validateNewTargetPosition(targetPosition);
         lastSpaceshipPosition.updateCoordinates(spaceship);
         return targetPosition;

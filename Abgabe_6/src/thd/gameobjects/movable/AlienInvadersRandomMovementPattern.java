@@ -13,10 +13,6 @@ class AlienInvadersRandomMovementPattern extends MovementPattern {
         return generateRandomPosition(UPPER_BOUNDARY, rightBoundary, LOWER_BOUNDARY, leftBoundary);
     }
 
-    protected Position generatePositionWithRandomY(double xCoordinate) {
-        return generatePositionWithRandomY(xCoordinate, UPPER_BOUNDARY, LOWER_BOUNDARY);
-    }
-
     protected Position generatePositionWithRandomY(double xCoordinate, int upperBoundary, int lowerBoundary) {
         return new Position(xCoordinate, random.nextInt(upperBoundary, lowerBoundary));
     }

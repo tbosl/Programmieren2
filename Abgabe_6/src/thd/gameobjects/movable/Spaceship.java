@@ -132,18 +132,13 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
     }
 
     @Override
-    public void updateStatus() {
-
-    }
-
-    @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("spaceship_right.png", position.getX(), position.getY(), size, rotation);
     }
 
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
-        if (other instanceof BomberBomb || other instanceof EnemyGameObject) {
+        if (other instanceof BomberBomb || other instanceof EnemyGameObject || other instanceof EnemyProjectile) {
             gamePlayManager.lifeLost();
         }
     }

@@ -4,11 +4,9 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.GameObject;
 import thd.gameobjects.movable.Astronaut;
-import thd.gameobjects.movable.EnemyGameObject;
 import thd.gameobjects.unmovable.RemainingLive;
 import thd.gameobjects.unmovable.SmartBomb;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,19 +15,16 @@ import java.util.List;
 public class GamePlayManager extends UserControlledGameObjectPool {
 
     private int amountOfSmartBombs;
-
-    /**
-     * Represents the amount of lives that the user has available at the beginning.
-     */
-    public final int LIVES = 3;
-    private int lives;
-    private int points;
+    private static final int LIVES = 3;
+    protected int lives;
+    protected int points;
     private final GameObjectManager gameObjectManager;
 
     protected GamePlayManager(GameView gameView) {
         super(gameView);
         this.gameObjectManager = new GameObjectManager();
         amountOfSmartBombs = 0;
+        lives = LIVES;
     }
 
     /**
@@ -115,7 +110,11 @@ public class GamePlayManager extends UserControlledGameObjectPool {
 
     void lifeGained() {
         lives++;
-        spawnGameObject(new RemainingLive(gameView, this));
+        spawnGameObject(new RemainingLive(gameView, this, lives));
+    }
+
+    void lifeGained(int lifeIndex) {
+        spawnGameObject(new RemainingLive(gameView, this, lifeIndex));
     }
 
     /**

@@ -15,7 +15,7 @@ public class Lander extends EnemyGameObject {
     private Astronaut grabbedAstronaut;
     private final Spaceship spaceship;
     private final int waitTimeBeforeAttackingAstronaut;
-    private final int spwanTime;
+    private final int spawnTime;
     private boolean attackingAllowed;
     private final int outerMarginToSideBorders;
     private static final int POINTS_ON_DESTRUCTION = 150;
@@ -29,7 +29,7 @@ public class Lander extends EnemyGameObject {
      * @param spaceship       The player's spaceship.
      */
     public Lander(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
-        super(gameView, gamePlayManager,POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
         this.spaceship = spaceship;
         landerMovementPattern = new LanderMovementPattern();
         position.updateCoordinates(landerMovementPattern.startPosition());
@@ -39,7 +39,7 @@ public class Lander extends EnemyGameObject {
         speedInPixel = 5;
         width = 25;
         height = 40;
-        spwanTime = gameView.gameTimeInMilliseconds();
+        spawnTime = gameView.gameTimeInMilliseconds();
         waitTimeBeforeAttackingAstronaut = new Random().nextInt(2000, 6000);
         attackingAllowed = false;
         int hitBoxOffsetX = 6;
@@ -71,7 +71,7 @@ public class Lander extends EnemyGameObject {
             gamePlayManager.destroyGameObject(grabbedAstronaut);
             gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
         }
-        if (!attackingAllowed && gameView.gameTimeInMilliseconds() > waitTimeBeforeAttackingAstronaut + spwanTime) {
+        if (!attackingAllowed && gameView.gameTimeInMilliseconds() > waitTimeBeforeAttackingAstronaut + spawnTime) {
             attackingAllowed = true;
         }
     }

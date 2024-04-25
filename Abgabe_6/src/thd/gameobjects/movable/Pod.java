@@ -54,10 +54,6 @@ public class Pod extends EnemyGameObject {
     }
 
     @Override
-    public void updateStatus() {
-    }
-
-    @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("pod_animation_1.png", position.getX(), position.getY(), size, rotation);
     }
