@@ -77,6 +77,15 @@ public abstract class GameObject {
     public void updateStatus() {
     }
 
+    /**
+     * Returns speed in pixel of the game object.
+     *
+     * @return speed of the game object in pixel.
+     */
+    public double getSpeedInPixel() {
+        return speedInPixel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {

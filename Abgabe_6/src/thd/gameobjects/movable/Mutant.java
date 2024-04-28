@@ -3,7 +3,6 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
-import thd.gameobjects.base.Position;
 
 import java.util.List;
 import java.util.Random;
@@ -20,7 +19,6 @@ class Mutant extends CollidingGameObject {
     private static final int UPPER_INTERVALL_BOUND = 2000;
     private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
     private List<CollidingGameObject> collidingGameObjectsForPathDecision;
-    protected final Position positionBeforeMoving;
     private static final int POINTS_ON_DESTRUCTION = 150; // TODO Implement with Abgabe_7
 
 
@@ -42,7 +40,6 @@ class Mutant extends CollidingGameObject {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
         currentDoubleShootIntervallInMilliseconds = generateNewShootIntervall();
         collidingGameObjectsForPathDecision = gamePlayManager.provideAllActiveEnemies();
-        positionBeforeMoving = new Position();
         size = 0.08;
         speedInPixel = 4;
         width = 25;
@@ -59,24 +56,9 @@ class Mutant extends CollidingGameObject {
     @Override
     public void updatePosition() {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
-        positionBeforeMoving.updateCoordinates(position);
         position.moveToPosition(movementPattern.shake(spaceship.getPosition(), position), speedInPixel);
         if (position.distance(targetPosition) > SPACESHIP_DISTANCE_THRESHOLD) {
             position.moveToPosition(targetPosition, speedInPixel);
-        }
-        avoidCollisions();
-    }
-
-    private void avoidCollisions() {
-        collidingGameObjectsForPathDecision = gamePlayManager.provideAllActiveEnemies();
-        for (CollidingGameObject collidingGameObject : collidingGameObjectsForPathDecision) {
-            if (collidingGameObject == this) {
-                continue;
-            }
-            if (collidesWith(collidingGameObject)) {
-                position.updateCoordinates(positionBeforeMoving);
-                break;
-            }
         }
     }
 

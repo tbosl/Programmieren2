@@ -62,7 +62,7 @@ public class Score extends GameObject {
 
     private List<Integer> createDigitsOfScoreInReversedOrder() {
         var digits = new ArrayList<Integer>();
-        int score = gamePlayManager.getScore();
+        int score = gamePlayManager.getPoints();
         if (score == 0) {
             digits.add(0);
             digits.add(0);

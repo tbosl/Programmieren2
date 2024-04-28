@@ -78,6 +78,11 @@ public class GamePlayManager extends UserControlledGameObjectPool {
     private void gamePlayManagement() {
     }
 
+    /**
+     * Add points to the score of the player.
+     *
+     * @param amount The amount of points to be added.
+     */
     public void addPoints(int amount) {
         points += amount;
     }
@@ -87,7 +92,7 @@ public class GamePlayManager extends UserControlledGameObjectPool {
      *
      * @return The current amount of points.
      */
-    public int getScore() {
+    public int getPoints() {
         return points;
     }
 

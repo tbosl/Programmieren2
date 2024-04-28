@@ -84,7 +84,7 @@ public class Lander extends EnemyGameObject {
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
         super.reactToCollisionWith(other);
-        if (other instanceof LaserProjectile) {
+        if (other instanceof LaserProjectile || other instanceof Spaceship) {
             if (grabbedAstronaut != null) {
                 grabbedAstronaut.pickedUp = false;
                 grabbedAstronaut.lander = null;
@@ -112,7 +112,7 @@ public class Lander extends EnemyGameObject {
         return nearestAstronaut;
     }
 
-    double getSpeedInPixel() {
-        return speedInPixel;
+    Astronaut getGrabbedAstronaut() {
+        return grabbedAstronaut;
     }
 }

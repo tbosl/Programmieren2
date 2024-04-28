@@ -8,9 +8,9 @@ class GameManager extends GamePlayManager {
 
     GameManager(GameView gameView) {
         super(gameView);
-        astronaut = new Astronaut(gameView, this);
         score = new Score(gameView, this);
         spaceship = new Spaceship(gameView, this);
+        astronaut = new Astronaut(gameView, this);
         lander = new Lander(gameView, this, spaceship);
         bomber = new Bomber(gameView, this);
         pod = new Pod(gameView, this, spaceship);

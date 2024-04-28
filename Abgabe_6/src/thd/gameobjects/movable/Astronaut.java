@@ -14,6 +14,7 @@ public class Astronaut extends CollidingGameObject {
     private static final int FALL_SPEED_IN_PIXEL = 1;
     boolean pickedUp;
     Lander lander;
+    boolean stopWalking;
 
     /**
      * Creates an Astronaut with a reference of the gameview.
@@ -33,6 +34,7 @@ public class Astronaut extends CollidingGameObject {
         pickedUp = false;
         int hitBoxOffsetWidth = 5;
         hitBoxOffsets(hitBoxOffsetWidth, 0, 0, 0);
+        stopWalking = false;
     }
 
     @Override
@@ -42,12 +44,13 @@ public class Astronaut extends CollidingGameObject {
 
     @Override
     public void updatePosition() {
-        if (!pickedUp) {
+        if (!pickedUp && !stopWalking) {
             if (position.similarTo(targetPosition) || position.getY() < MovementPattern.LOWER_BOUNDARY) {
                 targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
             }
             double speedToBeUsed = position.getY() < MovementPattern.LOWER_BOUNDARY ? FALL_SPEED_IN_PIXEL : speedInPixel;
             position.moveToPosition(targetPosition, speedToBeUsed);
+
         } else {
             if (lander != null) {
                 int horizontalOffset = 2;

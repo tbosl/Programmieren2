@@ -46,6 +46,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void left() {
         position.left(speedInPixel);
+        undoMovementIfCollisionWithAstronaut('r');
     }
 
     /**
@@ -53,6 +54,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void right() {
         position.right(speedInPixel);
+        undoMovementIfCollisionWithAstronaut('l');
     }
 
     /**
@@ -60,9 +62,11 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void up() {
         position.up(speedInPixel);
-        if (position.getY() < MovementPattern.UPPER_BOUNDARY) {
+        boolean collisionDetected = undoMovementIfCollisionWithAstronaut('d');
+        if (!collisionDetected && position.getY() < MovementPattern.UPPER_BOUNDARY) {
             position.updateCoordinates(position.getX(), MovementPattern.UPPER_BOUNDARY);
         }
+
     }
 
     /**
@@ -70,9 +74,40 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void down() {
         position.down(speedInPixel);
-        if (position.getY() > MovementPattern.LOWER_BOUNDARY) {
+        boolean collisionDetected = undoMovementIfCollisionWithAstronaut('u');
+
+        if (!collisionDetected && position.getY() > MovementPattern.LOWER_BOUNDARY) {
             position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
         }
+    }
+
+    private boolean undoMovementIfCollisionWithAstronaut(char counterDirection) {
+        boolean collisionDetected = false;
+        for (CollidingGameObject collidingGameObject : gamePlayManager.provideAllAstronauts()) {
+            Astronaut astronaut = (Astronaut) collidingGameObject;
+            if (collidesWith(astronaut) && astronaut.getPosition().getY() == MovementPattern.LOWER_BOUNDARY) {
+                switch (counterDirection) {
+                    case 'd':
+                        position.down(speedInPixel);
+                        break;
+                    case 'u':
+                        position.up(speedInPixel);
+                        break;
+                    case 'l':
+                        position.left(speedInPixel);
+                        break;
+                    case 'r':
+                        position.right(speedInPixel);
+                        break;
+                }
+                collisionDetected = true;
+                astronaut.stopWalking = true;
+                break;
+            } else {
+                astronaut.stopWalking = false;
+            }
+        }
+        return collisionDetected;
     }
 
     /**
@@ -109,11 +144,22 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
             double x = enemy.getPosition().getX();
             double y = enemy.getPosition().getY();
             if (x >= 0 && x <= GameView.WIDTH && y >= 0 && y <= GameView.HEIGHT) {
+                if (enemy instanceof Lander lander) {
+                    removeLanderConnectionToAstronaut(lander);
+                }
                 gamePlayManager.destroyGameObject(enemy);
                 killedEnemies.add((EnemyGameObject) enemy);
             }
         }
         return killedEnemies;
+    }
+
+    private void removeLanderConnectionToAstronaut(Lander lander) {
+        if (lander.getGrabbedAstronaut() != null) {
+            Astronaut astronaut = lander.getGrabbedAstronaut();
+            astronaut.lander = null;
+            astronaut.pickedUp = false;
+        }
     }
 
     private void updateScore(List<EnemyGameObject> killedEnemies) {
