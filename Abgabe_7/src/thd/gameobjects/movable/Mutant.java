@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * A gameobject that represents the alien invader called Mutant.
  */
-class Mutant extends CollidingGameObject {
+class Mutant extends EnemyGameObject {
     private final MutantMovementPatterns movementPattern;
     private final Spaceship spaceship;
     private final Random random;
@@ -17,7 +17,7 @@ class Mutant extends CollidingGameObject {
     private static final int LOWER_INTERVALL_BOUND = 1000;
     private static final int UPPER_INTERVALL_BOUND = 2000;
     private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
-    private static final int POINTS_ON_DESTRUCTION = 150; // TODO Implement with Abgabe_7
+    private static final int POINTS_ON_DESTRUCTION = 150;
 
 
     /**
@@ -30,7 +30,7 @@ class Mutant extends CollidingGameObject {
      * @param preMutation     The lander which is mutated.
      */
     Mutant(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Lander preMutation) {
-        super(gameView, gamePlayManager);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
         this.spaceship = spaceship;
         movementPattern = new MutantMovementPatterns(gameView);
         random = new Random();
@@ -83,10 +83,7 @@ class Mutant extends CollidingGameObject {
 
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
-        // TODO Change back to EnemyGameObject after finishing Abgabe_6
-        if (other instanceof LaserProjectile) {
-            gamePlayManager.destroyGameObject(this);
-        }
+        super.reactToCollisionWith(other);
     }
 }
 
