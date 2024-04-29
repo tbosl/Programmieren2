@@ -4,7 +4,6 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -18,7 +17,6 @@ class Mutant extends CollidingGameObject {
     private static final int LOWER_INTERVALL_BOUND = 1000;
     private static final int UPPER_INTERVALL_BOUND = 2000;
     private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
-    private List<CollidingGameObject> collidingGameObjectsForPathDecision;
     private static final int POINTS_ON_DESTRUCTION = 150; // TODO Implement with Abgabe_7
 
 
@@ -39,7 +37,6 @@ class Mutant extends CollidingGameObject {
         position.updateCoordinates(movementPattern.startPosition(preMutation.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
         currentDoubleShootIntervallInMilliseconds = generateNewShootIntervall();
-        collidingGameObjectsForPathDecision = gamePlayManager.provideAllActiveEnemies();
         size = 0.08;
         speedInPixel = 4;
         width = 25;
@@ -85,7 +82,7 @@ class Mutant extends CollidingGameObject {
 
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
-        // TODO Change back to EnemyGameObject after Wichtel changed.
+        // TODO Change back to EnemyGameObject after finishing Abgabe_6
         if (other instanceof LaserProjectile) {
             gamePlayManager.destroyGameObject(this);
         }

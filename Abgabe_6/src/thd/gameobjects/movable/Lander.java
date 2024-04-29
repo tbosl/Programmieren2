@@ -17,7 +17,6 @@ public class Lander extends EnemyGameObject {
     private final int waitTimeBeforeAttackingAstronaut;
     private final int spawnTime;
     private boolean attackingAllowed;
-    private final int outerMarginToSideBorders;
     private static final int POINTS_ON_DESTRUCTION = 150;
 
 
@@ -33,7 +32,7 @@ public class Lander extends EnemyGameObject {
         this.spaceship = spaceship;
         landerMovementPattern = new LanderMovementPattern();
         position.updateCoordinates(landerMovementPattern.startPosition());
-        outerMarginToSideBorders = 100;
+        int outerMarginToSideBorders = 100;
         targetPosition.updateCoordinates(landerMovementPattern.generateRandomPosition(-outerMarginToSideBorders, GameView.WIDTH + outerMarginToSideBorders));
         size = 0.08;
         speedInPixel = 5;

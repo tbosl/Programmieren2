@@ -11,7 +11,6 @@ import thd.gameobjects.base.Position;
  * A gameobject that represents an enemy projectile.
  */
 class EnemyProjectile extends Projectile {
-    private final EnemyProjectileMovementPattern movementPattern;
     private final ColorCycleManager colorCycleManager;
     private static final int COLOR_CYCLE_DURATION = 500;
 
@@ -25,7 +24,7 @@ class EnemyProjectile extends Projectile {
      */
     EnemyProjectile(GameView gameView, GamePlayManager gamePlayManager, GameObject enemy, Position spaceshipPosition) {
         super(gameView, gamePlayManager);
-        movementPattern = new EnemyProjectileMovementPattern();
+        EnemyProjectileMovementPattern movementPattern = new EnemyProjectileMovementPattern();
         colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
         position.updateCoordinates(movementPattern.startPosition(enemy.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceshipPosition, enemy.getPosition()));

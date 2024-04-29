@@ -83,9 +83,8 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
 
     private boolean undoMovementIfCollisionWithAstronaut(char counterDirection) {
         boolean collisionDetected = false;
-        for (CollidingGameObject collidingGameObject : gamePlayManager.provideAllAstronauts()) {
-            Astronaut astronaut = (Astronaut) collidingGameObject;
-            if (collidesWith(astronaut) && astronaut.getPosition().getY() == MovementPattern.LOWER_BOUNDARY) {
+        for (Astronaut collidingGameObject : gamePlayManager.provideAllAstronauts()) {
+            if (collidesWith(collidingGameObject) && collidingGameObject.getPosition().getY() == MovementPattern.LOWER_BOUNDARY) {
                 switch (counterDirection) {
                     case 'd':
                         position.down(speedInPixel);
@@ -101,10 +100,10 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
                         break;
                 }
                 collisionDetected = true;
-                astronaut.stopWalking = true;
+                collidingGameObject.stopWalking = true;
                 break;
             } else {
-                astronaut.stopWalking = false;
+                collidingGameObject.stopWalking = false;
             }
         }
         return collisionDetected;

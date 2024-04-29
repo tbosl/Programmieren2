@@ -9,7 +9,7 @@ class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
     private final Position lastSpaceshipPosition;
 
     SwarmerMovementPattern(Position spaceship) {
-        left = spaceship.getX() <= GameView.WIDTH / 2;
+        left = spaceship.getX() <= GameView.WIDTH / 2f;
         lastSpaceshipPosition = new Position(spaceship);
         spawnMargin = 100;
     }
