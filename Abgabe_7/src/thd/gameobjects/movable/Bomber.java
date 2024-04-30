@@ -51,10 +51,8 @@ public class Bomber extends EnemyGameObject {
             targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
         }
         double sinusScale = 0.5;
-        positionBeforeMoving.updateCoordinates(position);
         position.down(Math.round(Math.sin(sinusScale * Math.toRadians(position.getX()))));
         position.moveToPosition(targetPosition, speedInPixel);
-        super.updatePosition();
     }
 
     @Override

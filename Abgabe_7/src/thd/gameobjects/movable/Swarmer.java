@@ -20,8 +20,7 @@ class Swarmer extends EnemyGameObject {
      *
      * @param gameView        The GameView.
      * @param gamePlayManager The manager which is responsible for the occurrence of the swarmer.
-     * @param spaceship       The player spaceship - the target of the mutant.
-     *                        (This will later come from GameManager or Astronaut)
+     * @param spaceship       The player spaceship - the target of the swarmer.
      * @param pod             The pod from which the swarmer is spawned.
      */
     Swarmer(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Pod pod) {
@@ -48,9 +47,7 @@ class Swarmer extends EnemyGameObject {
     @Override
     public void updatePosition() {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position, targetPosition));
-        positionBeforeMoving.updateCoordinates(position);
         position.moveToPosition(targetPosition, speedInPixel);
-        super.updatePosition();
     }
 
     @Override

@@ -49,9 +49,8 @@ public class Pod extends EnemyGameObject {
         if (position.similarTo(targetPosition)) {
             targetPosition.updateCoordinates(randomMovementPattern.nextTargetPosition());
         }
-        positionBeforeMoving.updateCoordinates(position);
         position.moveToPosition(targetPosition, speedInPixel);
-        super.updatePosition();
+        System.out.println(this);
     }
 
     @Override

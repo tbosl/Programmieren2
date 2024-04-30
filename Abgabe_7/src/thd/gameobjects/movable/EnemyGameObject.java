@@ -4,17 +4,16 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.Position;
+import thd.gameobjects.base.ShiftableGameObject;
 
 /**
  * The parent class of all enemies.
  */
-public abstract class EnemyGameObject extends CollidingGameObject {
-    protected final Position positionBeforeMoving;
+public abstract class EnemyGameObject extends CollidingGameObject implements ShiftableGameObject {
     private final int pointsOnDestruction;
 
     EnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointsOnDestruction) {
         super(gameView, gamePlayManager);
-        positionBeforeMoving = new Position();
         this.pointsOnDestruction = pointsOnDestruction;
     }
 

@@ -9,12 +9,16 @@ class MutantMovementPatterns extends MovementPattern {
     private boolean shakeLeft;
     private boolean shakeUp;
     private final int shakeFrequencyInMs;
+    private int shakeThreshold;
+    private int shakeSpeed;
 
     MutantMovementPatterns(GameView gameView) {
         this.gameView = gameView;
         shakeLeft = false;
         shakeUp = false;
         shakeFrequencyInMs = 150;
+        shakeThreshold = 50;
+        shakeSpeed = 5;
     }
 
     @Override
@@ -61,9 +65,8 @@ class MutantMovementPatterns extends MovementPattern {
     Position shake(Position... referencePositions) {
         Position spaceship = referencePositions[0];
         Position mutant = referencePositions[1];
-        Position shakingOutcome = new Position(mutant);
         updateShakeDirections();
-        addShaking(spaceship, mutant, shakingOutcome);
+        Position shakingOutcome = addShaking(spaceship, mutant);
         return shakingOutcome;
     }
 
@@ -74,21 +77,29 @@ class MutantMovementPatterns extends MovementPattern {
         }
     }
 
-    private void addShaking(Position spaceshipPosition, Position mutantPosition, Position shakingOutcome) {
-        int threshold = 50;
-        int shakeSpeed = 5;
-        if (Math.abs(mutantPosition.getX() - spaceshipPosition.getX()) < threshold) {
+    private Position addShaking(Position spaceshipPosition, Position mutantPosition) {
+        Position result = new Position(mutantPosition);
+        addHorizontalShaking(spaceshipPosition, mutantPosition, result);
+        addVerticalShaking(spaceshipPosition, mutantPosition, result);
+        return result;
+    }
+
+    private void addHorizontalShaking(Position spaceshipPosition, Position mutantPosition, Position result) {
+        if (Math.abs(mutantPosition.getX() - spaceshipPosition.getX()) < shakeThreshold) {
             if (shakeLeft) {
-                shakingOutcome.left(shakeSpeed);
+                result.left(shakeSpeed);
             } else {
-                shakingOutcome.right(shakeSpeed);
+                result.right(shakeSpeed);
             }
         }
-        if (Math.abs(mutantPosition.getY() - spaceshipPosition.getY()) < threshold) {
+    }
+
+    private void addVerticalShaking(Position spaceshipPosition, Position mutantPosition, Position result) {
+        if (Math.abs(mutantPosition.getY() - spaceshipPosition.getY()) < shakeThreshold) {
             if (shakeUp) {
-                shakingOutcome.up(shakeSpeed);
+                result.up(shakeSpeed);
             } else {
-                shakingOutcome.down(shakeSpeed);
+                result.down(shakeSpeed);
             }
         }
     }

@@ -27,7 +27,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public Spaceship(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
-        double horizontalPositionFactor = 0.3;
+        double horizontalPositionFactor = 0.125;
         double verticalPositionFactor = 0.5;
         position.updateCoordinates(GameView.WIDTH * horizontalPositionFactor, GameView.HEIGHT * verticalPositionFactor);
         size = 0.1;
@@ -46,16 +46,26 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      * Moves the spaceship to the left at the current speed.
      */
     public void left() {
-        position.left(speedInPixel);
-        undoMovementIfCollisionWithAstronaut('r');
+        if (position.getX() > GameView.WIDTH / 2d - 400) {
+            position.left(speedInPixel);
+            undoMovementIfCollisionWithAstronaut('r', false);
+        } else {
+            gamePlayManager.moveWorldToRight(speedInPixel);
+            undoMovementIfCollisionWithAstronaut('l', true);
+        }
     }
 
     /**
      * Moves the spaceship to the right at the current speed.
      */
     public void right() {
-        position.right(speedInPixel);
-        undoMovementIfCollisionWithAstronaut('l');
+        if (position.getX() < GameView.WIDTH / 2d + 400) {
+            position.right(speedInPixel);
+            undoMovementIfCollisionWithAstronaut('l', false);
+        } else {
+            gamePlayManager.moveWorldToLeft(speedInPixel);
+            undoMovementIfCollisionWithAstronaut('r', true);
+        }
     }
 
     /**
@@ -63,7 +73,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void up() {
         position.up(speedInPixel);
-        boolean collisionDetected = undoMovementIfCollisionWithAstronaut('d');
+        boolean collisionDetected = undoMovementIfCollisionWithAstronaut('d', false);
         if (!collisionDetected && position.getY() < MovementPattern.UPPER_BOUNDARY) {
             position.updateCoordinates(position.getX(), MovementPattern.UPPER_BOUNDARY);
         }
@@ -75,31 +85,18 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void down() {
         position.down(speedInPixel);
-        boolean collisionDetected = undoMovementIfCollisionWithAstronaut('u');
+        boolean collisionDetected = undoMovementIfCollisionWithAstronaut('u', false);
 
         if (!collisionDetected && position.getY() > MovementPattern.LOWER_BOUNDARY) {
             position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
         }
     }
 
-    private boolean undoMovementIfCollisionWithAstronaut(char counterDirection) {
+    private boolean undoMovementIfCollisionWithAstronaut(char counterDirection, boolean worldShift) {
         boolean collisionDetected = false;
         for (Astronaut collidingGameObject : gamePlayManager.provideAllAstronauts()) {
             if (collidesWith(collidingGameObject) && collidingGameObject.getPosition().getY() == MovementPattern.LOWER_BOUNDARY) {
-                switch (counterDirection) {
-                    case 'd':
-                        position.down(speedInPixel);
-                        break;
-                    case 'u':
-                        position.up(speedInPixel);
-                        break;
-                    case 'l':
-                        position.left(speedInPixel);
-                        break;
-                    case 'r':
-                        position.right(speedInPixel);
-                        break;
-                }
+                correctPosition(counterDirection, worldShift);
                 collisionDetected = true;
                 collidingGameObject.stopWalking = true;
                 break;
@@ -108,6 +105,31 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
             }
         }
         return collisionDetected;
+    }
+
+    private void correctPosition(char counterDirection, boolean worldShift) {
+        switch (counterDirection) {
+            case 'd':
+                position.down(speedInPixel);
+                break;
+            case 'u':
+                position.up(speedInPixel);
+                break;
+            case 'l':
+                if (worldShift) {
+                    gamePlayManager.moveWorldToLeft(speedInPixel);
+                } else {
+                    position.left(speedInPixel);
+                }
+                break;
+            case 'r':
+                if (worldShift) {
+                    gamePlayManager.moveWorldToRight(speedInPixel);
+                } else {
+                    position.right(speedInPixel);
+                }
+                break;
+        }
     }
 
     /**

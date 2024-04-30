@@ -4,6 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.managers.TooManyRemainingLivesException;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.ShiftableGameObject;
 
 /**
  * A gameobject used to represent the remaining lives of the player.
@@ -20,7 +21,7 @@ public class RemainingLive extends GameObject {
      * Creates a remaining life with a reference of the gameview.
      *
      * @param gameView        The GameView.
-     * @param gamePlayManager The manager which is responsible for the occurrence of the bomber bomb.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the remaining live.
      * @param liveIndex       The index of the live which will be created.
      */
     public RemainingLive(GameView gameView, GamePlayManager gamePlayManager, int liveIndex) {

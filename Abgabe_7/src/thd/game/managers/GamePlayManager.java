@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Manages the creation and destruction of game objects.
  */
-public class GamePlayManager extends UserControlledGameObjectPool {
+public class GamePlayManager extends WorldShiftManager {
 
     private int amountOfSmartBombs;
     private static final int LIVES = 3;
@@ -32,7 +32,9 @@ public class GamePlayManager extends UserControlledGameObjectPool {
      *
      * @param gameObject The game object to be added.
      */
+    @Override
     public void spawnGameObject(GameObject gameObject) {
+        super.spawnGameObject(gameObject);
         gameObjectManager.add(gameObject);
     }
 
@@ -41,11 +43,15 @@ public class GamePlayManager extends UserControlledGameObjectPool {
      *
      * @param gameObject The game object to be removed.
      */
+    @Override
     public void destroyGameObject(GameObject gameObject) {
+        super.destroyGameObject(gameObject);
         gameObjectManager.remove(gameObject);
     }
 
+    @Override
     protected void destroyAllGameObjects() {
+        super.destroyAllGameObjects();
         gameObjectManager.removeAll();
     }
 

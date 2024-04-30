@@ -3,6 +3,7 @@ package thd.gameobjects.unmovable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.ShiftableGameObject;
 
 /**
  * Represents a smart bomb.
@@ -18,7 +19,7 @@ public class SmartBomb extends GameObject {
      * Creates a smart bomb with a reference of the gameview.
      *
      * @param gameView        The GameView.
-     * @param gamePlayManager The manager which is responsible for the occurrence of the smart bomb reserve.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the smart bomb.
      */
     public SmartBomb(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);

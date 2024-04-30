@@ -11,8 +11,8 @@ public class Baiter extends EnemyGameObject {
     private final BaiterMovementPattern movementPattern;
     private final Spaceship spaceship;
     private static final int THRESHOLD_TO_SPACESHIP = 200;
-    private static final int SLOW_SPEED_IN_PIXEL = 5;
-    private static final int FAST_SPEED_IN_PIXEL = 8;
+    private static final int SLOW_SPEED_IN_PIXEL = 4;
+    private static final int FAST_SPEED_IN_PIXEL = 6;
     private static final int POINTS_ON_DESTRUCTION = 200;
 
     /**
@@ -20,7 +20,7 @@ public class Baiter extends EnemyGameObject {
      *
      * @param gameView        The GameView.
      * @param gamePlayManager The manager which is responsible for the occurrence of the baiter.
-     * @param spaceship       The player spaceship - the target of the mutant.
+     * @param spaceship       The player spaceship - the target of the baiter.
      */
     public Baiter(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
@@ -47,9 +47,7 @@ public class Baiter extends EnemyGameObject {
     public void updatePosition() {
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
         setupSpeedInPixelDependingOnDistanceToSpaceship();
-        positionBeforeMoving.updateCoordinates(position);
         position.moveToPosition(targetPosition, speedInPixel);
-        super.updatePosition();
     }
 
     private void setupSpeedInPixelDependingOnDistanceToSpaceship() {

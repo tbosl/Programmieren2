@@ -4,6 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.ColorCycleManager;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.ShiftableGameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * A gameobject used to represent the current score of the user.
  */
-public class Score extends GameObject {
+public class Score extends GameObject{
     private final String[] scoreBlockImages;
     private final ColorCycleManager colorCycleManager;
     private static final int COLOR_CYCLE_DURATION = 500;

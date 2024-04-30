@@ -106,9 +106,20 @@ class GameObjectManager extends CollisionManager {
 
     private void addToGameObjects() {
         for (GameObject gameObject : gameObjectsToBeAdded) {
-            gameObjects.add(gameObject);
+            sortIntoGameObjects(gameObject);
             addToCollisionManagement(gameObject);
         }
         gameObjectsToBeAdded.clear();
+    }
+
+    private void sortIntoGameObjects(GameObject toAdd) {
+        int indexToSortIn = 0;
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject.getDistanceToBackground() >= toAdd.getDistanceToBackground()) {
+                break;
+            }
+            indexToSortIn++;
+        }
+        gameObjects.add(indexToSortIn, toAdd);
     }
 }

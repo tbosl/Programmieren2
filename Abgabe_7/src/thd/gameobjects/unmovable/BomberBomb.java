@@ -4,13 +4,14 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.ColorCycleManager;
+import thd.gameobjects.base.ShiftableGameObject;
 import thd.gameobjects.movable.Bomber;
 import thd.gameobjects.movable.Spaceship;
 
 /**
  * A gameobject used to represent a bomb placed by a bomber.
  */
-public class BomberBomb extends CollidingGameObject {
+public class BomberBomb extends CollidingGameObject implements ShiftableGameObject {
     private final ColorCycleManager colorCycleManager;
     private static final int COLOR_CYCLE_DURATION = 150;
     private static final int ROTATION_INTERVALL = 250;

@@ -3,6 +3,7 @@ package thd.gameobjects.unmovable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.ShiftableGameObject;
 
 /**
  * Represents the frame of the scanner.
@@ -21,7 +22,7 @@ public class ScannerFrame extends GameObject {
         position.updateCoordinates(610, 0);
         blockImage = ScannerBlockImage.SCANNER_FRAME;
         size = 5;
-        distanceToBackground = 0;
+        distanceToBackground = 1;
     }
 
     @Override

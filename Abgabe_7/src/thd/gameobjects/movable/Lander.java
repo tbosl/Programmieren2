@@ -58,14 +58,24 @@ public class Lander extends EnemyGameObject {
         } else {
             targetPosition.updateCoordinates(spaceship.getPosition());
         }
-        positionBeforeMoving.updateCoordinates(position);
         position.moveToPosition(targetPosition, speedInPixel);
-        super.updatePosition();
+    }
+
+    private Astronaut findNearestAstronaut() {
+        Astronaut nearestAstronaut = new Astronaut(gameView, gamePlayManager);
+        double currentDistance = -1;
+        for (Astronaut astronaut : gamePlayManager.provideAllAstronauts()) {
+            double distance = position.distance(astronaut.getPosition());
+            if ((currentDistance < 0 || currentDistance > distance) && !astronaut.pickedUp) {
+                nearestAstronaut = astronaut;
+                currentDistance = distance;
+            }
+        }
+        return nearestAstronaut;
     }
 
     @Override
     public void updateStatus() {
-        // TODO Check if astronaut is grabbed
         if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.pickedUp) {
             gamePlayManager.destroyGameObject(this);
             gamePlayManager.destroyGameObject(grabbedAstronaut);
@@ -85,31 +95,26 @@ public class Lander extends EnemyGameObject {
     public void reactToCollisionWith(CollidingGameObject other) {
         super.reactToCollisionWith(other);
         if (other instanceof LaserProjectile || other instanceof Spaceship) {
-            if (grabbedAstronaut != null) {
-                grabbedAstronaut.pickedUp = false;
-                grabbedAstronaut.lander = null;
-            }
-            landerMovementPattern.astronautGrabbed = false;
+            removeConnectionToAstronaut();
         }
         if (other instanceof Astronaut astronaut && !astronaut.pickedUp) {
-            grabbedAstronaut = astronaut;
-            grabbedAstronaut.pickedUp = true;
-            grabbedAstronaut.lander = this;
-            landerMovementPattern.astronautGrabbed = true;
+            pickUpAstronaut(astronaut);
         }
     }
 
-    private Astronaut findNearestAstronaut() {
-        Astronaut nearestAstronaut = new Astronaut(gameView, gamePlayManager);
-        double currentDistance = -1;
-        for (Astronaut astronaut : gamePlayManager.provideAllAstronauts()) {
-            double distance = position.distance(astronaut.getPosition());
-            if ((currentDistance < 0 || currentDistance > distance) && !astronaut.pickedUp) {
-                nearestAstronaut = astronaut;
-                currentDistance = distance;
-            }
+    private void removeConnectionToAstronaut() {
+        if (grabbedAstronaut != null) {
+            grabbedAstronaut.pickedUp = false;
+            grabbedAstronaut.lander = null;
         }
-        return nearestAstronaut;
+        landerMovementPattern.astronautGrabbed = false;
+    }
+
+    private void pickUpAstronaut(Astronaut astronaut) {
+        grabbedAstronaut = astronaut;
+        grabbedAstronaut.pickedUp = true;
+        grabbedAstronaut.lander = this;
+        landerMovementPattern.astronautGrabbed = true;
     }
 
     Astronaut getGrabbedAstronaut() {
