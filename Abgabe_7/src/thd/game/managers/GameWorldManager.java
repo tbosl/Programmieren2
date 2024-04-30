@@ -94,7 +94,7 @@ class GameWorldManager extends GamePlayManager {
                 double x = (column - worldOffsetLines) * scale;
                 char character = lines[line].charAt(column);
                 if (character == ' ') {
-                    return;
+                    continue;
                 }
                 if (character == 'S') {
                     Star star = new Star(gameView, this);
