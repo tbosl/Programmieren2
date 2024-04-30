@@ -1,8 +1,6 @@
 package thd.game.managers;
 
 import thd.game.utilities.GameView;
-import thd.gameobjects.movable.*;
-import thd.gameobjects.unmovable.*;
 
 class GameManager extends GameWorldManager {
 

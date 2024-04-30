@@ -3,7 +3,6 @@ package thd.gameobjects.unmovable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.base.Position;
 import thd.gameobjects.base.ShiftableGameObject;
 
 /**
@@ -15,11 +14,9 @@ public class Mountains extends GameObject implements ShiftableGameObject {
      *
      * @param gameView        The GameView
      * @param gamePlayManager The manager which is responsible for the occurrence of the background mountains.
-     * @param spawnLocation   The location where the mountains will be spawned.
      */
-    public Mountains(GameView gameView, GamePlayManager gamePlayManager, Position spawnLocation) {
+    public Mountains(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
-        position.updateCoordinates(spawnLocation);
         size = 1;
         distanceToBackground = 0;
     }

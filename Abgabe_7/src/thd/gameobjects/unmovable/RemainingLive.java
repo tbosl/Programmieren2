@@ -4,7 +4,6 @@ import thd.game.managers.GamePlayManager;
 import thd.game.managers.TooManyRemainingLivesException;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.base.ShiftableGameObject;
 
 /**
  * A gameobject used to represent the remaining lives of the player.

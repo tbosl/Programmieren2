@@ -50,7 +50,6 @@ public class Pod extends EnemyGameObject {
             targetPosition.updateCoordinates(randomMovementPattern.nextTargetPosition());
         }
         position.moveToPosition(targetPosition, speedInPixel);
-        System.out.println(this);
     }
 
     @Override

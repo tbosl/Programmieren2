@@ -3,7 +3,6 @@ package thd.gameobjects.unmovable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.base.ShiftableGameObject;
 
 import java.awt.*;
 

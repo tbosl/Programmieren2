@@ -5,6 +5,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.MainCharacter;
 import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.Position;
 import thd.gameobjects.unmovable.BomberBomb;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
     private boolean shotAvailable;
     private boolean smartBombDetonatable;
     private static final int SMART_BOMB_COOLDOWN_IN_MS = 1000;
+    private final Position absolutePosition;
 
     /**
      * Creates the spaceship with a reference of the gameview.
@@ -30,6 +32,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
         double horizontalPositionFactor = 0.125;
         double verticalPositionFactor = 0.5;
         position.updateCoordinates(GameView.WIDTH * horizontalPositionFactor, GameView.HEIGHT * verticalPositionFactor);
+        absolutePosition = new Position(position);
         size = 0.1;
         speedInPixel = 7;
         width = 75;
@@ -53,6 +56,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
             gamePlayManager.moveWorldToRight(speedInPixel);
             undoMovementIfCollisionWithAstronaut('l', true);
         }
+        absolutePosition.left(speedInPixel);
     }
 
     /**
@@ -66,6 +70,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
             gamePlayManager.moveWorldToLeft(speedInPixel);
             undoMovementIfCollisionWithAstronaut('r', true);
         }
+        absolutePosition.right(speedInPixel);
     }
 
     /**
@@ -77,7 +82,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
         if (!collisionDetected && position.getY() < MovementPattern.UPPER_BOUNDARY) {
             position.updateCoordinates(position.getX(), MovementPattern.UPPER_BOUNDARY);
         }
-
+        absolutePosition.updateCoordinates(absolutePosition.getX(), position.getY());
     }
 
     /**
@@ -90,6 +95,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
         if (!collisionDetected && position.getY() > MovementPattern.LOWER_BOUNDARY) {
             position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
         }
+        absolutePosition.updateCoordinates(absolutePosition.getX(), position.getY());
     }
 
     private boolean undoMovementIfCollisionWithAstronaut(char counterDirection, boolean worldShift) {
@@ -209,5 +215,14 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
         if (other instanceof BomberBomb || other instanceof EnemyGameObject || other instanceof EnemyProjectile) {
             gamePlayManager.lifeLost();
         }
+    }
+
+    /**
+     * Get the absolute position of the spaceship.
+     *
+     * @return the absolute position.
+     */
+    public Position getAbsolutePosition() {
+        return new Position(absolutePosition);
     }
 }

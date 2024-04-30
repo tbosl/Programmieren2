@@ -87,6 +87,11 @@ public abstract class GameObject {
         return speedInPixel;
     }
 
+    /**
+     * Returns the distance to the background of the game object.
+     *
+     * @return distance to the background of the game object.
+     */
     public char getDistanceToBackground() {
         return distanceToBackground;
     }
