@@ -20,6 +20,9 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
     private boolean smartBombDetonatable;
     private static final int SMART_BOMB_COOLDOWN_IN_MS = 1000;
     private final Position absolutePosition;
+    private static final int ABSOLUTE_WORLD_LENGTH = 6400;
+    private static final int LEFT_SCROLL_THRESHOLD = 240;
+    private static final int RIGHT_SCROLL_THRESHOLD = 1040;
 
     /**
      * Creates the spaceship with a reference of the gameview.
@@ -49,28 +52,36 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      * Moves the spaceship to the left at the current speed.
      */
     public void left() {
-        if (position.getX() > GameView.WIDTH / 2d - 400) {
+        boolean movementUndone;
+        if (position.getX() > LEFT_SCROLL_THRESHOLD || absolutePosition.getX() < LEFT_SCROLL_THRESHOLD) {
             position.left(speedInPixel);
-            undoMovementIfCollisionWithAstronaut('r', false);
+            movementUndone = undoMovementIfCollisionWithAstronaut('r', false)
+                             || undoMovementIfOutOfGameWorld('r');
         } else {
             gamePlayManager.moveWorldToRight(speedInPixel);
-            undoMovementIfCollisionWithAstronaut('l', true);
+            movementUndone = undoMovementIfCollisionWithAstronaut('l', true);
         }
-        absolutePosition.left(speedInPixel);
+        if (!movementUndone) {
+            absolutePosition.left(speedInPixel);
+        }
     }
 
     /**
      * Moves the spaceship to the right at the current speed.
      */
     public void right() {
-        if (position.getX() < GameView.WIDTH / 2d + 400) {
+        boolean movementUndone;
+        if ((position.getX() < RIGHT_SCROLL_THRESHOLD) || absolutePosition.getX() > ABSOLUTE_WORLD_LENGTH - width) {
             position.right(speedInPixel);
-            undoMovementIfCollisionWithAstronaut('l', false);
+            movementUndone = undoMovementIfCollisionWithAstronaut('l', false)
+                             || undoMovementIfOutOfGameWorld('l');
         } else {
             gamePlayManager.moveWorldToLeft(speedInPixel);
-            undoMovementIfCollisionWithAstronaut('r', true);
+            movementUndone = undoMovementIfCollisionWithAstronaut('r', true);
         }
-        absolutePosition.right(speedInPixel);
+        if (!movementUndone) {
+            absolutePosition.right(speedInPixel);
+        }
     }
 
     /**
@@ -136,6 +147,21 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
                 }
                 break;
         }
+    }
+
+    private boolean undoMovementIfOutOfGameWorld(char counterDirection) {
+        if (counterDirection == 'l') {
+            if (absolutePosition.getX() > ABSOLUTE_WORLD_LENGTH - width) {
+                position.left(speedInPixel);
+                return true;
+            }
+        } else if (counterDirection == 'r') {
+            if (position.getX() < 0) {
+                position.right(speedInPixel);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
