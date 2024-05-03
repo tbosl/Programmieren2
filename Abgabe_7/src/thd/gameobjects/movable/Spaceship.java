@@ -20,7 +20,6 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
     private boolean smartBombDetonatable;
     private static final int SMART_BOMB_COOLDOWN_IN_MS = 1000;
     private final Position absolutePosition;
-    private static final int ABSOLUTE_WORLD_LENGTH = 6400;
     private static final int LEFT_SCROLL_THRESHOLD = 240;
     private static final int RIGHT_SCROLL_THRESHOLD = 1040;
 
@@ -71,7 +70,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public void right() {
         boolean movementUndone;
-        if ((position.getX() < RIGHT_SCROLL_THRESHOLD) || absolutePosition.getX() > ABSOLUTE_WORLD_LENGTH - width) {
+        if ((position.getX() < RIGHT_SCROLL_THRESHOLD) || absolutePosition.getX() > GamePlayManager.ABSOLUTE_WORLD_LENGTH - (GameView.WIDTH - RIGHT_SCROLL_THRESHOLD)) {
             position.right(speedInPixel);
             movementUndone = undoMovementIfCollisionWithAstronaut('l', false)
                              || undoMovementIfOutOfGameWorld('l');
@@ -151,7 +150,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
 
     private boolean undoMovementIfOutOfGameWorld(char counterDirection) {
         if (counterDirection == 'l') {
-            if (absolutePosition.getX() > ABSOLUTE_WORLD_LENGTH - width) {
+            if (absolutePosition.getX() > GamePlayManager.ABSOLUTE_WORLD_LENGTH - width) {
                 position.left(speedInPixel);
                 return true;
             }
