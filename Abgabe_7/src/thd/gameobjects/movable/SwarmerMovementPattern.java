@@ -4,23 +4,22 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.Position;
 
 class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
-    private final int spawnMargin;
+    private static final int SPAWN_MARGIN = 150;
     private boolean left;
     private final Position lastSpaceshipPosition;
 
     SwarmerMovementPattern(Position spaceship) {
         left = spaceship.getX() <= GameView.WIDTH / 2f;
         lastSpaceshipPosition = new Position(spaceship);
-        spawnMargin = 100;
     }
 
     @Override
     protected Position startPosition(Position... referencePositions) {
         Position pod = referencePositions[0];
-        double leftXBoundary = pod.getX() >= spawnMargin ? pod.getX() - spawnMargin : 0;
-        double rightXBoundary = pod.getX() <= GameView.WIDTH - spawnMargin ? pod.getX() + spawnMargin : GameView.WIDTH;
-        double upYBoundary = pod.getY() >= spawnMargin + UPPER_BOUNDARY ? pod.getY() - spawnMargin : UPPER_BOUNDARY;
-        double lowYBoundary = pod.getY() <= LOWER_BOUNDARY ? pod.getY() + spawnMargin : LOWER_BOUNDARY;
+        double leftXBoundary = pod.getX() >= SPAWN_MARGIN ? pod.getX() - SPAWN_MARGIN : 0;
+        double rightXBoundary = pod.getX() <= GameView.WIDTH - SPAWN_MARGIN ? pod.getX() + SPAWN_MARGIN : GameView.WIDTH;
+        double upYBoundary = pod.getY() >= SPAWN_MARGIN + UPPER_BOUNDARY ? pod.getY() - SPAWN_MARGIN : UPPER_BOUNDARY;
+        double lowYBoundary = pod.getY() <= LOWER_BOUNDARY ? pod.getY() + SPAWN_MARGIN : LOWER_BOUNDARY;
         return generateRandomPosition(upYBoundary, rightXBoundary, lowYBoundary, leftXBoundary);
     }
 
