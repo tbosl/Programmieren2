@@ -48,8 +48,8 @@ class GameObjectManager extends CollisionManager {
         manageCollisions(false);
     }
 
-    List<CollidingGameObject> provideAllActiveEnemies() {
-        var enemies = new LinkedList<CollidingGameObject>();
+    List<EnemyGameObject> provideAllActiveEnemies() {
+        var enemies = new LinkedList<EnemyGameObject>();
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof EnemyGameObject enemyGameObject) {
                 enemies.add(enemyGameObject);

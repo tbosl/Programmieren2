@@ -4,6 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -24,7 +25,7 @@ public class Pod extends EnemyGameObject {
      * @param spaceship       The player's spaceship.
      */
     public Pod(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.BLUE);
         this.spaceship = spaceship;
         randomMovementPattern = new RandomMovementPattern();
         random = new Random();

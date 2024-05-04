@@ -4,6 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -30,7 +31,7 @@ class Mutant extends EnemyGameObject {
      * @param preMutation     The lander which is mutated.
      */
     Mutant(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Lander preMutation) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.GRAY.darker());
         this.spaceship = spaceship;
         movementPattern = new MutantMovementPatterns(gameView);
         random = new Random();

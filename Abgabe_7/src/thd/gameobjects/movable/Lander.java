@@ -5,6 +5,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.MovementPattern;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -28,7 +29,7 @@ public class Lander extends EnemyGameObject {
      * @param spaceship       The player's spaceship.
      */
     public Lander(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.YELLOW);
         this.spaceship = spaceship;
         landerMovementPattern = new LanderMovementPattern();
         position.updateCoordinates(landerMovementPattern.startPosition());
@@ -77,7 +78,7 @@ public class Lander extends EnemyGameObject {
     @Override
     public void updateStatus() {
         if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.pickedUp) {
-            gamePlayManager.destroyGameObject(this);
+            selfDestruction();
             gamePlayManager.destroyGameObject(grabbedAstronaut);
             gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
         }

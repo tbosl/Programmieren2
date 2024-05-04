@@ -4,6 +4,8 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 
+import java.awt.*;
+
 /**
  * A gameobject that represents the alien invader called Baiter.
  */
@@ -23,7 +25,7 @@ public class Baiter extends EnemyGameObject {
      * @param spaceship       The player spaceship - the target of the baiter.
      */
     public Baiter(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.GREEN);
         this.spaceship = spaceship;
         movementPattern = new BaiterMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());

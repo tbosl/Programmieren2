@@ -42,5 +42,13 @@ class UserControlledGameObjectPool {
             spaceship.detonateSmartBomb();
         }
     }
+
+    /**
+     * Get the player's spaceship.
+     * @return the player's spaceship.
+     */
+    public Spaceship getSpaceship(){
+        return spaceship;
+    }
 }
 

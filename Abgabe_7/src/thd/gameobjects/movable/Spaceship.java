@@ -2,19 +2,17 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.CollidingGameObject;
-import thd.gameobjects.base.MainCharacter;
-import thd.gameobjects.base.MovementPattern;
-import thd.gameobjects.base.Position;
+import thd.gameobjects.base.*;
 import thd.gameobjects.unmovable.BomberBomb;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A gameobject that represents the spaceship controlled by the player.
  */
-public class Spaceship extends CollidingGameObject implements MainCharacter {
+public class Spaceship extends CollidingGameObject implements MainCharacter, ScanableGameObject {
     private final int shotDurationInMilliseconds;
     private boolean shotAvailable;
     private boolean smartBombDetonatable;
@@ -22,6 +20,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
     private final Position absolutePosition;
     private static final int LEFT_SCROLL_THRESHOLD = 240;
     private static final int RIGHT_SCROLL_THRESHOLD = 1040;
+    private final ScannerItem scannerItem;
 
     /**
      * Creates the spaceship with a reference of the gameview.
@@ -45,6 +44,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
         distanceToBackground = 1;
         int hitBoxOffsetY = 12;
         hitBoxOffsets(0, hitBoxOffsetY, 0, 0);
+        scannerItem = initializeScannerItem(Color.white);
     }
 
     /**
@@ -192,16 +192,16 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
 
     private List<EnemyGameObject> killAllEnemiesOnScreen() {
         var killedEnemies = new ArrayList<EnemyGameObject>();
-        List<CollidingGameObject> enemies = gamePlayManager.provideAllActiveEnemies();
-        for (CollidingGameObject enemy : enemies) {
+        List<EnemyGameObject> enemies = gamePlayManager.provideAllActiveEnemies();
+        for (EnemyGameObject enemy : enemies) {
             double x = enemy.getPosition().getX();
             double y = enemy.getPosition().getY();
             if (x >= 0 && x <= GameView.WIDTH && y >= 0 && y <= GameView.HEIGHT) {
                 if (enemy instanceof Lander lander) {
                     removeLanderConnectionToAstronaut(lander);
                 }
-                gamePlayManager.destroyGameObject(enemy);
-                killedEnemies.add((EnemyGameObject) enemy);
+                enemy.selfDestruction();
+                killedEnemies.add(enemy);
             }
         }
         return killedEnemies;
@@ -249,5 +249,18 @@ public class Spaceship extends CollidingGameObject implements MainCharacter {
      */
     public Position getAbsolutePosition() {
         return new Position(absolutePosition);
+    }
+
+    /**
+     * Initialize the Scanner item for the spaceship.
+     *
+     * @param scanColor The color which the scanner item will have.
+     * @return The initialized ScannerItem.
+     */
+    @Override
+    public ScannerItem initializeScannerItem(Color scanColor) {
+        ScannerItem scannerItem = new ScannerItem(gameView, gamePlayManager, this, scanColor, this);
+        gamePlayManager.spawnGameObject(scannerItem);
+        return scannerItem;
     }
 }

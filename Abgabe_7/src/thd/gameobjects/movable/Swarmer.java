@@ -4,6 +4,8 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 
+import java.awt.*;
+
 /**
  * A gameobject that represents the alien invader called Swarmer.
  */
@@ -24,7 +26,7 @@ class Swarmer extends EnemyGameObject {
      * @param pod             The pod from which the swarmer is spawned.
      */
     Swarmer(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Pod pod) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.RED);
         this.spaceship = spaceship;
         movementPattern = new SwarmerMovementPattern(spaceship.getPosition());
         position.updateCoordinates(movementPattern.startPosition(pod.getPosition()));

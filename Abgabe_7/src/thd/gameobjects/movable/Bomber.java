@@ -5,6 +5,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.unmovable.BomberBomb;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -26,7 +27,7 @@ public class Bomber extends EnemyGameObject {
      * @param gamePlayManager The manager which is responsible for the occurrence of the game object.
      */
     public Bomber(GameView gameView, GamePlayManager gamePlayManager) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.MAGENTA);
         movementPattern = new BomberMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));

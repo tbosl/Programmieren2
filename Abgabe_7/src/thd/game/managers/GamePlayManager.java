@@ -4,6 +4,7 @@ import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.GameObject;
 import thd.gameobjects.movable.Astronaut;
+import thd.gameobjects.movable.EnemyGameObject;
 import thd.gameobjects.unmovable.RemainingLive;
 import thd.gameobjects.unmovable.SmartBomb;
 
@@ -19,6 +20,10 @@ public class GamePlayManager extends WorldShiftManager {
     protected int lives;
     protected int points;
     private final GameObjectManager gameObjectManager;
+    /**
+     * The absolute length of the game world.
+     */
+    public static final int ABSOLUTE_WORLD_LENGTH = 6400;
 
     protected GamePlayManager(GameView gameView) {
         super(gameView);
@@ -68,7 +73,7 @@ public class GamePlayManager extends WorldShiftManager {
      *
      * @return A LinkedList with all currently active enemies.
      */
-    public List<CollidingGameObject> provideAllActiveEnemies() {
+    public List<EnemyGameObject> provideAllActiveEnemies() {
         return gameObjectManager.provideAllActiveEnemies();
     }
 
