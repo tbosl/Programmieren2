@@ -2,15 +2,14 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.CollidingGameObject;
-import thd.gameobjects.base.MovementPattern;
-import thd.gameobjects.base.Position;
-import thd.gameobjects.base.ShiftableGameObject;
+import thd.gameobjects.base.*;
+
+import java.awt.*;
 
 /**
  * A gameobject that represents the astronauts that get kidnapped by the alien invaders.
  */
-public class Astronaut extends CollidingGameObject implements ShiftableGameObject {
+public class Astronaut extends ScannedGameObject implements ShiftableGameObject {
     private final AstronautMovementPatterns astronautMovementPatterns;
     private static final int FALL_SPEED_IN_PIXEL = 1;
     boolean pickedUp;
@@ -24,7 +23,7 @@ public class Astronaut extends CollidingGameObject implements ShiftableGameObjec
      * @param gamePlayManager The manager which is responsible for the occurrence of the astronaut.
      */
     public Astronaut(GameView gameView, GamePlayManager gamePlayManager) {
-        super(gameView, gamePlayManager);
+        super(gameView, gamePlayManager, Color.GRAY.brighter());
         astronautMovementPatterns = new AstronautMovementPatterns();
         position.updateCoordinates(astronautMovementPatterns.startPosition());
         targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));

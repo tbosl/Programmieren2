@@ -54,7 +54,7 @@ public class Lander extends EnemyGameObject {
 
     @Override
     public void updatePosition() {
-        if (attackingAllowed) {
+        if (attackingAllowed && gamePlayManager.provideAllAstronauts().size() > 0) {
             targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(findNearestAstronaut().getPosition(), position));
         } else {
             targetPosition.updateCoordinates(spaceship.getPosition());
@@ -63,11 +63,11 @@ public class Lander extends EnemyGameObject {
     }
 
     private Astronaut findNearestAstronaut() {
-        Astronaut nearestAstronaut = new Astronaut(gameView, gamePlayManager);
+        Astronaut nearestAstronaut = null;
         double currentDistance = -1;
         for (Astronaut astronaut : gamePlayManager.provideAllAstronauts()) {
             double distance = position.distance(astronaut.getPosition());
-            if ((currentDistance < 0 || currentDistance > distance) && !astronaut.pickedUp) {
+            if ((currentDistance < 0 || currentDistance > distance) && (!astronaut.pickedUp ^ astronaut.lander == this)) {
                 nearestAstronaut = astronaut;
                 currentDistance = distance;
             }
@@ -79,7 +79,7 @@ public class Lander extends EnemyGameObject {
     public void updateStatus() {
         if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.pickedUp) {
             selfDestruction();
-            gamePlayManager.destroyGameObject(grabbedAstronaut);
+            grabbedAstronaut.selfDestruction();
             gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
         }
         if (!attackingAllowed && gameView.gameTimeInMilliseconds() > waitTimeBeforeAttackingAstronaut + spawnTime) {

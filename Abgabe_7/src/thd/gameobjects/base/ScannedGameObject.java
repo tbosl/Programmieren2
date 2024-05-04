@@ -18,13 +18,10 @@ public abstract class ScannedGameObject extends CollidingGameObject {
      * @param gamePlayManager Controls the game play.
      * @param scanColor       The color which the scanner item will have.
      */
-    protected ScannedGameObject(GameView gameView, GamePlayManager gamePlayManager, Color scanColor, Spaceship spaceship) {
-        super(gameView, gamePlayManager);
-        scannerItem = initializeScannerItem(scanColor, spaceship);
-    }
-
     protected ScannedGameObject(GameView gameView, GamePlayManager gamePlayManager, Color scanColor) {
-        this(gameView, gamePlayManager, scanColor, gamePlayManager.getSpaceship());
+        super(gameView, gamePlayManager);
+        Spaceship spaceship = this instanceof Spaceship ship ? ship : gamePlayManager.getSpaceship();
+        scannerItem = initializeScannerItem(scanColor, spaceship);
     }
 
     private ScannerItem initializeScannerItem(Color scanColor, Spaceship spaceship) {

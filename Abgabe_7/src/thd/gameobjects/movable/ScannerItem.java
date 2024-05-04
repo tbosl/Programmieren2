@@ -3,6 +3,7 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
+import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.unmovable.HeaderFrame;
 
 import java.awt.*;
@@ -55,8 +56,8 @@ public class ScannerItem extends GameObject {
 
     private double calculateNewYCoordinate() {
         int frameSize = 5;
-        double targetY = scanableGameObject.getPosition().getY();
-        double scale = (HeaderFrame.BOX_HEIGHT - 2 * frameSize) / (GameView.HEIGHT + 0d);
+        double targetY = scanableGameObject.getPosition().getY() - MovementPattern.UPPER_BOUNDARY;
+        double scale = (HeaderFrame.BOX_HEIGHT - 2 * frameSize) / (MovementPattern.LOWER_BOUNDARY - MovementPattern.UPPER_BOUNDARY + 0d);
         return HeaderFrame.BOX_BEGINN_Y + frameSize + (targetY * scale);
     }
 

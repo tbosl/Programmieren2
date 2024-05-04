@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * A gameobject that represents the spaceship controlled by the player.
  */
-public class Spaceship extends CollidingGameObject implements MainCharacter, ScanableGameObject {
+public class Spaceship extends ScannedGameObject implements MainCharacter {
     private final int shotDurationInMilliseconds;
     private boolean shotAvailable;
     private boolean smartBombDetonatable;
@@ -20,7 +20,6 @@ public class Spaceship extends CollidingGameObject implements MainCharacter, Sca
     private final Position absolutePosition;
     private static final int LEFT_SCROLL_THRESHOLD = 240;
     private static final int RIGHT_SCROLL_THRESHOLD = 1040;
-    private final ScannerItem scannerItem;
 
     /**
      * Creates the spaceship with a reference of the gameview.
@@ -29,7 +28,7 @@ public class Spaceship extends CollidingGameObject implements MainCharacter, Sca
      * @param gamePlayManager The manager which is responsible for the occurrence of the spaceship.
      */
     public Spaceship(GameView gameView, GamePlayManager gamePlayManager) {
-        super(gameView, gamePlayManager);
+        super(gameView, gamePlayManager, Color.white);
         double horizontalPositionFactor = 0.125;
         double verticalPositionFactor = 0.5;
         position.updateCoordinates(GameView.WIDTH * horizontalPositionFactor, GameView.HEIGHT * verticalPositionFactor);
@@ -44,7 +43,6 @@ public class Spaceship extends CollidingGameObject implements MainCharacter, Sca
         distanceToBackground = 1;
         int hitBoxOffsetY = 12;
         hitBoxOffsets(0, hitBoxOffsetY, 0, 0);
-        scannerItem = initializeScannerItem(Color.white);
     }
 
     /**
@@ -249,18 +247,5 @@ public class Spaceship extends CollidingGameObject implements MainCharacter, Sca
      */
     public Position getAbsolutePosition() {
         return new Position(absolutePosition);
-    }
-
-    /**
-     * Initialize the Scanner item for the spaceship.
-     *
-     * @param scanColor The color which the scanner item will have.
-     * @return The initialized ScannerItem.
-     */
-    @Override
-    public ScannerItem initializeScannerItem(Color scanColor) {
-        ScannerItem scannerItem = new ScannerItem(gameView, gamePlayManager, this, scanColor, this);
-        gamePlayManager.spawnGameObject(scannerItem);
-        return scannerItem;
     }
 }
