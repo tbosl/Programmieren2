@@ -14,7 +14,7 @@ import java.awt.*;
 public abstract class EnemyGameObject extends ScannedGameObject implements ShiftableGameObject {
     private final int pointsOnDestruction;
 
-    EnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointsOnDestruction, Color scanColor) {
+    protected EnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointsOnDestruction, Color scanColor) {
         super(gameView, gamePlayManager, scanColor);
         this.pointsOnDestruction = pointsOnDestruction;
     }

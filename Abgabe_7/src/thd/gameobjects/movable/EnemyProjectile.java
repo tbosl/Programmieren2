@@ -10,7 +10,7 @@ import thd.gameobjects.base.Position;
 /**
  * A gameobject that represents an enemy projectile.
  */
-class EnemyProjectile extends Projectile {
+public class EnemyProjectile extends Projectile {
     private final ColorCycleManager colorCycleManager;
     private static final int COLOR_CYCLE_DURATION = 500;
 
@@ -22,7 +22,7 @@ class EnemyProjectile extends Projectile {
      * @param enemy             The enemy, from which the projectile got fired.
      * @param spaceshipPosition The position of the player's spaceship.
      */
-    EnemyProjectile(GameView gameView, GamePlayManager gamePlayManager, GameObject enemy, Position spaceshipPosition) {
+    public EnemyProjectile(GameView gameView, GamePlayManager gamePlayManager, GameObject enemy, Position spaceshipPosition) {
         super(gameView, gamePlayManager);
         EnemyProjectileMovementPattern movementPattern = new EnemyProjectileMovementPattern();
         colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);

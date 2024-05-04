@@ -3,6 +3,7 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
+import thd.gameobjects.base.ShootingEnemyGameObject;
 
 import java.awt.*;
 import java.util.Random;
@@ -10,13 +11,10 @@ import java.util.Random;
 /**
  * A gameobject that represents the alien invader called Mutant.
  */
-class Mutant extends EnemyGameObject {
+class Mutant extends ShootingEnemyGameObject {
     private final MutantMovementPatterns movementPattern;
     private final Spaceship spaceship;
     private final Random random;
-    private int currentDoubleShootIntervallInMilliseconds;
-    private static final int LOWER_INTERVALL_BOUND = 1000;
-    private static final int UPPER_INTERVALL_BOUND = 2000;
     private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
     private static final int POINTS_ON_DESTRUCTION = 150;
 
@@ -37,7 +35,6 @@ class Mutant extends EnemyGameObject {
         random = new Random();
         position.updateCoordinates(movementPattern.startPosition(preMutation.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
-        currentDoubleShootIntervallInMilliseconds = generateNewShootIntervall();
         size = 0.08;
         speedInPixel = 4;
         width = 25;
@@ -59,22 +56,6 @@ class Mutant extends EnemyGameObject {
         if (position.distance(targetPosition) > SPACESHIP_DISTANCE_THRESHOLD) {
             position.moveToPosition(targetPosition, speedInPixel);
         }
-    }
-
-    @Override
-    public void updateStatus() {
-        if (gameView.timer(currentDoubleShootIntervallInMilliseconds, this)) {
-            fire();
-            currentDoubleShootIntervallInMilliseconds = generateNewShootIntervall();
-        }
-    }
-
-    private void fire() {
-        gamePlayManager.spawnGameObject(new EnemyProjectile(gameView, gamePlayManager, this, spaceship.getPosition()));
-    }
-
-    private int generateNewShootIntervall() {
-        return random.nextInt(LOWER_INTERVALL_BOUND, UPPER_INTERVALL_BOUND);
     }
 
     @Override

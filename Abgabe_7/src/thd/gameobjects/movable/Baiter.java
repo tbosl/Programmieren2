@@ -3,13 +3,14 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
+import thd.gameobjects.base.ShootingEnemyGameObject;
 
 import java.awt.*;
 
 /**
  * A gameobject that represents the alien invader called Baiter.
  */
-public class Baiter extends EnemyGameObject {
+public class Baiter extends ShootingEnemyGameObject {
     private final BaiterMovementPattern movementPattern;
     private final Spaceship spaceship;
     private static final int THRESHOLD_TO_SPACESHIP = 200;

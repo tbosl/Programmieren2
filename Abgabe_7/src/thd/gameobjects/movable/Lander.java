@@ -4,6 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.ShootingEnemyGameObject;
 
 import java.awt.*;
 import java.util.Random;
@@ -11,7 +12,7 @@ import java.util.Random;
 /**
  * A gameobject that represents the first type of alien invader.
  */
-public class Lander extends EnemyGameObject {
+public class Lander extends ShootingEnemyGameObject {
     private final LanderMovementPattern landerMovementPattern;
     private Astronaut grabbedAstronaut;
     private final Spaceship spaceship;

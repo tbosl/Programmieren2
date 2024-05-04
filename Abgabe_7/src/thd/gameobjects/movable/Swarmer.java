@@ -3,13 +3,14 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
+import thd.gameobjects.base.ShootingEnemyGameObject;
 
 import java.awt.*;
 
 /**
  * A gameobject that represents the alien invader called Swarmer.
  */
-class Swarmer extends EnemyGameObject {
+class Swarmer extends ShootingEnemyGameObject {
     private final SwarmerMovementPattern movementPattern;
     private final Spaceship spaceship;
     static final int MINIMUM_SWARMERS_PER_SWARM = 5;
