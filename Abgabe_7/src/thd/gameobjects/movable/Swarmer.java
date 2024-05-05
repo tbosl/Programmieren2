@@ -27,15 +27,15 @@ class Swarmer extends ShootingEnemyGameObject {
      * @param pod             The pod from which the swarmer is spawned.
      */
     Swarmer(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Pod pod) {
-        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.RED);
+        super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.RED, 2000, 4000);
         this.spaceship = spaceship;
-        movementPattern = new SwarmerMovementPattern(spaceship.getPosition());
-        position.updateCoordinates(movementPattern.startPosition(pod.getPosition()));
-        targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position, targetPosition));
         size = 0.05;
         speedInPixel = 8;
         width = 15;
         height = 15;
+        movementPattern = new SwarmerMovementPattern(spaceship.getPosition(), width);
+        position.updateCoordinates(movementPattern.startPosition(pod.getPosition()));
+        targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position, targetPosition));
         distanceToBackground = 1;
         int hitBoxOffsetX = 5;
         int hitBoxOffsetY = 5;

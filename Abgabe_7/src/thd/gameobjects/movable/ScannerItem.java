@@ -50,7 +50,7 @@ public class ScannerItem extends GameObject {
             targetX = scanableGameObject.getPosition().getX() + spaceship.getAbsolutePosition().getX() - spaceship.getPosition().getX();
         }
         double scale = (HeaderFrame.BOX_WIDTH - 2 * frameSize) / (GamePlayManager.ABSOLUTE_WORLD_LENGTH + 0d);
-        return HeaderFrame.BOX_BEGINN_X + frameSize + (targetX * scale);
+        return HeaderFrame.BOX_BEGINN_X + 2 * frameSize + (targetX * scale);
     }
 
 

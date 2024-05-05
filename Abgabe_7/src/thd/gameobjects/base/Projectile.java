@@ -1,4 +1,4 @@
-package thd.gameobjects.movable;
+package thd.gameobjects.base;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
@@ -9,7 +9,7 @@ import thd.gameobjects.base.ShiftableGameObject;
 /**
  * Used as a base class for the laser and enemy projectile.
  */
-abstract class Projectile extends CollidingGameObject implements ShiftableGameObject {
+public abstract class Projectile extends CollidingGameObject implements ShiftableGameObject {
 
     /**
      * Creates a projectile with a reference of the gameview.
@@ -17,7 +17,7 @@ abstract class Projectile extends CollidingGameObject implements ShiftableGameOb
      * @param gameView        The GameView.
      * @param gamePlayManager The manager which is responsible for the occurrence of the projectile.
      */
-    Projectile(GameView gameView, GamePlayManager gamePlayManager) {
+    protected Projectile(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
     }
 

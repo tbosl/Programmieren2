@@ -98,7 +98,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof LaserProjectile) {
-            gamePlayManager.destroyGameObject(this);
+            selfDestruction();
         }
     }
 }

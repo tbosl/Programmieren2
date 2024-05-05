@@ -2,10 +2,7 @@ package thd.gameobjects.movable;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.CollidingGameObject;
-import thd.gameobjects.base.ColorCycleManager;
-import thd.gameobjects.base.GameObject;
-import thd.gameobjects.base.Position;
+import thd.gameobjects.base.*;
 
 /**
  * A gameobject that represents an enemy projectile.

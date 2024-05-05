@@ -1,9 +1,8 @@
 package thd.game.managers;
 
-import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.GameObject;
 import thd.gameobjects.movable.Astronaut;
-import thd.gameobjects.movable.EnemyGameObject;
+import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.unmovable.RemainingLive;
 import thd.gameobjects.unmovable.SmartBomb;
 

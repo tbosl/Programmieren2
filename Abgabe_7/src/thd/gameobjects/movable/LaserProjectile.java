@@ -3,12 +3,14 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
+import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.base.Position;
+import thd.gameobjects.base.Projectile;
 
 /**
  * A gameobject that represents a laser projectile.
  */
-class LaserProjectile extends Projectile {
+public class LaserProjectile extends Projectile {
 
     /**
      * Creates a laser projectile with a reference of the gameview.
