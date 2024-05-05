@@ -12,7 +12,6 @@ import java.awt.*;
  */
 class Swarmer extends ShootingEnemyGameObject {
     private final SwarmerMovementPattern movementPattern;
-    private final Spaceship spaceship;
     static final int MINIMUM_SWARMERS_PER_SWARM = 5;
     static final int MAXIMUM_SWARMERS_PER_SWARM = 8;
     private static final int POINTS_ON_DESTRUCTION = 150;
@@ -28,7 +27,6 @@ class Swarmer extends ShootingEnemyGameObject {
      */
     Swarmer(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Pod pod) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.RED, 2000, 4000);
-        this.spaceship = spaceship;
         size = 0.05;
         speedInPixel = 8;
         width = 15;

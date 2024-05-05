@@ -32,7 +32,7 @@ class GameWorldManager extends GamePlayManager {
         score = new Score(gameView, this);
         spaceship = new Spaceship(gameView, this);
         astronaut = new Astronaut(gameView, this);
-        lander = new Lander(gameView, this, spaceship);
+        lander = new Lander(gameView, this);
         bomber = new Bomber(gameView, this);
         pod = new Pod(gameView, this, spaceship);
         baiter = new Baiter(gameView, this, spaceship);

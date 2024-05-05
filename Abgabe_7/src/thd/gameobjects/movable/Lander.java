@@ -15,7 +15,6 @@ import java.util.Random;
 public class Lander extends ShootingEnemyGameObject {
     private final LanderMovementPattern landerMovementPattern;
     private Astronaut grabbedAstronaut;
-    private final Spaceship spaceship;
     private final int waitTimeBeforeAttackingAstronaut;
     private final int spawnTime;
     private boolean attackingAllowed;
@@ -27,11 +26,9 @@ public class Lander extends ShootingEnemyGameObject {
      *
      * @param gameView        The GameView
      * @param gamePlayManager The manager which is responsible for the occurrence of the lander.
-     * @param spaceship       The player's spaceship.
      */
-    public Lander(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
+    public Lander(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.YELLOW);
-        this.spaceship = spaceship;
         landerMovementPattern = new LanderMovementPattern();
         position.updateCoordinates(landerMovementPattern.startPosition());
         int outerMarginToSideBorders = 100;

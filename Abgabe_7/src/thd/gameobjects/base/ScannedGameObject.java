@@ -7,12 +7,15 @@ import thd.gameobjects.movable.Spaceship;
 
 import java.awt.*;
 
+/**
+ * Makes a game object relevant for the scanner area.
+ */
 public abstract class ScannedGameObject extends CollidingGameObject {
 
     private final ScannerItem scannerItem;
 
     /**
-     * Crates a new game object that is able to collide.
+     * Crates a new game object that is relevant for the scanner area.
      *
      * @param gameView        Window to show the game object on.
      * @param gamePlayManager Controls the game play.
@@ -25,9 +28,9 @@ public abstract class ScannedGameObject extends CollidingGameObject {
     }
 
     private ScannerItem initializeScannerItem(Color scanColor, Spaceship spaceship) {
-        ScannerItem scannerItem = new ScannerItem(gameView, gamePlayManager, this, scanColor, spaceship);
-        gamePlayManager.spawnGameObject(scannerItem);
-        return scannerItem;
+        ScannerItem item = new ScannerItem(gameView, gamePlayManager, this, scanColor, spaceship);
+        gamePlayManager.spawnGameObject(item);
+        return item;
     }
 
     /**

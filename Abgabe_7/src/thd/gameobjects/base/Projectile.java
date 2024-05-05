@@ -2,9 +2,6 @@ package thd.gameobjects.base;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.CollidingGameObject;
-import thd.gameobjects.base.MovementPattern;
-import thd.gameobjects.base.ShiftableGameObject;
 
 /**
  * Used as a base class for the laser and enemy projectile.

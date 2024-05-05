@@ -45,9 +45,10 @@ class UserControlledGameObjectPool {
 
     /**
      * Get the player's spaceship.
+     *
      * @return the player's spaceship.
      */
-    public Spaceship getSpaceship(){
+    public Spaceship getSpaceship() {
         return spaceship;
     }
 }

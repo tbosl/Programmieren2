@@ -12,7 +12,7 @@ import java.util.Random;
  * Represents an enemy game object with the ability to shoot.
  */
 public abstract class ShootingEnemyGameObject extends EnemyGameObject {
-    private final Spaceship spaceship;
+    protected final Spaceship spaceship;
     private int currentShootIntervallInMilliseconds;
     private final Random random;
     private static final int DEFAULT_LOWER_INTERVALL_BOUND = 1000;

@@ -33,8 +33,9 @@ class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
         if ((currentPosition.getX() - swarmerWidth <= 0 || currentPosition.getX() + swarmerWidth >= GameView.WIDTH)) {
             left = !left;
             lastSpaceshipPosition.updateCoordinates(spaceship);
-            if (!targetOnOtherSide(currentPosition, targetPosition))
+            if (!targetOnOtherSide(currentPosition, targetPosition)){
                 return generatePositionAtOtherSide(spaceship);
+            }
         }
         validateNewTargetPosition(targetPosition);
         lastSpaceshipPosition.updateCoordinates(spaceship);

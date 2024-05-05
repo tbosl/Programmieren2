@@ -6,15 +6,12 @@ import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.ShootingEnemyGameObject;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * A gameobject that represents the alien invader called Mutant.
  */
 class Mutant extends ShootingEnemyGameObject {
     private final MutantMovementPatterns movementPattern;
-    private final Spaceship spaceship;
-    private final Random random;
     private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
     private static final int POINTS_ON_DESTRUCTION = 150;
 
@@ -30,9 +27,7 @@ class Mutant extends ShootingEnemyGameObject {
      */
     Mutant(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Lander preMutation) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.GRAY.darker());
-        this.spaceship = spaceship;
         movementPattern = new MutantMovementPatterns(gameView);
-        random = new Random();
         position.updateCoordinates(movementPattern.startPosition(preMutation.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
         size = 0.08;

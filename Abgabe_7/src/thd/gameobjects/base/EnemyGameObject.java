@@ -2,9 +2,6 @@ package thd.gameobjects.base;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.CollidingGameObject;
-import thd.gameobjects.base.ScannedGameObject;
-import thd.gameobjects.base.ShiftableGameObject;
 import thd.gameobjects.movable.LaserProjectile;
 import thd.gameobjects.movable.Spaceship;
 

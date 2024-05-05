@@ -12,7 +12,6 @@ import java.awt.*;
  */
 public class Baiter extends ShootingEnemyGameObject {
     private final BaiterMovementPattern movementPattern;
-    private final Spaceship spaceship;
     private static final int THRESHOLD_TO_SPACESHIP = 200;
     private static final int SLOW_SPEED_IN_PIXEL = 4;
     private static final int FAST_SPEED_IN_PIXEL = 6;
@@ -27,7 +26,6 @@ public class Baiter extends ShootingEnemyGameObject {
      */
     public Baiter(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.GREEN);
-        this.spaceship = spaceship;
         movementPattern = new BaiterMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
