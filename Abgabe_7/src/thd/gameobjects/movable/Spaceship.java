@@ -20,6 +20,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     private final Position absolutePosition;
     private static final int LEFT_SCROLL_THRESHOLD = 240;
     private static final int RIGHT_SCROLL_THRESHOLD = 1040;
+    Astronaut attachedAstronaut;
 
     /**
      * Creates the spaceship with a reference of the gameview.
@@ -237,6 +238,13 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof BomberBomb || other instanceof EnemyGameObject || other instanceof EnemyProjectile) {
             gamePlayManager.lifeLost();
+        }
+        if (other instanceof Astronaut astronaut) {
+            if (astronaut.getPosition().getY() < MovementPattern.LOWER_BOUNDARY) {
+                attachedAstronaut = astronaut;
+                astronaut.pickedUp = true;
+                gamePlayManager.addPoints(Astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
+            }
         }
     }
 

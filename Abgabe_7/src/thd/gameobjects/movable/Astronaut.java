@@ -15,6 +15,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
     boolean pickedUp;
     Lander lander;
     boolean stopWalking;
+    static final int SCORE_POINTS_FOR_RESCUE_AND_PICK_UP = 500;
 
     /**
      * Creates an Astronaut with a reference of the gameview.
@@ -47,10 +48,24 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
     public void updatePosition() {
         if (!pickedUp && !stopWalking) {
             walk();
-        } else {
+        } else if (lander != null) {
             followLander();
+        } else if (gamePlayManager.getSpaceship().attachedAstronaut == this) {
+            if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
+                followSpaceship();
+            } else {
+                detachFromSpaceship();
+            }
         }
     }
+
+    private void detachFromSpaceship() {
+        position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
+        pickedUp = false;
+        gamePlayManager.getSpaceship().attachedAstronaut = null;
+        gamePlayManager.addPoints(SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
+    }
+
 
     private void walk() {
         if (position.similarTo(targetPosition) || position.getY() < MovementPattern.LOWER_BOUNDARY) {
@@ -68,6 +83,13 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         }
     }
 
+    private void followSpaceship() {
+        int horizontalOffset = 10;
+        int verticalOffset = 40;
+        Position spaceshipPosition = gamePlayManager.getSpaceship().getPosition();
+        position.updateCoordinates(spaceshipPosition.getX() + horizontalOffset, spaceshipPosition.getY() + verticalOffset);
+    }
+
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("astronaut.png", position.getX(), position.getY(), size, rotation);
@@ -75,7 +97,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
 
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
-        if (other instanceof Projectile) {
+        if (other instanceof LaserProjectile) {
             gamePlayManager.destroyGameObject(this);
         }
     }
