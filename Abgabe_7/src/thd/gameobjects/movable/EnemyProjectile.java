@@ -28,13 +28,12 @@ public class EnemyProjectile extends Projectile {
         colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
         position.updateCoordinates(movementPattern.startPosition(enemy.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceshipPosition, enemy.getPosition()));
-        size = 15;
+        size = 0.08;
         speedInPixel = 10;
-        width = 10;
-        height = 13;
+        width = 25;
+        height = 5;
         distanceToBackground = 1;
-        int hitBoxOffsetY = 5;
-        hitBoxOffsets(0, hitBoxOffsetY, 0, 0);
+        hitBoxOffsets(0, 0, 0, 0);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class EnemyProjectile extends Projectile {
 
     @Override
     public void addToCanvas() {
-        gameView.addTextToCanvas("X", position.getX(), position.getY(), size, true, colorCycleManager.findCurrentColor(), rotation);
+        gameView.addImageToCanvas("enemy_laser.png", position.getX(), position.getY(), size, rotation);
     }
 
     @Override
