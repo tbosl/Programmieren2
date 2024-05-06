@@ -18,6 +18,7 @@ class BomberMovementPattern extends AlienInvadersRandomMovementPattern {
 
     @Override
     protected Position nextTargetPosition(Position... referencePositions) {
+        // TODO Fix strange movement on the borders.
         double targetXCoordinate = referencePositions[0].getX() < 0 ? GameView.WIDTH - outerMarginToBorders : outerMarginToBorders;
         return generatePositionWithRandomY(targetXCoordinate, UPPER_BOUNDARY + 100, LOWER_BOUNDARY - 100);
     }

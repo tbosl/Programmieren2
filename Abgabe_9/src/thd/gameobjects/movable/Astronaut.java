@@ -84,6 +84,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         }
     }
 
+    // TODO Check why this doesn't get called if the lander is destroyed by the ship, not the laser.
     private void followSpaceship() {
         int horizontalOffset = 10;
         int verticalOffset = 40;
