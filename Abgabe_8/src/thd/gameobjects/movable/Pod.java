@@ -17,7 +17,10 @@ public class Pod extends EnemyGameObject {
     private final Spaceship spaceship;
     private static final int POINTS_ON_DESTRUCTION = 1000;
 
-
+    /**
+     * The level of the enemy.
+     */
+    public static final int ENEMY_LEVEL = 3;
     /**
      * Creates a Pod with a reference of the gameview.
      *

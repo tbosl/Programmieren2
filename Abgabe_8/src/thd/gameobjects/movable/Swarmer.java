@@ -16,6 +16,10 @@ class Swarmer extends ShootingEnemyGameObject {
     static final int MAXIMUM_SWARMERS_PER_SWARM = 8;
     private static final int POINTS_ON_DESTRUCTION = 150;
 
+    /**
+     * The level of the enemy.
+     */
+    public static final int ENEMY_LEVEL = 3;
 
     /**
      * Creates a Swarmer with a reference of the gameview.

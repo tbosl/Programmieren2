@@ -18,6 +18,11 @@ public class Baiter extends ShootingEnemyGameObject {
     private static final int POINTS_ON_DESTRUCTION = 200;
 
     /**
+     * The level of the enemy.
+     */
+    public static final int ENEMY_LEVEL = 2;
+
+    /**
      * Creates a Baiter with a reference of the gameview.
      *
      * @param gameView        The GameView.

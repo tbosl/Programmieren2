@@ -17,7 +17,7 @@ import java.util.List;
 public class Star extends GameObject implements ShiftableGameObject, ActivatableGameObject<Spaceship> {
 
     private final Color color;
-    private static final List<Color> colors = new ArrayList<>(List.of(Color.yellow, Color.white, Color.red));
+    private static final List<Color> COLORS = new ArrayList<>(List.of(Color.yellow, Color.white, Color.red));
 
     /**
      * Creates a star in the background with a reference of the gameview.
@@ -29,7 +29,7 @@ public class Star extends GameObject implements ShiftableGameObject, Activatable
         super(gameView, gamePlayManager);
         size = 8;
         distanceToBackground = 0;
-        color = colors.get(gamePlayManager.getLevel().number - 1);
+        color = COLORS.get(gamePlayManager.getLevel().number - 1);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package thd.gameobjects.movable;
 
-import thd.game.utilities.GameView;
+import thd.game.managers.GamePlayManager;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
@@ -19,7 +19,7 @@ class RandomMovementPattern extends MovementPattern {
     }
 
     RandomMovementPattern() {
-        this(UPPER_BOUNDARY, GameView.WIDTH - INNER_MARGIN_TO_SIDE_BORDERS, LOWER_BOUNDARY, INNER_MARGIN_TO_SIDE_BORDERS);
+        this(UPPER_BOUNDARY, GamePlayManager.ABSOLUTE_WORLD_LENGTH - INNER_MARGIN_TO_SIDE_BORDERS, LOWER_BOUNDARY, INNER_MARGIN_TO_SIDE_BORDERS);
     }
 
     @Override

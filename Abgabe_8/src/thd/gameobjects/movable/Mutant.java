@@ -15,6 +15,10 @@ class Mutant extends ShootingEnemyGameObject {
     private static final int SPACESHIP_DISTANCE_THRESHOLD = 30;
     private static final int POINTS_ON_DESTRUCTION = 150;
 
+    /**
+     * The level of the enemy.
+     */
+    public static final int ENEMY_LEVEL = 1;
 
     /**
      * Creates a Mutant with a reference of the gameview.

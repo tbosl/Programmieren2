@@ -1,6 +1,6 @@
 package thd.gameobjects.movable;
 
-import thd.game.utilities.GameView;
+import thd.game.managers.GamePlayManager;
 import thd.gameobjects.base.Position;
 
 class LanderMovementPattern extends AlienInvadersRandomMovementPattern {
@@ -13,7 +13,7 @@ class LanderMovementPattern extends AlienInvadersRandomMovementPattern {
     @Override
     protected Position startPosition(Position... referencePositions) {
         int marginToSideBorders = 50;
-        return generateRandomPosition(-marginToSideBorders, GameView.WIDTH + marginToSideBorders);
+        return generateRandomPosition(marginToSideBorders, GamePlayManager.ABSOLUTE_WORLD_LENGTH - marginToSideBorders);
     }
 
     @Override

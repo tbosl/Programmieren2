@@ -22,10 +22,11 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
      *
      * @param gameView        The GameView
      * @param gamePlayManager The manager which is responsible for the occurrence of the astronaut.
+     * @param spawnLeftHalf   Determine whether the astronaut should spawn on the left half of the map.
      */
-    public Astronaut(GameView gameView, GamePlayManager gamePlayManager) {
+    public Astronaut(GameView gameView, GamePlayManager gamePlayManager, boolean spawnLeftHalf) {
         super(gameView, gamePlayManager, Color.GRAY.brighter());
-        astronautMovementPatterns = new AstronautMovementPatterns();
+        astronautMovementPatterns = new AstronautMovementPatterns(spawnLeftHalf);
         position.updateCoordinates(astronautMovementPatterns.startPosition());
         targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
         size = 0.08;

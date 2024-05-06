@@ -1,23 +1,28 @@
 package thd.gameobjects.movable;
 
-import thd.game.utilities.GameView;
+import thd.game.managers.GamePlayManager;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
 import java.util.Random;
 
 class AstronautMovementPatterns extends MovementPattern {
+    private final boolean spawnLeft;
     private boolean walkingRight;
 
-    AstronautMovementPatterns() {
+    AstronautMovementPatterns(boolean spawnLeft) {
         walkingRight = true;
+        this.spawnLeft = spawnLeft;
     }
 
     @Override
     protected Position startPosition(Position... referencePositions) {
         int marginToSideBorders = 100;
-        return new Position(new Random().nextDouble(marginToSideBorders, GameView.WIDTH - marginToSideBorders), LOWER_BOUNDARY);
+        int lowerBound = spawnLeft ? marginToSideBorders : GamePlayManager.ABSOLUTE_WORLD_LENGTH / 2;
+        int upperBound = spawnLeft ? GamePlayManager.ABSOLUTE_WORLD_LENGTH / 2 : GamePlayManager.ABSOLUTE_WORLD_LENGTH - marginToSideBorders;
+        return new Position(new Random().nextDouble(lowerBound, upperBound), LOWER_BOUNDARY);
     }
+
 
     @Override
     protected Position nextTargetPosition(Position... referencePositions) {

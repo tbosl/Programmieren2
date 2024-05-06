@@ -20,6 +20,11 @@ public class Bomber extends EnemyGameObject {
     private static final int UPPER_INTERVAL_BOUND = 8000;
     private static final int POINTS_ON_DESTRUCTION = 250;
 
+    /**
+     * The level of the enemy.
+     */
+    public static final int ENEMY_LEVEL = 2;
+
 
     /**
      * Creates a Bomber with a reference of the gameview.

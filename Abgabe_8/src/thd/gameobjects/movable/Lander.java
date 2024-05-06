@@ -4,6 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.Position;
 import thd.gameobjects.base.ShootingEnemyGameObject;
 
 import java.awt.*;
@@ -19,6 +20,11 @@ public class Lander extends ShootingEnemyGameObject {
     private final int spawnTime;
     private boolean attackingAllowed;
     private static final int POINTS_ON_DESTRUCTION = 150;
+
+    /**
+     * The level of the enemy.
+     */
+    public static final int ENEMY_LEVEL = 1;
 
 
     /**
@@ -52,15 +58,16 @@ public class Lander extends ShootingEnemyGameObject {
 
     @Override
     public void updatePosition() {
-        if (attackingAllowed && gamePlayManager.provideAllAstronauts().size() > 0) {
-            targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(findNearestAstronaut().getPosition(), position));
+        Position astronautTargetPosition = findNearestAstronautPosition();
+        if (attackingAllowed && gamePlayManager.provideAllAstronauts().size() > 0 && !astronautTargetPosition.equals(new Position())) {
+            targetPosition.updateCoordinates(landerMovementPattern.nextTargetPosition(findNearestAstronautPosition(), position));
         } else {
             targetPosition.updateCoordinates(spaceship.getPosition());
         }
         position.moveToPosition(targetPosition, speedInPixel);
     }
 
-    private Astronaut findNearestAstronaut() {
+    private Position findNearestAstronautPosition() {
         Astronaut nearestAstronaut = null;
         double currentDistance = -1;
         for (Astronaut astronaut : gamePlayManager.provideAllAstronauts()) {
@@ -70,7 +77,7 @@ public class Lander extends ShootingEnemyGameObject {
                 currentDistance = distance;
             }
         }
-        return nearestAstronaut;
+        return nearestAstronaut != null ? nearestAstronaut.getPosition() : new Position();
     }
 
     @Override

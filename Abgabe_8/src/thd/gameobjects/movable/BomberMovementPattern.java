@@ -1,5 +1,6 @@
 package thd.gameobjects.movable;
 
+import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.Position;
 
@@ -12,7 +13,7 @@ class BomberMovementPattern extends AlienInvadersRandomMovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        return generateRandomPosition(UPPER_BOUNDARY + 100, GameView.WIDTH + outerMarginToBorders, LOWER_BOUNDARY - 100, -outerMarginToBorders);
+        return generateRandomPosition(UPPER_BOUNDARY + 100, GamePlayManager.ABSOLUTE_WORLD_LENGTH - outerMarginToBorders, LOWER_BOUNDARY - 100, outerMarginToBorders);
     }
 
     @Override
