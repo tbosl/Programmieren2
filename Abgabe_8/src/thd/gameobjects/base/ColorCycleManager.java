@@ -3,15 +3,17 @@ package thd.gameobjects.base;
 
 import thd.game.utilities.GameView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
+import java.util.List;
 
 /**
  * This class manages to provide a color cycle on a set of colors.
  */
 public class ColorCycleManager {
     private final GameView gameView;
-    private final char[] colors;
+    private final List<Character> colors;
     private int colorIndex;
     private final int periodDuration;
     private final HashMap<Character, Color> colorCodeToColor;
@@ -25,7 +27,7 @@ public class ColorCycleManager {
     public ColorCycleManager(GameView gameView, int periodDuration) {
         this.gameView = gameView;
         this.periodDuration = periodDuration;
-        colors = new char[]{'r', 'P', 'B', 'b', 'C', 'W', 'y', 'Y', 'O'};
+        colors = new ArrayList<>(List.of('r', 'P', 'B', 'b', 'C', 'W', 'y', 'Y', 'O'));
         colorCodeToColor = new HashMap<>();
         initializeColorDictionary();
     }
@@ -37,7 +39,7 @@ public class ColorCycleManager {
      */
     public char findCurrentColorCode() {
         updateColor();
-        return colors[colorIndex];
+        return colors.get(colorIndex);
     }
 
     /**
@@ -47,12 +49,12 @@ public class ColorCycleManager {
      */
     public Color findCurrentColor() {
         updateColor();
-        return colorCodeToColor.get(colors[colorIndex]);
+        return colorCodeToColor.get(colors.get(colorIndex));
     }
 
     private void updateColor() {
         if (gameView.timer(periodDuration, this)) {
-            colorIndex = colorIndex > colors.length - 2 ? 0 : colorIndex + 1;
+            colorIndex = colorIndex > colors.size() - 2 ? 0 : colorIndex + 1;
         }
     }
 

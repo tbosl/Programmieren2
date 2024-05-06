@@ -56,7 +56,7 @@ class GameWorldManager extends GamePlayManager {
         spawnGameObject(spaceship);
         spawnGameObject(new Astronaut(gameView, this));
         spawnGameObject(score);
-        spawnGameObject(new LevelName(gameView,this, level.name));
+        spawnGameObject(new LevelName(gameView, this, level.name));
         spawnGameObject(new HeaderFrame(gameView, this));
         spawnGameObject(new ScannerFrame(gameView, this));
         spawnGameObject(new Lander(gameView, this));

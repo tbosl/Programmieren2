@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * A gameobject used to represent the current score of the user.
  */
-public class Score extends GameObject{
-    private final String[] scoreBlockImages;
+public class Score extends GameObject {
+    private final List<String> scoreBlockImages;
     private final ColorCycleManager colorCycleManager;
     private static final int COLOR_CYCLE_DURATION = 500;
     private static final int MARGIN_PER_NUMBER = 30;
@@ -30,7 +30,7 @@ public class Score extends GameObject{
         size = 1;
         distanceToBackground = 0;
         colorCycleManager = new ColorCycleManager(gameView, COLOR_CYCLE_DURATION);
-        scoreBlockImages = new String[]{
+        scoreBlockImages = new ArrayList<>(List.of(
                 ScoreBlockImages.ZERO,
                 ScoreBlockImages.ONE,
                 ScoreBlockImages.TWO,
@@ -40,7 +40,7 @@ public class Score extends GameObject{
                 ScoreBlockImages.SIX,
                 ScoreBlockImages.SEVEN,
                 ScoreBlockImages.EIGHT,
-                ScoreBlockImages.NINE};
+                ScoreBlockImages.NINE));
     }
 
     @Override
@@ -83,6 +83,6 @@ public class Score extends GameObject{
                               + "Default value (0) will be used.%n", number);
             validatedNumber = 0;
         }
-        return scoreBlockImages[validatedNumber].replace('r', colorCycleManager.findCurrentColorCode());
+        return scoreBlockImages.get(validatedNumber).replace('r', colorCycleManager.findCurrentColorCode());
     }
 }

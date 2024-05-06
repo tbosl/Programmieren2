@@ -22,6 +22,15 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     private static final int RIGHT_SCROLL_THRESHOLD = 1040;
     Astronaut attachedAstronaut;
 
+    private enum State {
+        left,
+        right,
+        leftAccelerating,
+        rightAccelerating
+    }
+
+    private State currentState;
+
     /**
      * Creates the spaceship with a reference of the gameview.
      *
@@ -44,6 +53,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
         distanceToBackground = 1;
         int hitBoxOffsetY = 12;
         hitBoxOffsets(0, hitBoxOffsetY, 0, 0);
+        currentState = State.right;
     }
 
     /**
@@ -255,5 +265,19 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
      */
     public Position getAbsolutePosition() {
         return new Position(absolutePosition);
+    }
+
+    @Override
+    public void updateStatus() {
+        switch (currentState) {
+            case left:
+                break;
+            case right:
+                break;
+            case leftAccelerating:
+                break;
+            case rightAccelerating:
+                break;
+        }
     }
 }
