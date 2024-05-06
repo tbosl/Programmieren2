@@ -8,11 +8,17 @@ import thd.gameobjects.base.ShiftableGameObject;
 import thd.gameobjects.movable.Spaceship;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the stars in the background.
  */
 public class Star extends GameObject implements ShiftableGameObject, ActivatableGameObject<Spaceship> {
+
+    private final Color color;
+    private static final List<Color> colors = new ArrayList<>(List.of(Color.yellow, Color.white, Color.red));
+
     /**
      * Creates a star in the background with a reference of the gameview.
      *
@@ -23,11 +29,12 @@ public class Star extends GameObject implements ShiftableGameObject, Activatable
         super(gameView, gamePlayManager);
         size = 8;
         distanceToBackground = 0;
+        color = colors.get(gamePlayManager.getLevel().number - 1);
     }
 
     @Override
     public void addToCanvas() {
-        gameView.addTextToCanvas("*", position.getX(), position.getY(), size, true, Color.YELLOW, rotation);
+        gameView.addTextToCanvas("*", position.getX(), position.getY(), size, true, color, rotation);
     }
 
     @Override

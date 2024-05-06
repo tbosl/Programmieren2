@@ -2,8 +2,8 @@ package thd.game.managers;
 
 import thd.game.level.Level;
 import thd.game.utilities.GameView;
-import thd.gameobjects.movable.*;
-import thd.gameobjects.unmovable.*;
+import thd.gameobjects.movable.Spaceship;
+import thd.gameobjects.unmovable.Score;
 
 import java.awt.event.KeyEvent;
 
@@ -43,10 +43,19 @@ class UserControlledGameObjectPool {
     /**
      * Get the player's spaceship.
      *
-     * @return the player's spaceship.
+     * @return The player's spaceship.
      */
     public Spaceship getSpaceship() {
         return spaceship;
+    }
+
+    /**
+     * Get the current level.
+     *
+     * @return The current level.
+     */
+    public Level getLevel() {
+        return level;
     }
 }
 

@@ -30,4 +30,18 @@ public class Level {
      */
     public int worldOffsetLines;
 
+    /**
+     * The amount of astronauts in the beginning.
+     */
+    public int amountOfAstronauts;
+
+    /**
+     * The level of the enemies that are allowed in the level.
+     */
+    public int enemyLevel;
+
+    /**
+     * The amount of enemies that will be spawned in the beginning.
+     */
+    public int amountOfEnemies;
 }

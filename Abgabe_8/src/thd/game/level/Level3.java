@@ -21,5 +21,8 @@ public class Level3 extends Level {
                 """;
         worldOffsetColumns = 0;
         worldOffsetLines = 0;
+        amountOfAstronauts = 10;
+        enemyLevel = 3;
+        amountOfEnemies = 14;
     }
 }
