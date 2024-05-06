@@ -178,7 +178,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
      * Detonates a smart bomb to kill all enemies, which are currently visible on the screen.
      */
     public void detonateSmartBomb() {
-        if (gameView.timer(SMART_BOMB_COOLDOWN_IN_MS, this) && gamePlayManager.getAmountOfSmartBombs() > 0) {
+        if (gameView.timer(SMART_BOMB_COOLDOWN_IN_MS, this) && gamePlayManager.getSmartBombs() > 0) {
             smartBombDetonatable = true;
         }
         if (smartBombDetonatable) {

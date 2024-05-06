@@ -6,7 +6,7 @@ import java.util.*;
 public class Utf8Checker {
 
     public static void main(String[] args) {
-        String directory = "D:\\Studium\\2. Semester\\Programmieren 2\\Abgabe_5";
+        String directory = "D:\\Studium\\2. Semester\\Programmieren 2\\Abgabe_8";
         List<File> javaFiles = findJavaFiles(directory);
 
         for (File file : javaFiles) {

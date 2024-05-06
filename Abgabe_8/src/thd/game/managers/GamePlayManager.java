@@ -1,9 +1,9 @@
 package thd.game.managers;
 
 import thd.game.utilities.GameView;
+import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.base.GameObject;
 import thd.gameobjects.movable.Astronaut;
-import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.unmovable.RemainingLive;
 import thd.gameobjects.unmovable.SmartBomb;
 
@@ -14,8 +14,7 @@ import java.util.List;
  */
 public class GamePlayManager extends WorldShiftManager {
 
-    private int amountOfSmartBombs;
-    private static final int LIVES = 3;
+    protected int smartBombs;
     protected int lives;
     protected int points;
     private final GameObjectManager gameObjectManager;
@@ -27,8 +26,6 @@ public class GamePlayManager extends WorldShiftManager {
     protected GamePlayManager(GameView gameView) {
         super(gameView);
         this.gameObjectManager = new GameObjectManager();
-        amountOfSmartBombs = 0;
-        lives = LIVES;
     }
 
     /**
@@ -116,7 +113,7 @@ public class GamePlayManager extends WorldShiftManager {
 
     private RemainingLive findLastAddedLive() {
         for (RemainingLive remainingLive : gameObjectManager.provideAllRemainingLives()) {
-            if (remainingLive.getLiveIndex() == lives) {
+            if (remainingLive.getLiveIndex() == lives - 1) {
                 return remainingLive;
             }
         }
@@ -142,7 +139,7 @@ public class GamePlayManager extends WorldShiftManager {
     }
 
     void smartBombGained() {
-        amountOfSmartBombs++;
+        smartBombs++;
         spawnGameObject(new SmartBomb(gameView, this));
     }
 
@@ -151,12 +148,12 @@ public class GamePlayManager extends WorldShiftManager {
      */
     public void detonateSmartBomb() {
         destroyGameObject(findLastAddedSmartBomb());
-        amountOfSmartBombs--;
+        smartBombs--;
     }
 
     private SmartBomb findLastAddedSmartBomb() {
         for (SmartBomb smartBomb : gameObjectManager.provideAllRemainingSmartBombs()) {
-            if (smartBomb.getSmartBombIndex() == amountOfSmartBombs) {
+            if (smartBomb.getSmartBombIndex() + 1 == smartBombs) {
                 return smartBomb;
             }
         }
@@ -168,7 +165,7 @@ public class GamePlayManager extends WorldShiftManager {
      *
      * @return The current amount of remaining smart bombs.
      */
-    public int getAmountOfSmartBombs() {
-        return amountOfSmartBombs;
+    public int getSmartBombs() {
+        return smartBombs;
     }
 }

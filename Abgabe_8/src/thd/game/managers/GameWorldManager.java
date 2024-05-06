@@ -10,34 +10,13 @@ import java.util.List;
 import java.util.ListIterator;
 
 class GameWorldManager extends GamePlayManager {
-    private final String world;
     private final List<GameObject> activatableGameObjects;
-    private final int worldOffsetColumns;
-    private final int worldOffsetLines;
 
     protected GameWorldManager(GameView gameView) {
         super(gameView);
-        world = """
-                B                                                                       \s
-                                                                                        \s
-                S    S     S     S    S       S   S        S           S       S       S\s
-                  S    S      S         S       S      S          S        S        S   \s
-                S   S     S          S        S       S      S           S      S       \s
-                  S     S  S   S    S       S      S      S       S            S       S\s
-                                                                                        \s
-                """;
         activatableGameObjects = new LinkedList<>();
-        worldOffsetColumns = 0;
-        worldOffsetLines = 0;
         score = new Score(gameView, this);
         spaceship = new Spaceship(gameView, this);
-        astronaut = new Astronaut(gameView, this);
-        lander = new Lander(gameView, this);
-        bomber = new Bomber(gameView, this);
-        pod = new Pod(gameView, this, spaceship);
-        baiter = new Baiter(gameView, this, spaceship);
-        spawnGameObjects();
-        spawnGameObjectsFromWorldString();
     }
 
     @Override
@@ -59,18 +38,33 @@ class GameWorldManager extends GamePlayManager {
         }
     }
 
+    protected void initializeLevel() {
+        activatableGameObjects.clear();
+        destroyAllGameObjects();
+        spawnGameObjects();
+        spawnGameObjectsFromWorldString();
+        clearListsForPathDecisionsInGameObjects();
+    }
+
+    private void clearListsForPathDecisionsInGameObjects() {
+        return; // Will be removed. No path decision lists are required so far.
+    }
+
+
     private void spawnGameObjects() {
-        spawnGameObject(astronaut);
-        spawnGameObject(lander);
-        spawnGameObject(score);
+        spaceship = new Spaceship(gameView, this);
         spawnGameObject(spaceship);
+        spawnGameObject(new Astronaut(gameView, this));
+        spawnGameObject(score);
+        spawnGameObject(new LevelName(gameView,this, level.name));
         spawnGameObject(new HeaderFrame(gameView, this));
         spawnGameObject(new ScannerFrame(gameView, this));
+        spawnGameObject(new Lander(gameView, this));
+        spawnGameObject(new Bomber(gameView, this));
+        spawnGameObject(new Pod(gameView, this));
+        spawnGameObject(new Baiter(gameView, this));
         spawnRemainingLives();
         spawnSmartBombs();
-        spawnGameObject(bomber);
-        spawnGameObject(pod);
-        spawnGameObject(baiter);
     }
 
     private void spawnRemainingLives() {
@@ -80,18 +74,18 @@ class GameWorldManager extends GamePlayManager {
     }
 
     private void spawnSmartBombs() {
-        for (int spawnedSmartBombs = 0; spawnedSmartBombs < SmartBomb.AMOUNT_OF_SMART_BOMBS_AT_START; spawnedSmartBombs++) {
-            smartBombGained();
+        for (int spawnedSmartBombs = 0; spawnedSmartBombs < smartBombs; spawnedSmartBombs++) {
+            spawnGameObject(new SmartBomb(gameView, this, spawnedSmartBombs));
         }
     }
 
     private void spawnGameObjectsFromWorldString() {
-        String[] lines = world.split("\\R");
+        String[] lines = level.world.split("\\R");
         int scale = 100;
         for (int line = 0; line < lines.length; line++) {
-            double y = (line - worldOffsetColumns) * scale;
+            double y = (line - level.worldOffsetColumns) * scale;
             for (int column = 0; column < lines[line].length(); column++) {
-                double x = (column - worldOffsetLines) * scale;
+                double x = (column - level.worldOffsetLines) * scale;
                 char character = lines[line].charAt(column);
                 if (character == ' ') {
                     continue;

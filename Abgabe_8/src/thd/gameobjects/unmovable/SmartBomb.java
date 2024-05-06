@@ -21,17 +21,28 @@ public class SmartBomb extends GameObject {
      * @param gamePlayManager The manager which is responsible for the occurrence of the smart bomb.
      */
     public SmartBomb(GameView gameView, GamePlayManager gamePlayManager) {
+        this(gameView, gamePlayManager, gamePlayManager.getSmartBombs() - 1);
+    }
+
+    /**
+     * Creates a smart bomb with a reference of the gameview.
+     *
+     * @param gameView        The GameView.
+     * @param gamePlayManager The manager which is responsible for the occurrence of the smart bomb.
+     * @param smartBombIndex  The index of this smart bomb.
+     */
+    public SmartBomb(GameView gameView, GamePlayManager gamePlayManager, int smartBombIndex) {
         super(gameView, gamePlayManager);
+        this.smartBombIndex = smartBombIndex;
         position.updateCoordinates(245, calculateYCoordinate());
         size = 0.05;
         distanceToBackground = 0;
-        smartBombIndex = gamePlayManager.getAmountOfSmartBombs();
     }
 
     private int calculateYCoordinate() {
         int startCoordinate = 55;
         int offsetPerSmartBomb = 20;
-        return startCoordinate + offsetPerSmartBomb * (gamePlayManager.getAmountOfSmartBombs() - 1);
+        return startCoordinate + offsetPerSmartBomb * (smartBombIndex);
     }
 
     @Override

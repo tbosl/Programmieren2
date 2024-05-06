@@ -56,6 +56,7 @@ class Mutant extends ShootingEnemyGameObject {
     @Override
     public void addToCanvas() {
         gameView.addImageToCanvas("mutant.png", position.getX(), position.getY(), size, rotation);
+        System.out.println(this);
     }
 
     @Override

@@ -22,9 +22,8 @@ public class Baiter extends ShootingEnemyGameObject {
      *
      * @param gameView        The GameView.
      * @param gamePlayManager The manager which is responsible for the occurrence of the baiter.
-     * @param spaceship       The player spaceship - the target of the baiter.
      */
-    public Baiter(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
+    public Baiter(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.GREEN);
         movementPattern = new BaiterMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());

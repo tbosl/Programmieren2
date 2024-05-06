@@ -48,8 +48,16 @@ public class HeaderFrame extends GameObject {
 
     @Override
     public void addToCanvas() {
+        addBar();
+        addRectangle();
+    }
+
+    private void addBar() {
         int verticalLineAlignment = 118;
         gameView.addLineToCanvas(0, verticalLineAlignment, GameView.WIDTH, verticalLineAlignment, size, frameColor);
+    }
+
+    private void addRectangle() {
         int xAlignment = BOX_BEGINN_X;
         int yAlignment = BOX_BEGINN_Y;
         int width = BOX_WIDTH;

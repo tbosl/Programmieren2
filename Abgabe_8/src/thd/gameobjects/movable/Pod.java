@@ -23,11 +23,10 @@ public class Pod extends EnemyGameObject {
      *
      * @param gameView        The GameView.
      * @param gamePlayManager The manager which is responsible for the occurrence of the pod.
-     * @param spaceship       The player's spaceship.
      */
-    public Pod(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
+    public Pod(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.BLUE);
-        this.spaceship = spaceship;
+        this.spaceship = gamePlayManager.getSpaceship();
         randomMovementPattern = new RandomMovementPattern();
         random = new Random();
         position.updateCoordinates(randomMovementPattern.startPosition());
