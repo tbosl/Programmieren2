@@ -6,6 +6,7 @@ import thd.gameobjects.base.Position;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 class MutantMovementPatterns extends MovementPattern {
     private final GameView gameView;
@@ -58,11 +59,26 @@ class MutantMovementPatterns extends MovementPattern {
         int horizontalCenterAlign = 10;
         int rightHorizontalMargin = 130;
         int leftHorizontalMargin = 110;
-        return new ArrayList<>(List.of(
+        List<Position> possibleTarget = new ArrayList<>(List.of(
                 new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() - verticalCenterAlign),
                 new Position(spaceship.getX() + horizontalCenterAlign + rightHorizontalMargin, spaceship.getY()),
                 new Position(spaceship.getX() + horizontalCenterAlign, spaceship.getY() + verticalCenterAlign),
                 new Position(spaceship.getX() + horizontalCenterAlign - leftHorizontalMargin, spaceship.getY())));
+        removeOutOfWorldPositions(possibleTarget);
+        return possibleTarget;
+    }
+
+    private void removeOutOfWorldPositions(List<Position> possibleTarget) {
+        ListIterator<Position> iterator = possibleTarget.listIterator();
+        while (iterator.hasNext()) {
+            Position position = iterator.next();
+            if (position.getY() < UPPER_BOUNDARY || position.getY() > LOWER_BOUNDARY) {
+                iterator.remove();
+            }
+            if (position.getX() < 0 || position.getX() > GameView.WIDTH) {
+                iterator.remove();
+            }
+        }
     }
 
     Position shake(Position... referencePositions) {

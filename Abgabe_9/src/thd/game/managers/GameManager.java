@@ -40,6 +40,6 @@ class GameManager extends LevelManager {
     }
 
     private boolean endOfLevel() {
-        return gameView.timer(3000, this);
+        return provideAllActiveEnemies().isEmpty();
     }
 }

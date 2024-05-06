@@ -82,6 +82,7 @@ public class Lander extends ShootingEnemyGameObject {
 
     @Override
     public void updateStatus() {
+        super.updateStatus();
         if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.pickedUp) {
             selfDestruction();
             grabbedAstronaut.selfDestruction();
@@ -121,6 +122,11 @@ public class Lander extends ShootingEnemyGameObject {
         grabbedAstronaut.pickedUp = true;
         grabbedAstronaut.lander = this;
         landerMovementPattern.astronautGrabbed = true;
+    }
+
+    void detachAstronautIfHeGotDestroyed() {
+        grabbedAstronaut = null;
+        landerMovementPattern.astronautGrabbed = false;
     }
 
     Astronaut getGrabbedAstronaut() {

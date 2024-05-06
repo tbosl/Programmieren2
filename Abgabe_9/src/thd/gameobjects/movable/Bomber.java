@@ -25,6 +25,21 @@ public class Bomber extends EnemyGameObject {
      */
     public static final int ENEMY_LEVEL = 2;
 
+    private static final int ANIMATION_INTERVALL = 300;
+
+    private enum State {
+        ANIMATION_1("bomber_animation_1.png"),
+        ANIMATION_2("bomber_animation_2.png"),
+        ANIMATION_3("bomber_animation_3.png");
+        private final String image;
+
+        State(String image) {
+            this.image = image;
+        }
+    }
+
+    private State currentState;
+
 
     /**
      * Creates a Bomber with a reference of the gameview.
@@ -45,6 +60,7 @@ public class Bomber extends EnemyGameObject {
         height = 23;
         distanceToBackground = 1;
         hitBoxOffsets(0, 0, 0, 0);
+        currentState = State.ANIMATION_1;
     }
 
     @Override
@@ -55,7 +71,7 @@ public class Bomber extends EnemyGameObject {
     @Override
     public void updatePosition() {
         if (position.similarTo(targetPosition)) {
-            targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
+            targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position, gamePlayManager.getSpaceship().getAbsolutePosition()));
         }
         double sinusScale = 0.5;
         position.down(Math.round(Math.sin(sinusScale * Math.toRadians(position.getX()))));
@@ -68,6 +84,14 @@ public class Bomber extends EnemyGameObject {
             gamePlayManager.spawnGameObject(new BomberBomb(gameView, gamePlayManager, this));
             currentBombDroppingIntervallInMilliseconds = generateNewBombDroppingIntervall();
         }
+        if (gameView.timer(ANIMATION_INTERVALL, this)) {
+            switchToNextAnimationState();
+        }
+    }
+
+    private void switchToNextAnimationState() {
+        int nextState = (currentState.ordinal() + 1) % State.values().length;
+        currentState = State.values()[nextState];
     }
 
     private int generateNewBombDroppingIntervall() {
@@ -76,7 +100,7 @@ public class Bomber extends EnemyGameObject {
 
     @Override
     public void addToCanvas() {
-        gameView.addImageToCanvas("bomber_animation_1.png", position.getX(), position.getY(), size, rotation);
+        gameView.addImageToCanvas(currentState.image, position.getX(), position.getY(), size, rotation);
     }
 
     @Override

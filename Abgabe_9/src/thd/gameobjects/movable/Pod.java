@@ -16,11 +16,26 @@ public class Pod extends EnemyGameObject {
     private final Random random;
     private final Spaceship spaceship;
     private static final int POINTS_ON_DESTRUCTION = 1000;
+    private static final int ANIMATION_INTERVALL = 300;
+
+    private enum State {
+        ROTATION_1("pod_animation_1.png"),
+        ROTATION_2("pod_animation_2.png");
+
+        private final String image;
+
+        State(String image) {
+            this.image = image;
+        }
+    }
+
+    private State currentState;
 
     /**
      * The level of the enemy.
      */
     public static final int ENEMY_LEVEL = 3;
+
     /**
      * Creates a Pod with a reference of the gameview.
      *
@@ -41,6 +56,7 @@ public class Pod extends EnemyGameObject {
         distanceToBackground = 1;
         int hitBoxOffset = 5;
         hitBoxOffsets(hitBoxOffset, hitBoxOffset, 0, 0);
+        currentState = State.ROTATION_1;
     }
 
     @Override
@@ -57,8 +73,20 @@ public class Pod extends EnemyGameObject {
     }
 
     @Override
+    public void updateStatus() {
+        super.updateStatus();
+        if (gameView.timer(ANIMATION_INTERVALL, this)) {
+            switchToNextAnimationState();
+        }
+    }
+
+    private void switchToNextAnimationState() {
+        currentState = currentState == State.ROTATION_1 ? State.ROTATION_2 : State.ROTATION_1;
+    }
+
+    @Override
     public void addToCanvas() {
-        gameView.addImageToCanvas("pod_animation_1.png", position.getX(), position.getY(), size, rotation);
+        gameView.addImageToCanvas(currentState.image, position.getX(), position.getY(), size, rotation);
     }
 
     @Override

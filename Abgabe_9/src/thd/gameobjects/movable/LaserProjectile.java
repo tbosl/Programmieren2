@@ -18,15 +18,15 @@ public class LaserProjectile extends Projectile {
      * @param gameView          The GameView.
      * @param gamePlayManager   The manager which is responsible for the occurrence of the laser projectile.
      * @param spaceshipPosition The position of the spaceship, from which the laser got fired.
+     * @param shootingRight     Determines the direction in which the laser will be fired.
      */
-    LaserProjectile(GameView gameView, GamePlayManager gamePlayManager, Position spaceshipPosition) {
+    LaserProjectile(GameView gameView, GamePlayManager gamePlayManager, Position spaceshipPosition, boolean shootingRight) {
         super(gameView, gamePlayManager);
-        // TODO Adjust alignment when spaceship is facing in the other direction.
         int horizontalAlignment = 60;
         int verticalAlignment = 20;
         position.updateCoordinates(spaceshipPosition.getX() + horizontalAlignment, spaceshipPosition.getY() + verticalAlignment);
         size = 0.08;
-        speedInPixel = 20;
+        speedInPixel = shootingRight ? 20 : -20;
         height = 3;
         width = 40;
         distanceToBackground = 1;
