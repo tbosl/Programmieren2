@@ -16,8 +16,8 @@ public class Bomber extends EnemyGameObject {
     private final BomberMovementPattern movementPattern;
     private int currentBombDroppingIntervallInMilliseconds;
     private final Random random;
-    private static final int LOWER_INTERVALL_BOUND = 4000;
-    private static final int UPPER_INTERVAL_BOUND = 8000;
+    private static final int LOWER_INTERVALL_BOUND = 8000;
+    private static final int UPPER_INTERVAL_BOUND = 16000;
     private static final int POINTS_ON_DESTRUCTION = 250;
 
     /**
@@ -55,7 +55,7 @@ public class Bomber extends EnemyGameObject {
         random = new Random();
         currentBombDroppingIntervallInMilliseconds = generateNewBombDroppingIntervall();
         size = 0.1;
-        speedInPixel = 2;
+        speedInPixel = random.nextInt(1, 4);
         width = 23;
         height = 23;
         distanceToBackground = 1;

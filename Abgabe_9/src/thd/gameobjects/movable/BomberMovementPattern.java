@@ -13,13 +13,13 @@ class BomberMovementPattern extends AlienInvadersRandomMovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        return generateRandomPosition(UPPER_BOUNDARY + 100, GamePlayManager.ABSOLUTE_WORLD_LENGTH - outerMarginToBorders, LOWER_BOUNDARY - 100, outerMarginToBorders);
+        return generateRandomPosition(UPPER_BOUNDARY + outerMarginToBorders, GamePlayManager.ABSOLUTE_WORLD_LENGTH - outerMarginToBorders, LOWER_BOUNDARY - outerMarginToBorders, outerMarginToBorders);
     }
 
     @Override
     protected Position nextTargetPosition(Position... referencePositions) {
-        // TODO Fix strange movement on the borders.
-        double targetXCoordinate = referencePositions[0].getX() < 0 ? GameView.WIDTH - outerMarginToBorders : outerMarginToBorders;
-        return generatePositionWithRandomY(targetXCoordinate, UPPER_BOUNDARY + 100, LOWER_BOUNDARY - 100);
+        int xCorrection = 10;
+        double targetXCoordinate = referencePositions[0].getX() <= outerMarginToBorders + xCorrection ? GameView.WIDTH - outerMarginToBorders : outerMarginToBorders;
+        return generatePositionWithRandomY(targetXCoordinate, UPPER_BOUNDARY + outerMarginToBorders, LOWER_BOUNDARY - outerMarginToBorders);
     }
 }
