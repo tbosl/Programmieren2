@@ -12,10 +12,23 @@ import java.awt.*;
 public class Astronaut extends ScannedGameObject implements ShiftableGameObject {
     private final AstronautMovementPatterns astronautMovementPatterns;
     private static final int FALL_SPEED_IN_PIXEL = 1;
-    boolean pickedUp;
     Lander lander;
-    boolean stopWalking;
     static final int SCORE_POINTS_FOR_RESCUE_AND_PICK_UP = 500;
+    boolean stopWalking;
+
+    private enum State {
+        WALKING(0.25),
+        FALLING(FALL_SPEED_IN_PIXEL),
+        FOLLOW_LANDER(0),
+        FOLLOW_SPACESHIP(0);
+        private double speed;
+
+        State(double speed) {
+            this.speed = speed;
+        }
+    }
+
+    private State currentState;
 
     /**
      * Creates an Astronaut with a reference of the gameview.
@@ -33,9 +46,8 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         speedInPixel = 0.25;
         height = 40;
         width = 15;
-        pickedUp = false;
-        stopWalking = false;
         distanceToBackground = 1;
+        currentState = State.WALKING;
         int hitBoxOffsetWidth = 5;
         hitBoxOffsets(hitBoxOffsetWidth, 0, 0, 0);
     }
@@ -47,11 +59,11 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
 
     @Override
     public void updatePosition() {
-        if (!pickedUp && !stopWalking) {
+        if ((currentState == State.WALKING && !stopWalking) || currentState == State.FALLING) {
             walk();
-        } else if (lander != null) {
+        } else if (currentState == State.FOLLOW_LANDER || lander != null) {
             followLander();
-        } else if (gamePlayManager.getSpaceship().attachedAstronaut == this) {
+        } else if (currentState == State.FOLLOW_SPACESHIP || gamePlayManager.getSpaceship().attachedAstronaut == this) {
             if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
                 followSpaceship();
             } else {
@@ -62,9 +74,9 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
 
     private void detachFromSpaceship() {
         position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
-        pickedUp = false;
         gamePlayManager.getSpaceship().attachedAstronaut = null;
         gamePlayManager.addPoints(SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
+        currentState = State.WALKING;
     }
 
 
@@ -84,7 +96,6 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         }
     }
 
-    // TODO Check why this doesn't get called if the lander is destroyed by the ship, not the laser.
     private void followSpaceship() {
         int horizontalOffset = 10;
         int verticalOffset = 40;
@@ -98,6 +109,14 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
     }
 
     @Override
+    public void updateStatus() {
+        super.updateStatus();
+        if (currentState == State.FALLING && position.getY() >= MovementPattern.LOWER_BOUNDARY) {
+            currentState = State.WALKING;
+        }
+    }
+
+    @Override
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof LaserProjectile) {
             selfDestruction();
@@ -105,5 +124,28 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
                 lander.detachAstronautIfHeGotDestroyed();
             }
         }
+        if (other instanceof Spaceship spaceship) {
+            if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
+                spaceship.attachedAstronaut = this;
+                gamePlayManager.addPoints(Astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
+                currentState = State.FOLLOW_SPACESHIP;
+            }
+        }
+    }
+
+    void updateStateToLander() {
+        currentState = State.FOLLOW_LANDER;
+    }
+
+    public void updateStateToLFalling() {
+        currentState = State.FALLING;
+    }
+
+    boolean canBeGrabbed() {
+        return currentState != State.FOLLOW_LANDER && currentState != State.FOLLOW_SPACESHIP;
+    }
+
+    boolean isAttachedToLander() {
+        return lander != null && currentState == State.FOLLOW_LANDER;
     }
 }

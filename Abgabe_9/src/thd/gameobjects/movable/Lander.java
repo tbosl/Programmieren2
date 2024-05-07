@@ -20,6 +20,7 @@ public class Lander extends ShootingEnemyGameObject {
     private final int spawnTime;
     private boolean attackingAllowed;
     private static final int POINTS_ON_DESTRUCTION = 150;
+    private boolean destroyed;
 
     /**
      * The level of the enemy.
@@ -48,6 +49,7 @@ public class Lander extends ShootingEnemyGameObject {
         attackingAllowed = false;
         distanceToBackground = 1;
         int hitBoxOffsetX = 6;
+        destroyed = false;
         hitBoxOffsets(hitBoxOffsetX, 0, 0, 0);
     }
 
@@ -72,7 +74,7 @@ public class Lander extends ShootingEnemyGameObject {
         double currentDistance = -1;
         for (Astronaut astronaut : gamePlayManager.provideAllAstronauts()) {
             double distance = position.distance(astronaut.getPosition());
-            if ((currentDistance < 0 || currentDistance > distance) && (!astronaut.pickedUp ^ astronaut.lander == this)) {
+            if ((currentDistance < 0 || currentDistance > distance) && astronaut.canBeGrabbed() ^ astronaut.lander == this) {
                 nearestAstronaut = astronaut;
                 currentDistance = distance;
             }
@@ -83,7 +85,7 @@ public class Lander extends ShootingEnemyGameObject {
     @Override
     public void updateStatus() {
         super.updateStatus();
-        if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.pickedUp) {
+        if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.isAttachedToLander() /*grabbedAstronaut.pickedUp*/) {
             selfDestruction();
             grabbedAstronaut.selfDestruction();
             gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
@@ -103,15 +105,17 @@ public class Lander extends ShootingEnemyGameObject {
         super.reactToCollisionWith(other);
         if (other instanceof LaserProjectile || other instanceof Spaceship) {
             removeConnectionToAstronaut();
+            destroyed = true;
         }
-        if (other instanceof Astronaut astronaut && !astronaut.pickedUp) {
+        if (other instanceof Astronaut astronaut && astronaut.canBeGrabbed() && !destroyed) {
             pickUpAstronaut(astronaut);
         }
     }
 
     private void removeConnectionToAstronaut() {
         if (grabbedAstronaut != null) {
-            grabbedAstronaut.pickedUp = false;
+            //grabbedAstronaut.pickedUp = false;
+            grabbedAstronaut.updateStateToLFalling();
             grabbedAstronaut.lander = null;
         }
         landerMovementPattern.astronautGrabbed = false;
@@ -119,8 +123,8 @@ public class Lander extends ShootingEnemyGameObject {
 
     private void pickUpAstronaut(Astronaut astronaut) {
         grabbedAstronaut = astronaut;
-        grabbedAstronaut.pickedUp = true;
         grabbedAstronaut.lander = this;
+        grabbedAstronaut.updateStateToLander();
         landerMovementPattern.astronautGrabbed = true;
     }
 

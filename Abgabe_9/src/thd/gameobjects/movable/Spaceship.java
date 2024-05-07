@@ -22,7 +22,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     private static final int RIGHT_SCROLL_THRESHOLD = 940;
     Astronaut attachedAstronaut;
 
-    private enum State {
+    enum State {
         LEFT("spaceship_left.png", "default_exhaust_left.png", 78, 10, 0.1),
         RIGHT("spaceship_right.png", "default_exhaust_right.png", -12, 10, 0.1),
         LEFT_ACCELERATING("spaceship_left.png", "accelerated_exhaust_left.png", 78, 10, 0.1),
@@ -133,14 +133,14 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
 
     private boolean undoMovementIfCollisionWithAstronaut(char counterDirection, boolean worldShift) {
         boolean collisionDetected = false;
-        for (Astronaut collidingGameObject : gamePlayManager.provideAllAstronauts()) {
-            if (collidesWith(collidingGameObject) && collidingGameObject.getPosition().getY() == MovementPattern.LOWER_BOUNDARY) {
+        for (Astronaut astronaut : gamePlayManager.provideAllAstronauts()) {
+            if (collidesWith(astronaut) && astronaut.getPosition().getY() == MovementPattern.LOWER_BOUNDARY) {
                 correctPosition(counterDirection, worldShift);
                 collisionDetected = true;
-                collidingGameObject.stopWalking = true;
+                astronaut.stopWalking = true;
                 break;
             } else {
-                collidingGameObject.stopWalking = false;
+                astronaut.stopWalking = false;
             }
         }
         return collisionDetected;
@@ -238,7 +238,6 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
         if (lander.getGrabbedAstronaut() != null) {
             Astronaut astronaut = lander.getGrabbedAstronaut();
             astronaut.lander = null;
-            astronaut.pickedUp = false;
         }
     }
 
@@ -278,13 +277,6 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
             // gamePlayManager.lifeLost(); // TODO Uncomment - only for jimmy.
             return; //TODO Delete - only for jimmy.
         }
-        if (other instanceof Astronaut astronaut) {
-            if (astronaut.getPosition().getY() < MovementPattern.LOWER_BOUNDARY) {
-                attachedAstronaut = astronaut;
-                astronaut.pickedUp = true;
-                gamePlayManager.addPoints(Astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
-            }
-        }
     }
 
     /**
@@ -296,17 +288,5 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
         return new Position(absolutePosition);
     }
 
-    //    @Override
-    //    public void updateStatus() {
-    //        switch (currentState) {
-    //            case left:
-    //                break;
-    //            case right:
-    //                break;
-    //            case leftAccelerating:
-    //                break;
-    //            case rightAccelerating:
-    //                break;
-    //        }
-    //    }
+
 }
