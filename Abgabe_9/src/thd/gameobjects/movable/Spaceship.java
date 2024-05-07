@@ -214,6 +214,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
             List<EnemyGameObject> killedEnemies = killAllEnemiesOnScreen();
             updateScore(killedEnemies);
             smartBombDetonatable = false;
+            gameView.timer(SMART_BOMB_COOLDOWN_IN_MS, this);
         }
     }
 

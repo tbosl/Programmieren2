@@ -55,7 +55,7 @@ public class Bomber extends EnemyGameObject {
         random = new Random();
         currentBombDroppingIntervallInMilliseconds = generateNewBombDroppingIntervall();
         size = 0.1;
-        speedInPixel = random.nextInt(1, 4);
+        speedInPixel = random.nextInt(2, 4);
         width = 23;
         height = 23;
         distanceToBackground = 1;
