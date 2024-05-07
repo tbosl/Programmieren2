@@ -137,7 +137,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         currentState = State.FOLLOW_LANDER;
     }
 
-    public void updateStateToLFalling() {
+    void updateStateToLFalling() {
         currentState = State.FALLING;
     }
 
