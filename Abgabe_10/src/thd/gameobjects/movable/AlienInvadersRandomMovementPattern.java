@@ -9,7 +9,7 @@ class AlienInvadersRandomMovementPattern extends MovementPattern {
         return new Position(random.nextDouble(leftBoundary, rightBoundary), random.nextDouble(upBoundary, lowBoundary));
     }
 
-    protected Position generateRandomPosition(double leftBoundary, double rightBoundary) {
+    Position generateRandomPosition(double leftBoundary, double rightBoundary) {
         return generateRandomPosition(UPPER_BOUNDARY, rightBoundary, LOWER_BOUNDARY, leftBoundary);
     }
 
