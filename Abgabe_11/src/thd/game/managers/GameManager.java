@@ -2,6 +2,7 @@ package thd.game.managers;
 
 import thd.game.level.Difficulty;
 import thd.game.level.Level;
+import thd.game.utilities.FileAccess;
 import thd.game.utilities.GameView;
 
 class GameManager extends LevelManager {
@@ -42,7 +43,14 @@ class GameManager extends LevelManager {
      * Start a new game.
      */
     void startNewGame() {
-        Level.difficulty = Difficulty.EASY;
+        Difficulty difficulty = FileAccess.readDifficultyFromDisc(); // Lesen der gespeicherten Auswahl.
+        /* Der folgende Befehl wird in der nächsten Woche durch eine Benutzerauswahl ersetzt. Der Benutzer
+         * bekommt seine alte Auswahl vom letzten Mal angezeigt und kann die Auswahl ggf. ändern. */
+        difficulty = Difficulty.EASY;
+        FileAccess.writeDifficultyToDisc(difficulty); // Abspeichern der neuen Auswahl.
+
+        Level.difficulty = difficulty;
+
         initializeGame();
         gameView.playSound("theme.wav", true);
     }

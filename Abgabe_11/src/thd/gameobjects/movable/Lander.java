@@ -112,6 +112,12 @@ public class Lander extends ShootingEnemyGameObject {
         }
     }
 
+    @Override
+    public void selfDestruction() {
+        super.selfDestruction();
+        removeConnectionToAstronaut();
+    }
+
     private void removeConnectionToAstronaut() {
         if (grabbedAstronaut != null) {
             //grabbedAstronaut.pickedUp = false;
