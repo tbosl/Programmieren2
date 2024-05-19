@@ -54,6 +54,7 @@ public class EnemyProjectile extends Projectile {
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof Spaceship) {
             gamePlayManager.destroyGameObject(this);
+            gameView.playSound("projectile_hit.wav", false);
         }
     }
 }

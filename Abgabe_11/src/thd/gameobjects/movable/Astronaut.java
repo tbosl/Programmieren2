@@ -68,6 +68,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
                 followSpaceship();
             } else {
                 detachFromSpaceship();
+                gameView.playSound("thank_you.wav", false);
             }
         }
     }
@@ -129,6 +130,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
                 spaceship.attachedAstronaut = this;
                 gamePlayManager.addPoints(Astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
                 currentState = State.FOLLOW_SPACESHIP;
+                gameView.playSound("pick_astronaut.wav", false);
             }
         }
     }

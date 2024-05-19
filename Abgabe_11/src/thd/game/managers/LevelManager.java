@@ -2,6 +2,7 @@ package thd.game.managers;
 
 import thd.game.level.*;
 import thd.game.utilities.GameView;
+import thd.gameobjects.unmovable.RemainingLive;
 
 import java.util.List;
 
@@ -24,6 +25,9 @@ class LevelManager extends GameWorldManager {
     private void initializeGameObjects() {
         if (smartBombs < LevelManager.SMART_BOMBS) {
             smartBombGained();
+        }
+        if (level.number > 1 && lives < RemainingLive.MAXIMUM_AMOUNT_OF_LIVES) {
+            lifeGained();
         }
         // Die Methode initializeGameObjects() soll in Zukunft dazu genutzt werden um Spielelemente an ein
         // neues Level anzupassen, z.B.

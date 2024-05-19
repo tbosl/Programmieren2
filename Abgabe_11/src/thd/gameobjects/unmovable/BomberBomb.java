@@ -59,6 +59,7 @@ public class BomberBomb extends CollidingGameObject implements ShiftableGameObje
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof Spaceship) {
             gamePlayManager.destroyGameObject(this);
+            gameView.playSound("bomber_bomb.wav", false);
         }
     }
 }

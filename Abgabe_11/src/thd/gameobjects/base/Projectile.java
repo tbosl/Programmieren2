@@ -16,6 +16,7 @@ public abstract class Projectile extends CollidingGameObject implements Shiftabl
      */
     protected Projectile(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager);
+        gameView.playSound("projectile.wav", false);
     }
 
     @Override
@@ -25,5 +26,4 @@ public abstract class Projectile extends CollidingGameObject implements Shiftabl
             gamePlayManager.destroyGameObject(this);
         }
     }
-
 }

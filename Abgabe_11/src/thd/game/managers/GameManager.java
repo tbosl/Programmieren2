@@ -20,6 +20,7 @@ class GameManager extends LevelManager {
         if (endOfGame()) {
             if (!overlay.isMessageShown()) {
                 overlay.showMessage("Game Over");
+                gameView.playSound("game_over.wav", false);
             }
             if (gameView.timer(2000, this)) {
                 overlay.stopShowing();
@@ -43,12 +44,14 @@ class GameManager extends LevelManager {
     void startNewGame() {
         Level.difficulty = Difficulty.EASY;
         initializeGame();
+        gameView.playSound("theme.wav", true);
     }
 
     @Override
     protected void initializeLevel() {
         super.initializeLevel();
         overlay.showMessage(level.name, 2);
+        gameView.playSound("level_begin.wav", false);
     }
 
     @Override

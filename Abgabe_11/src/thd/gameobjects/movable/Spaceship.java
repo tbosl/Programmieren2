@@ -211,6 +211,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
         }
         if (smartBombDetonatable) {
             gamePlayManager.detonateSmartBomb();
+            gameView.playSound("smart_bomb.wav", false);
             List<EnemyGameObject> killedEnemies = killAllEnemiesOnScreen();
             updateScore(killedEnemies);
             smartBombDetonatable = false;

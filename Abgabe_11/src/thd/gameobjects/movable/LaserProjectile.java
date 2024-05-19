@@ -52,6 +52,7 @@ public class LaserProjectile extends Projectile {
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof EnemyGameObject || other instanceof Astronaut) {
             gamePlayManager.destroyGameObject(this);
+            gameView.playSound("projectile_hit.wav", false);
         }
     }
 }
