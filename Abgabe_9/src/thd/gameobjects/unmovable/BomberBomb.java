@@ -14,7 +14,7 @@ import thd.gameobjects.movable.Spaceship;
 public class BomberBomb extends CollidingGameObject implements ShiftableGameObject {
     private final ColorCycleManager colorCycleManager;
     private static final int COLOR_CYCLE_DURATION = 150;
-    private static final int ROTATION_INTERVALL = 250;
+    private static final int ROTATION_INTERVAL = 250;
     private static final int DEFAULT_ROTATION = 0;
     private static final int ANGLED_ROTATION = 45;
 
@@ -50,7 +50,7 @@ public class BomberBomb extends CollidingGameObject implements ShiftableGameObje
     }
 
     private void updateRotation() {
-        if (gameView.timer(ROTATION_INTERVALL, this)) {
+        if (gameView.timer(ROTATION_INTERVAL, this)) {
             rotation = rotation != DEFAULT_ROTATION ? DEFAULT_ROTATION : ANGLED_ROTATION;
         }
     }
