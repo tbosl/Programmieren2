@@ -8,7 +8,6 @@ import thd.gameobjects.base.ShiftableGameObject;
 import thd.gameobjects.movable.Spaceship;
 
 import java.awt.*;
-import java.beans.ConstructorProperties;
 
 /**
  * Represents the stars in the background.
