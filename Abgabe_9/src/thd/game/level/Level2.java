@@ -1,5 +1,7 @@
 package thd.game.level;
 
+import java.awt.*;
+
 /**
  * The first level of the game.
  */
@@ -24,5 +26,6 @@ public class Level2 extends Level {
         amountOfAstronauts = 8;
         enemyLevel = 2;
         amountOfEnemies = 12;
+        starColor = Color.white;
     }
 }

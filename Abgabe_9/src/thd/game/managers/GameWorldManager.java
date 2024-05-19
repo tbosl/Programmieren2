@@ -150,7 +150,7 @@ class GameWorldManager extends GamePlayManager {
     }
 
     private void spawnStar(double x, double y) {
-        Star star = new Star(gameView, this);
+        Star star = new Star(gameView, this, level.starColor);
         star.getPosition().updateCoordinates(x, y);
         addActivatableGameObject(star);
     }

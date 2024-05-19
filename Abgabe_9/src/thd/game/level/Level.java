@@ -1,5 +1,7 @@
 package thd.game.level;
 
+import java.awt.*;
+
 /**
  * Represents a level in the game.
  */
@@ -44,4 +46,9 @@ public class Level {
      * The amount of enemies that will be spawned in the beginning.
      */
     public int amountOfEnemies;
+
+    /**
+     * The color in which the stars in the background will appear.
+     */
+    public Color starColor;
 }
