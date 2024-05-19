@@ -51,4 +51,9 @@ public class Level {
      * The color in which the stars in the background will appear.
      */
     public Color starColor;
+
+    /**
+     * The difficulty of the game.
+     */
+    public static Difficulty difficulty = Difficulty.STANDARD;
 }

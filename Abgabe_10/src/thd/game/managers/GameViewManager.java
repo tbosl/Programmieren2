@@ -15,7 +15,7 @@ public class GameViewManager extends GameView {
         setWindowTitle("Defender");
         setStatusText("Tobias Bosl - Java Programmierung SS 2024");
         setWindowIcon("spaceship_right.png");
-        gameManager.initializeGame();
+        gameManager.startNewGame();
     }
 
     @Override
