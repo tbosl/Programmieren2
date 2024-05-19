@@ -61,7 +61,9 @@ public abstract class ShootingEnemyGameObject extends EnemyGameObject {
     }
 
     private void shoot() {
-        gamePlayManager.spawnGameObject(new EnemyProjectile(gameView, gamePlayManager, this, spaceship.getPosition()));
+        if(position.getX() > 0 && position.getX() < GameView.WIDTH){
+            gamePlayManager.spawnGameObject(new EnemyProjectile(gameView, gamePlayManager, this, spaceship.getPosition()));
+        }
     }
 
     private void generateNewShootInterval() {

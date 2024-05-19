@@ -37,7 +37,7 @@ public class Lander extends ShootingEnemyGameObject {
     public Lander(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.YELLOW);
         landerMovementPattern = new LanderMovementPattern();
-        position.updateCoordinates(landerMovementPattern.startPosition());
+        position.updateCoordinates(landerMovementPattern.startPosition(gamePlayManager.getSpaceship().getPosition()));
         int outerMarginToSideBorders = 100;
         targetPosition.updateCoordinates(landerMovementPattern.generateRandomPosition(-outerMarginToSideBorders, GameView.WIDTH + outerMarginToSideBorders));
         size = 0.08;

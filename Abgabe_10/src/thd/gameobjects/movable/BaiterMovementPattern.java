@@ -8,7 +8,7 @@ class BaiterMovementPattern extends MovementPattern {
     @Override
     protected Position startPosition(Position... referencePositions) {
         int xMargin = 100;
-        return new AlienInvadersRandomMovementPattern().generateRandomPosition(xMargin, GamePlayManager.ABSOLUTE_WORLD_LENGTH - xMargin);
+        return new AlienInvadersRandomMovementPattern().generateRandomPositionWithDistanceToSpaceship(xMargin, GamePlayManager.ABSOLUTE_WORLD_LENGTH - xMargin, referencePositions[0], 200);
     }
 
     @Override

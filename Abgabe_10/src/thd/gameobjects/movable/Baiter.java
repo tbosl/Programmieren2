@@ -31,7 +31,7 @@ public class Baiter extends ShootingEnemyGameObject {
     public Baiter(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.GREEN);
         movementPattern = new BaiterMovementPattern();
-        position.updateCoordinates(movementPattern.startPosition());
+        position.updateCoordinates(movementPattern.startPosition(gamePlayManager.getSpaceship().getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
         size = 0.08;
         setupSpeedInPixelDependingOnDistanceToSpaceship();

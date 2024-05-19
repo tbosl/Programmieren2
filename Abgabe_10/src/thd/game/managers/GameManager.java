@@ -18,17 +18,29 @@ class GameManager extends LevelManager {
 
     private void gameManagement() {
         if (endOfGame()) {
-            startNewGame();
+            if (!overlay.isMessageShown()) {
+                overlay.showMessage("Game Over");
+            }
+            if (gameView.timer(2000, this)) {
+                overlay.stopShowing();
+                startNewGame();
+            }
         } else if (endOfLevel()) {
-            switchToNextLevel();
-            initializeLevel();
+            if (!overlay.isMessageShown()) {
+                overlay.showMessage("Great Job!");
+            }
+            if (gameView.timer(2000, this)) {
+                overlay.stopShowing();
+                switchToNextLevel();
+                initializeLevel();
+            }
         }
     }
 
     /**
      * Start a new game.
      */
-    public void startNewGame() {
+    void startNewGame() {
         Level.difficulty = Difficulty.EASY;
         initializeGame();
     }
@@ -36,6 +48,7 @@ class GameManager extends LevelManager {
     @Override
     protected void initializeLevel() {
         super.initializeLevel();
+        overlay.showMessage(level.name, 2);
     }
 
     @Override

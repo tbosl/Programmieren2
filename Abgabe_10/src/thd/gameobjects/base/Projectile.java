@@ -20,7 +20,8 @@ public abstract class Projectile extends CollidingGameObject implements Shiftabl
 
     @Override
     public void updateStatus() {
-        if (position.getX() < 0 || position.getX() > GameView.WIDTH || position.getY() < MovementPattern.UPPER_BOUNDARY || position.getY() > GameView.HEIGHT) {
+        int margin = 50;
+        if (position.getX() < -margin || position.getX() > GameView.WIDTH + margin || position.getY() < MovementPattern.UPPER_BOUNDARY || position.getY() > GameView.HEIGHT) {
             gamePlayManager.destroyGameObject(this);
         }
     }

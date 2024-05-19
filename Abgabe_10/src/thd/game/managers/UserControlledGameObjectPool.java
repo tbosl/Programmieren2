@@ -3,6 +3,7 @@ package thd.game.managers;
 import thd.game.level.Level;
 import thd.game.utilities.GameView;
 import thd.gameobjects.movable.Spaceship;
+import thd.gameobjects.unmovable.Overlay;
 import thd.gameobjects.unmovable.Score;
 
 import java.awt.event.KeyEvent;
@@ -12,6 +13,7 @@ class UserControlledGameObjectPool {
     protected Score score;
     protected Spaceship spaceship;
     protected Level level;
+    protected Overlay overlay;
 
     protected UserControlledGameObjectPool(GameView gameView) {
         this.gameView = gameView;

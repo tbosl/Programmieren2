@@ -64,6 +64,8 @@ class GameWorldManager extends GamePlayManager {
         spaceship = new Spaceship(gameView, this);
         spawnUnmovableGameObjects();
         dynamicallySpawnMovableGameObjectsByLevel();
+        overlay = new Overlay(gameView, this);
+        spawnGameObject(overlay);
     }
 
     private void spawnUnmovableGameObjects() {
@@ -101,7 +103,7 @@ class GameWorldManager extends GamePlayManager {
     }
 
     private void spawnEnemiesByLevel() {
-        List<Class<? extends EnemyGameObject>> allowedEnemies = enemyLevelMapper.providePossibleEnemyClasses(level.number);
+        List<Class<? extends EnemyGameObject>> allowedEnemies = enemyLevelMapper.providePossibleEnemyClasses(level.enemyLevel);
         for (int spawnedEnemies = 0; spawnedEnemies < level.amountOfEnemies; spawnedEnemies++) {
             int enemyClassIndex = provideRandomIndex(allowedEnemies.size());
             Class<? extends EnemyGameObject> enemyClass = allowedEnemies.get(enemyClassIndex);

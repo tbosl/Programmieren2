@@ -116,6 +116,9 @@ public class GamePlayManager extends WorldShiftManager {
     public void lifeLost() {
         destroyGameObject(findLastAddedLive());
         lives--;
+        if (lives <= 0) {
+            destroyGameObject(spaceship);
+        }
     }
 
     private RemainingLive findLastAddedLive() {
