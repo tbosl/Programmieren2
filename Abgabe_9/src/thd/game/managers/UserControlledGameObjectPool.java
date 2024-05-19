@@ -48,14 +48,5 @@ class UserControlledGameObjectPool {
     public Spaceship getSpaceship() {
         return spaceship;
     }
-
-    /**
-     * Get the current level.
-     *
-     * @return The current level.
-     */
-    public Level getLevel() {
-        return level;
-    }
 }
 

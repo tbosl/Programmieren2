@@ -15,6 +15,11 @@ public class RemainingLive extends GameObject {
     public static final int MAXIMUM_AMOUNT_OF_LIVES = 5;
 
     private final int liveIndex;
+    /**
+     * The amount of points after which the player will receive a new player.
+     * The player will receive a new life every time a multiple of this number is reached.
+     */
+    public static final int POINTS_REQUIRED_FOR_NEW_LIFE = 10_000;
 
     /**
      * Creates a remaining life with a reference of the gameview.

@@ -8,8 +8,7 @@ import thd.gameobjects.base.ShiftableGameObject;
 import thd.gameobjects.movable.Spaceship;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.beans.ConstructorProperties;
 
 /**
  * Represents the stars in the background.
@@ -23,6 +22,7 @@ public class Star extends GameObject implements ShiftableGameObject, Activatable
      *
      * @param gameView        The GameView
      * @param gamePlayManager The manager which is responsible for the occurrence of the star.
+     * @param color           The color of the star.
      */
     public Star(GameView gameView, GamePlayManager gamePlayManager, Color color) {
         super(gameView, gamePlayManager);
@@ -44,5 +44,10 @@ public class Star extends GameObject implements ShiftableGameObject, Activatable
 
     private double gameViewDiagonale() {
         return Math.sqrt(Math.pow(GameView.HEIGHT, 2) + Math.pow(GameView.WIDTH, 2));
+    }
+
+    @Override
+    public String toString() {
+        return "STAR: " + position;
     }
 }

@@ -17,6 +17,7 @@ public class GamePlayManager extends WorldShiftManager {
     protected int smartBombs;
     protected int lives;
     protected int points;
+    private boolean addNewLife;
     private final GameObjectManager gameObjectManager;
     /**
      * The absolute length of the game world.
@@ -26,6 +27,7 @@ public class GamePlayManager extends WorldShiftManager {
     protected GamePlayManager(GameView gameView) {
         super(gameView);
         this.gameObjectManager = new GameObjectManager();
+        addNewLife = false;
     }
 
     /**
@@ -83,6 +85,10 @@ public class GamePlayManager extends WorldShiftManager {
     }
 
     private void gamePlayManagement() {
+        if (addNewLife) {
+            lifeGained();
+            addNewLife = false;
+        }
     }
 
     /**
@@ -91,6 +97,7 @@ public class GamePlayManager extends WorldShiftManager {
      * @param amount The amount of points to be added.
      */
     public void addPoints(int amount) {
+        addNewLife = points / RemainingLive.POINTS_REQUIRED_FOR_NEW_LIFE < (points + amount) / RemainingLive.POINTS_REQUIRED_FOR_NEW_LIFE;
         points += amount;
     }
 
@@ -121,8 +128,10 @@ public class GamePlayManager extends WorldShiftManager {
     }
 
     void lifeGained() {
-        lives++;
-        spawnGameObject(new RemainingLive(gameView, this, lives));
+        if (lives < RemainingLive.MAXIMUM_AMOUNT_OF_LIVES) {
+            lives++;
+            spawnGameObject(new RemainingLive(gameView, this, lives - 1));
+        }
     }
 
     void lifeGained(int lifeIndex) {
