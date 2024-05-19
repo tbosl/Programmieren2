@@ -36,7 +36,7 @@ class GameManager extends LevelManager {
     }
 
     private boolean endOfGame() {
-        return lives == 0 || (!hasNextLevel() && endOfLevel());
+        return lives == 0 || (!hasNextLevel() && endOfLevel()) || provideAllAstronauts().isEmpty();
     }
 
     private boolean endOfLevel() {

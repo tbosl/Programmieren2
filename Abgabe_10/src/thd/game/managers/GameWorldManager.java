@@ -64,7 +64,6 @@ class GameWorldManager extends GamePlayManager {
         spaceship = new Spaceship(gameView, this);
         spawnUnmovableGameObjects();
         dynamicallySpawnMovableGameObjectsByLevel();
-        spawnGameObject(new Jimmy(gameView, this));
     }
 
     private void spawnUnmovableGameObjects() {

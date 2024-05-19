@@ -275,8 +275,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof BomberBomb || other instanceof EnemyGameObject || other instanceof EnemyProjectile) {
-            // gamePlayManager.lifeLost(); // TODO Uncomment - only for jimmy.
-            return; //TODO Delete - only for jimmy.
+            gamePlayManager.lifeLost();
         }
     }
 
