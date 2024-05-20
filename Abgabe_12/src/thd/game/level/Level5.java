@@ -3,11 +3,11 @@ package thd.game.level;
 import java.awt.*;
 
 /**
- * The first level of the game.
+ * The fifth level of the game.
  */
 public class Level5 extends Level {
     /**
-     * Creates the first level.
+     * Creates the fifth level.
      */
     public Level5() {
         name = "Wave 5";
@@ -23,9 +23,9 @@ public class Level5 extends Level {
                 """;
         worldOffsetColumns = 0;
         worldOffsetLines = 0;
-        amountOfAstronauts = difficulty == Difficulty.EASY ? 9 : 10;
+        amountOfAstronauts = difficultyEasy() ? 9 : 10;
         enemyLevel = 3;
-        amountOfEnemiesAtStart = difficulty == Difficulty.EASY ? 10 : 14;
+        amountOfEnemiesAtStart = difficultyEasy() ? 10 : 14;
         starColor = Color.blue;
         amountOfEnemiesToSpawnDuringGame = 4;
     }

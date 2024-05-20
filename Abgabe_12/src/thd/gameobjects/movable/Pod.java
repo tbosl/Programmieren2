@@ -1,5 +1,7 @@
 package thd.gameobjects.movable;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
@@ -93,7 +95,9 @@ public class Pod extends EnemyGameObject {
     public void reactToCollisionWith(CollidingGameObject other) {
         super.reactToCollisionWith(other);
         if (other instanceof LaserProjectile || other instanceof Spaceship) {
-            int amountOfSwarmersToSpawn = random.nextInt(Swarmer.MINIMUM_SWARMERS_PER_SWARM, Swarmer.MAXIMUM_SWARMERS_PER_SWARM);
+            int minimum = Level.difficulty == Difficulty.EASY ? Swarmer.MINIMUM_SWARMERS_PER_SWARM_EASY : Swarmer.MINIMUM_SWARMERS_PER_SWARM_STANDARD;
+            int maximum = Level.difficulty == Difficulty.EASY ? Swarmer.MAXIMUM_SWARMERS_PER_SWARM_EASY : Swarmer.MAXIMUM_SWARMERS_PER_SWARM_STANDARD;
+            int amountOfSwarmersToSpawn = random.nextInt(minimum, maximum);
             for (int spawnedSwarmers = 0; spawnedSwarmers < amountOfSwarmersToSpawn; spawnedSwarmers++) {
                 gamePlayManager.spawnGameObject(new Swarmer(gameView, gamePlayManager, spaceship, this));
             }

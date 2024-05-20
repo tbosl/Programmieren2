@@ -39,7 +39,7 @@ class LevelManager extends GameWorldManager {
     }
 
     protected void initializeGame() {
-        levels = List.of(new Level1(), new Level2(), new Level3(), new Level4(), new Level5(), new Level6());
+        levels = List.of(new Level1(), new Level2(), new Level3(), new Level4(), new Level5(), new Level6(), new Level7());
         level = levels.get(0);
         lives = LIVES;
         smartBombs = SMART_BOMBS;

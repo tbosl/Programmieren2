@@ -12,8 +12,11 @@ import java.awt.*;
  */
 class Swarmer extends ShootingEnemyGameObject {
     private final SwarmerMovementPattern movementPattern;
-    static final int MINIMUM_SWARMERS_PER_SWARM = 5;
-    static final int MAXIMUM_SWARMERS_PER_SWARM = 8;
+    static final int MINIMUM_SWARMERS_PER_SWARM_EASY = 3;
+    static final int MAXIMUM_SWARMERS_PER_SWARM_EASY = 4;
+
+    static final int MINIMUM_SWARMERS_PER_SWARM_STANDARD = 5;
+    static final int MAXIMUM_SWARMERS_PER_SWARM_STANDARD = 8;
     private static final int POINTS_ON_DESTRUCTION = 150;
 
     /**

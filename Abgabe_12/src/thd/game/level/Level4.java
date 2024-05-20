@@ -3,7 +3,7 @@ package thd.game.level;
 import java.awt.*;
 
 /**
- * The first level of the game.
+ * The fourth level of the game.
  */
 public class Level4 extends Level {
     /**
@@ -23,9 +23,9 @@ public class Level4 extends Level {
                 """;
         worldOffsetColumns = 0;
         worldOffsetLines = 0;
-        amountOfAstronauts = difficulty == Difficulty.EASY ? 5 : 4;
+        amountOfAstronauts = difficultyEasy() ? 5 : 4;
         enemyLevel = 2;
-        amountOfEnemiesAtStart = difficulty == Difficulty.EASY ? 5 : 7;
+        amountOfEnemiesAtStart = difficultyEasy() ? 5 : 7;
         starColor = Color.CYAN;
         amountOfEnemiesToSpawnDuringGame = 5;
     }

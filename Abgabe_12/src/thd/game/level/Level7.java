@@ -3,17 +3,17 @@ package thd.game.level;
 import java.awt.*;
 
 /**
- * The third level of the game.
+ * The seventh level of the game.
  */
-public class Level3 extends Level {
+public class Level7 extends Level {
     /**
-     * Creates the third level.
+     * Creates the seventh level.
      */
-    public Level3() {
-        name = "Wave 3";
-        number = 3;
+    public Level7() {
+        name = "Wave 7";
+        number = 7;
         world = """
-                B                                                                       \s
+                                                                                        \s
                                                                                         \s
                 S    S     S     S    S       S   S        S           S       S       S\s
                   S    S      S         S       S      S          S        S        S   \s
@@ -23,10 +23,10 @@ public class Level3 extends Level {
                 """;
         worldOffsetColumns = 0;
         worldOffsetLines = 0;
-        amountOfAstronauts = difficultyEasy() ? 9 : 10;
-        enemyLevel = 2;
-        amountOfEnemiesAtStart = difficultyEasy() ? 10 : 14;
-        starColor = Color.red;
-        amountOfEnemiesToSpawnDuringGame = 3;
+        amountOfAstronauts = 0;
+        enemyLevel = 1;
+        amountOfEnemiesAtStart = difficultyEasy() ? 8 : 10;
+        starColor = Color.blue;
+        amountOfEnemiesToSpawnDuringGame = difficultyEasy() ? 5 : 8;
     }
 }

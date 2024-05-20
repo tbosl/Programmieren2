@@ -61,4 +61,8 @@ public class Level {
      * The difficulty of the game.
      */
     public static Difficulty difficulty = Difficulty.STANDARD;
+
+    boolean difficultyEasy() {
+        return difficulty == Difficulty.EASY;
+    }
 }
