@@ -130,7 +130,7 @@ class GameWorldManager extends GamePlayManager {
 
     private Position createRandomPositionOnScreen() {
         int margin = 50;
-        int minimumDistanceToSpaceship = 150;
+        int minimumDistanceToSpaceship = 250;
         Position spawn;
         do {
             double x = random.nextDouble(0, GameView.WIDTH - margin);

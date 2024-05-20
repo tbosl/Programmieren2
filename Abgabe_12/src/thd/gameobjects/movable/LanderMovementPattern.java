@@ -13,7 +13,7 @@ class LanderMovementPattern extends AlienInvadersRandomMovementPattern {
     @Override
     protected Position startPosition(Position... referencePositions) {
         int marginToSideBorders = 50;
-        return generateRandomPositionWithDistanceToSpaceship(marginToSideBorders, GamePlayManager.ABSOLUTE_WORLD_LENGTH - marginToSideBorders, referencePositions[0], 200);
+        return generateRandomPositionWithDistanceToSpaceship(marginToSideBorders, GamePlayManager.ABSOLUTE_WORLD_LENGTH - marginToSideBorders, referencePositions[0], 250);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package thd.gameobjects.movable;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
@@ -35,7 +37,7 @@ class Swarmer extends ShootingEnemyGameObject {
     Swarmer(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship, Pod pod) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.RED, 2000, 4000);
         size = 0.05;
-        speedInPixel = 8;
+        speedInPixel = Level.difficulty == Difficulty.EASY ? 6 : 8;
         width = 15;
         height = 15;
         movementPattern = new SwarmerMovementPattern(spaceship.getPosition(), width);

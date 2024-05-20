@@ -1,5 +1,7 @@
 package thd.gameobjects.movable;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
@@ -13,8 +15,10 @@ import java.awt.*;
 public class Baiter extends ShootingEnemyGameObject {
     private final BaiterMovementPattern movementPattern;
     private static final int THRESHOLD_TO_SPACESHIP = 200;
-    private static final int SLOW_SPEED_IN_PIXEL = 4;
-    private static final int FAST_SPEED_IN_PIXEL = 6;
+    private static final int SLOW_SPEED_IN_PIXEL_EASY = 3;
+    private static final int FAST_SPEED_IN_PIXEL_EASY = 5;
+    private static final int SLOW_SPEED_IN_PIXEL_STANDARD = 4;
+    private static final int FAST_SPEED_IN_PIXEL_STANDARD = 6;
     private static final int POINTS_ON_DESTRUCTION = 200;
 
     /**
@@ -56,7 +60,9 @@ public class Baiter extends ShootingEnemyGameObject {
     }
 
     private void setupSpeedInPixelDependingOnDistanceToSpaceship() {
-        speedInPixel = position.distance(spaceship.getPosition()) < THRESHOLD_TO_SPACESHIP ? FAST_SPEED_IN_PIXEL : SLOW_SPEED_IN_PIXEL;
+        int fastSpeed = Level.difficulty == Difficulty.EASY ? FAST_SPEED_IN_PIXEL_EASY : FAST_SPEED_IN_PIXEL_STANDARD;
+        int slowSpeed = Level.difficulty == Difficulty.EASY ? SLOW_SPEED_IN_PIXEL_EASY : SLOW_SPEED_IN_PIXEL_STANDARD;
+        speedInPixel = position.distance(spaceship.getPosition()) < THRESHOLD_TO_SPACESHIP ? fastSpeed : slowSpeed;
     }
 
     @Override
