@@ -5,13 +5,13 @@ import java.awt.*;
 /**
  * The first level of the game.
  */
-public class Level2 extends Level {
+public class Level5 extends Level {
     /**
      * Creates the first level.
      */
-    public Level2() {
-        name = "Wave 2";
-        number = 2;
+    public Level5() {
+        name = "Wave 5";
+        number = 5;
         world = """
                 B                                                                       \s
                                                                                         \s
@@ -23,9 +23,9 @@ public class Level2 extends Level {
                 """;
         worldOffsetColumns = 0;
         worldOffsetLines = 0;
-        amountOfAstronauts = difficulty == Difficulty.EASY ? 9 : 8;
-        enemyLevel = 1;
-        amountOfEnemies = difficulty == Difficulty.EASY ? 8 : 12;
-        starColor = Color.white;
+        amountOfAstronauts = difficulty == Difficulty.EASY ? 9 : 10;
+        enemyLevel = 3;
+        amountOfEnemies = difficulty == Difficulty.EASY ? 10 : 14;
+        starColor = Color.blue;
     }
 }

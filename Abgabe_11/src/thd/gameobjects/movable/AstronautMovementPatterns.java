@@ -17,7 +17,7 @@ class AstronautMovementPatterns extends MovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        int marginToSideBorders = 100;
+        int marginToSideBorders = 150;
         int lowerBound = spawnLeft ? marginToSideBorders : GamePlayManager.ABSOLUTE_WORLD_LENGTH / 2;
         int upperBound = spawnLeft ? GamePlayManager.ABSOLUTE_WORLD_LENGTH / 2 : GamePlayManager.ABSOLUTE_WORLD_LENGTH - marginToSideBorders;
         return new Position(new Random().nextDouble(lowerBound, upperBound), LOWER_BOUNDARY);

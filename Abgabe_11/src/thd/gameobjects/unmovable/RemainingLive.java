@@ -1,7 +1,9 @@
 package thd.gameobjects.unmovable;
 
+import thd.game.level.Difficulty;
 import thd.game.managers.GamePlayManager;
 import thd.game.managers.TooManyRemainingLivesException;
+import thd.game.utilities.FileAccess;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 
@@ -19,7 +21,7 @@ public class RemainingLive extends GameObject {
      * The amount of points after which the player will receive a new player.
      * The player will receive a new life every time a multiple of this number is reached.
      */
-    public static final int POINTS_REQUIRED_FOR_NEW_LIFE = 1_000;
+    public static final int POINTS_REQUIRED_FOR_NEW_LIFE = FileAccess.readDifficultyFromDisc().equals(Difficulty.EASY) ? 1_000 : 2_500;
 
     /**
      * Creates a remaining life with a reference of the gameview.
