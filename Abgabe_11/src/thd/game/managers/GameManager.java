@@ -25,7 +25,6 @@ class GameManager extends LevelManager {
             }
             if (gameView.timer(2000, this)) {
                 overlay.stopShowing();
-                FileAccess.updateHighScore(points);
                 startNewGame();
             }
         } else if (endOfLevel()) {

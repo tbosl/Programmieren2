@@ -277,6 +277,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     public void reactToCollisionWith(CollidingGameObject other) {
         if (other instanceof BomberBomb || other instanceof EnemyGameObject || other instanceof EnemyProjectile) {
             gamePlayManager.lifeLost();
+            gameView.playSound("projectile_hit.wav", false);
         }
     }
 
