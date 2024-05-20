@@ -25,7 +25,14 @@ public class StartScreen {
      * @param preselectedDifficulty The difficulty which should be preselected.
      */
     public void showStartScreenWithPreselectedDifficulty(Difficulty preselectedDifficulty) {
-        String title = "Defender";
+        String title = """
+                  _____   ______  ______  ______  _   _  _____   ______  _____
+                 |  __ \\ |  ____||  ____||  ____|| \\ | ||  __ \\ |  ____||  __ \\
+                 | |  | || |__   | |__   | |__   |  \\| || |  | || |__   | |__) |
+                 | |  | ||  __|  |  __|  |  __|  | . ` || |  | ||  __|  |  _  /
+                 | |__| || |____ | |     | |____ | |\\  || |__| || |____ | | \\ \\
+                 |_____/ |______||_|     |______||_| \\_||_____/ |______||_|  \\_\\
+                """;
         String description = """
 
 
@@ -33,7 +40,7 @@ public class StartScreen {
                                     Safe the astronauts and protect the spaceship from the arriving alien invaders.
                                         You loose if you have no more lives or all astronauts are taken away.
 
-                                    If you are in the trouble use a smart bomb to kill all aliens visible on screen.
+                                   If you are in trouble, use a smart bomb to kill all aliens visible on the screen.
 
                                                                     Controls:
 

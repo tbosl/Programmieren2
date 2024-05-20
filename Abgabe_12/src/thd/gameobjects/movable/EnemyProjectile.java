@@ -28,7 +28,7 @@ public class EnemyProjectile extends Projectile {
         position.updateCoordinates(movementPattern.startPosition(enemy.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceshipPosition, enemy.getPosition()));
         size = 0.08;
-        speedInPixel = Level.difficulty == Difficulty.EASY ? 8 : 10;
+        speedInPixel = Level.difficulty == Difficulty.EASY ? 8.5 : 10;
         width = 25;
         height = 5;
         distanceToBackground = 1;
