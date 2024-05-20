@@ -4,6 +4,8 @@ import thd.game.level.Difficulty;
 import thd.game.level.Level;
 import thd.game.utilities.FileAccess;
 import thd.game.utilities.GameView;
+import thd.screens.EndScreen;
+import thd.screens.StartScreen;
 
 class GameManager extends LevelManager {
 
@@ -25,6 +27,8 @@ class GameManager extends LevelManager {
             }
             if (gameView.timer(2000, this)) {
                 overlay.stopShowing();
+                EndScreen endScreen = new EndScreen(gameView);
+                endScreen.showEndScreen(points);
                 startNewGame();
             }
         } else if (endOfLevel()) {
@@ -43,14 +47,12 @@ class GameManager extends LevelManager {
      * Start a new game.
      */
     void startNewGame() {
-        Difficulty difficulty = FileAccess.readDifficultyFromDisc(); // Lesen der gespeicherten Auswahl.
-        /* Der folgende Befehl wird in der nächsten Woche durch eine Benutzerauswahl ersetzt. Der Benutzer
-         * bekommt seine alte Auswahl vom letzten Mal angezeigt und kann die Auswahl ggf. ändern. */
-        difficulty = Difficulty.EASY;
-        FileAccess.writeDifficultyToDisc(difficulty); // Abspeichern der neuen Auswahl.
-
+        Difficulty difficulty = FileAccess.readDifficultyFromDisc();
+        StartScreen startScreen = new StartScreen(gameView);
+        startScreen.showStartScreenWithPreselectedDifficulty(difficulty);
+        difficulty = startScreen.getSelectedDifficulty();
+        FileAccess.writeDifficultyToDisc(difficulty);
         Level.difficulty = difficulty;
-
         initializeGame();
         gameView.playSound("theme.wav", true);
     }
