@@ -2,7 +2,6 @@ package thd.game.utilities;
 
 import thd.game.level.Difficulty;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -22,13 +21,15 @@ public class FileAccess {
      */
     public static void writeDifficultyToDisc(Difficulty difficulty) {
         try {
-            List<String> lines = Files.readAllLines(WICHTEL_GAME_FILE);
-            if (lines.size() < 1) {
-                lines.add(difficulty.toString());
+            String content = Files.readString(WICHTEL_GAME_FILE);
+            if (content.contains("\n")) {
+                StringBuilder sb = new StringBuilder(content);
+                sb.replace(0, content.indexOf("\n") - 1, difficulty.toString());
+                content = sb.toString();
             } else {
-                lines.set(0, difficulty.toString());
+                content = difficulty.toString();
             }
-            Files.write(WICHTEL_GAME_FILE, lines);
+            Files.writeString(WICHTEL_GAME_FILE, content, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
