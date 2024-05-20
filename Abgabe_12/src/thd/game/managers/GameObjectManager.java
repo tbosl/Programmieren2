@@ -7,6 +7,7 @@ import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.unmovable.RemainingLive;
 import thd.gameobjects.unmovable.SmartBomb;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -110,5 +111,15 @@ class GameObjectManager extends CollisionManager {
             addToCollisionManagement(toAdd);
         }
         gameObjectsToBeAdded.clear();
+    }
+
+    List<EnemyGameObject> provideAllEnemiesInToBeAdded() {
+        var enemies = new ArrayList<EnemyGameObject>();
+        for (GameObject toAdd : gameObjectsToBeAdded) {
+            if (toAdd instanceof EnemyGameObject enemy) {
+                enemies.add(enemy);
+            }
+        }
+        return enemies;
     }
 }

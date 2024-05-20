@@ -75,6 +75,10 @@ public class GamePlayManager extends WorldShiftManager {
         return gameObjectManager.provideAllActiveEnemies();
     }
 
+    List<EnemyGameObject> provideAllEnemiesInToBeAdded(){
+        return gameObjectManager.provideAllEnemiesInToBeAdded();
+    }
+
     /**
      * Provides a list of all astronauts that are currently active.
      *

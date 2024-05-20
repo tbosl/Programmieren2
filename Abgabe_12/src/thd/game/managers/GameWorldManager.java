@@ -22,6 +22,9 @@ class GameWorldManager extends GamePlayManager {
     private final EnemyLevelMapper enemyLevelMapper;
     private final Random random;
     protected int spawnedEnemiesDuringLevel;
+    private int nextEnemySpawnWaitTime;
+    private final int MINIMUM_SPAWN_WAIT_TIME = 5000;
+    private final int MAXIMUM_SPAWN_WAIT_TIME = 10000;
 
     protected GameWorldManager(GameView gameView) {
         super(gameView);
@@ -31,6 +34,7 @@ class GameWorldManager extends GamePlayManager {
         enemyLevelMapper = new EnemyLevelMapper();
         random = new Random();
         spawnedEnemiesDuringLevel = 0;
+        nextEnemySpawnWaitTime = random.nextInt(MINIMUM_SPAWN_WAIT_TIME, MAXIMUM_SPAWN_WAIT_TIME);
     }
 
     @Override
@@ -54,11 +58,16 @@ class GameWorldManager extends GamePlayManager {
     }
 
     private void spawnEnemiesDuringGame() {
-        if (provideAllActiveEnemies().size() < 2 && spawnedEnemiesDuringLevel < level.amountOfEnemiesToSpawnDuringGame) {
+        if (spawnRequired() && spawnedEnemiesDuringLevel < level.amountOfEnemiesToSpawnDuringGame) {
             spawnEnemiesByLevel(true, 1);
             spawnedEnemiesDuringLevel++;
             gameView.playSound("enemy_spawn.wav", false);
+            nextEnemySpawnWaitTime = random.nextInt(MINIMUM_SPAWN_WAIT_TIME, MAXIMUM_SPAWN_WAIT_TIME);
         }
+    }
+
+    private boolean spawnRequired() {
+        return provideAllActiveEnemies().size() < 2 || gameView.timer(nextEnemySpawnWaitTime, this);
     }
 
     protected void initializeLevel() {
