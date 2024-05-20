@@ -75,6 +75,6 @@ class GameManager extends LevelManager {
     }
 
     private boolean endOfLevel() {
-        return provideAllActiveEnemies().isEmpty();
+        return provideAllActiveEnemies().isEmpty() && spawnedEnemiesDuringLevel == level.amountOfEnemiesToSpawnDuringGame;
     }
 }

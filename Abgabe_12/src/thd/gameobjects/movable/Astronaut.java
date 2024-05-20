@@ -125,7 +125,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
                 lander.detachAstronautIfHeGotDestroyed();
             }
         }
-        if (other instanceof Spaceship spaceship) {
+        if (other instanceof Spaceship spaceship && !isAttachedToLander()) {
             if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
                 spaceship.attachedAstronaut = this;
                 gamePlayManager.addPoints(Astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);

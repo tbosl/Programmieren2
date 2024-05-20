@@ -4,7 +4,10 @@ import thd.game.level.EnemyLevelMapper;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.base.GameObject;
-import thd.gameobjects.movable.*;
+import thd.gameobjects.base.MovementPattern;
+import thd.gameobjects.base.Position;
+import thd.gameobjects.movable.Astronaut;
+import thd.gameobjects.movable.Spaceship;
 import thd.gameobjects.unmovable.*;
 
 import java.lang.reflect.Constructor;
@@ -18,6 +21,7 @@ class GameWorldManager extends GamePlayManager {
     private final List<GameObject> activatableGameObjects;
     private final EnemyLevelMapper enemyLevelMapper;
     private final Random random;
+    protected int spawnedEnemiesDuringLevel;
 
     protected GameWorldManager(GameView gameView) {
         super(gameView);
@@ -26,12 +30,14 @@ class GameWorldManager extends GamePlayManager {
         spaceship = new Spaceship(gameView, this);
         enemyLevelMapper = new EnemyLevelMapper();
         random = new Random();
+        spawnedEnemiesDuringLevel = 0;
     }
 
     @Override
     protected void gameLoopUpdate() {
         super.gameLoopUpdate();
         activateGameObjects();
+        spawnEnemiesDuringGame();
     }
 
     private void activateGameObjects() {
@@ -47,18 +53,21 @@ class GameWorldManager extends GamePlayManager {
         }
     }
 
+    private void spawnEnemiesDuringGame() {
+        if (provideAllActiveEnemies().size() < 2 && spawnedEnemiesDuringLevel < level.amountOfEnemiesToSpawnDuringGame) {
+            spawnEnemiesByLevel(true, 1);
+            spawnedEnemiesDuringLevel++;
+            gameView.playSound("enemy_spawn.wav", false);
+        }
+    }
+
     protected void initializeLevel() {
         activatableGameObjects.clear();
         destroyAllGameObjects();
         spawnGameObjects();
         spawnGameObjectsFromWorldString();
-        clearListsForPathDecisionsInGameObjects();
+        spawnedEnemiesDuringLevel = 0;
     }
-
-    private void clearListsForPathDecisionsInGameObjects() {
-        return; // Will be removed. No path decision lists are required so far.
-    }
-
 
     private void spawnGameObjects() {
         spaceship = new Spaceship(gameView, this);
@@ -92,7 +101,7 @@ class GameWorldManager extends GamePlayManager {
 
     private void dynamicallySpawnMovableGameObjectsByLevel() {
         spawnAstronautsByLevel();
-        spawnEnemiesByLevel();
+        spawnEnemiesAtStart();
     }
 
     private void spawnAstronautsByLevel() {
@@ -102,13 +111,33 @@ class GameWorldManager extends GamePlayManager {
         }
     }
 
-    private void spawnEnemiesByLevel() {
+    private void spawnEnemiesAtStart() {
+        spawnEnemiesByLevel(false, level.amountOfEnemiesAtStart);
+    }
+
+    private void spawnEnemiesByLevel(boolean midGame, int amount) {
         List<Class<? extends EnemyGameObject>> allowedEnemies = enemyLevelMapper.providePossibleEnemyClasses(level.enemyLevel);
-        for (int spawnedEnemies = 0; spawnedEnemies < level.amountOfEnemies; spawnedEnemies++) {
+        for (int spawnedEnemies = 0; spawnedEnemies < amount; spawnedEnemies++) {
             int enemyClassIndex = provideRandomIndex(allowedEnemies.size());
             Class<? extends EnemyGameObject> enemyClass = allowedEnemies.get(enemyClassIndex);
-            spawnEnemy(enemyClass);
+            EnemyGameObject enemy = spawnEnemy(enemyClass);
+            if (midGame) {
+                enemy.getPosition().updateCoordinates(createRandomPositionOnScreen());
+            }
         }
+
+    }
+
+    private Position createRandomPositionOnScreen() {
+        int margin = 50;
+        int minimumDistanceToSpaceship = 150;
+        Position spawn;
+        do {
+            double x = random.nextDouble(0, GameView.WIDTH - margin);
+            double y = random.nextDouble(MovementPattern.UPPER_BOUNDARY, MovementPattern.LOWER_BOUNDARY - margin);
+            spawn = new Position(x, y);
+        } while (spawn.distance(spaceship.getPosition()) < minimumDistanceToSpaceship);
+        return spawn;
     }
 
     private int provideRandomIndex(int bound) {
@@ -116,11 +145,12 @@ class GameWorldManager extends GamePlayManager {
     }
 
 
-    private void spawnEnemy(Class<? extends EnemyGameObject> enemyClass) {
+    private EnemyGameObject spawnEnemy(Class<? extends EnemyGameObject> enemyClass) {
         try {
             Constructor<? extends EnemyGameObject> constructor = enemyClass.getConstructor(GameView.class, GamePlayManager.class);
             EnemyGameObject enemy = constructor.newInstance(gameView, this);
             spawnGameObject(enemy);
+            return enemy;
         } catch (NoSuchMethodException
                  | InstantiationException
                  | IllegalAccessException

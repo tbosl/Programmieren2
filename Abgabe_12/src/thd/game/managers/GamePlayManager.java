@@ -149,6 +149,7 @@ public class GamePlayManager extends WorldShiftManager {
         if (lives < RemainingLive.MAXIMUM_AMOUNT_OF_LIVES) {
             lives++;
             spawnGameObject(new RemainingLive(gameView, this, lives - 1));
+            gameView.playSound("life_gained.wav", false);
         }
     }
 

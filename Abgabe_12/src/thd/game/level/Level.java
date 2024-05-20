@@ -45,7 +45,12 @@ public class Level {
     /**
      * The amount of enemies that will be spawned in the beginning.
      */
-    public int amountOfEnemies;
+    public int amountOfEnemiesAtStart;
+
+    /**
+     * The amount of enemies which will be spawned throughout the game.
+     */
+    public int amountOfEnemiesToSpawnDuringGame;
 
     /**
      * The color in which the stars in the background will appear.

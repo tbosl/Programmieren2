@@ -25,7 +25,8 @@ public class Level2 extends Level {
         worldOffsetLines = 0;
         amountOfAstronauts = difficulty == Difficulty.EASY ? 9 : 8;
         enemyLevel = 1;
-        amountOfEnemies = difficulty == Difficulty.EASY ? 8 : 12;
+        amountOfEnemiesAtStart = difficulty == Difficulty.EASY ? 8 : 12;
         starColor = Color.white;
+        amountOfEnemiesToSpawnDuringGame = 5;
     }
 }
