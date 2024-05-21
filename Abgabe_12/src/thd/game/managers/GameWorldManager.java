@@ -23,8 +23,8 @@ class GameWorldManager extends GamePlayManager {
     private final Random random;
     protected int spawnedEnemiesDuringLevel;
     private int nextEnemySpawnWaitTime;
-    private final int MINIMUM_SPAWN_WAIT_TIME = 5000;
-    private final int MAXIMUM_SPAWN_WAIT_TIME = 10000;
+    private static final int MINIMUM_SPAWN_WAIT_TIME = 5000;
+    private static final int MAXIMUM_SPAWN_WAIT_TIME = 10000;
 
     protected GameWorldManager(GameView gameView) {
         super(gameView);

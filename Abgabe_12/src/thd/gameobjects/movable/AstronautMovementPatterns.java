@@ -9,7 +9,7 @@ import java.util.Random;
 class AstronautMovementPatterns extends MovementPattern {
     private final boolean spawnLeft;
     private boolean walkingRight;
-    private final int DISTANCE_TO_WALK_IN_PIXEL = 50;
+    private static final int DISTANCE_TO_WALK_IN_PIXEL = 50;
 
     AstronautMovementPatterns(boolean spawnLeft) {
         walkingRight = true;
