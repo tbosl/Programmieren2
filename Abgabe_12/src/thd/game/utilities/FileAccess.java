@@ -12,6 +12,7 @@ import java.nio.file.Path;
  */
 public class FileAccess {
     private static final Path WICHTEL_GAME_FILE = Path.of(System.getProperty("user.home")).resolve("wichtelgame.txt");
+    static final String HIGH_SCORE_KEY = "highScore";
 
 
     /**
@@ -21,11 +22,37 @@ public class FileAccess {
      */
     public static void writeDifficultyToDisc(Difficulty difficulty) {
         try {
-            Files.writeString(WICHTEL_GAME_FILE, difficulty.toString(), StandardCharsets.UTF_8);
+            FileModel fileModel = new FileModel(readModelFromFile());
+            fileModel.difficulty = difficulty;
+            writeModelToFile(fileModel);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    /**
+     * Write the high score to the disc.
+     *
+     * @param score The score which will be written.
+     */
+    public static void writeHighScoreToDisc(int score) {
+        try {
+            FileModel fileModel = new FileModel(readModelFromFile());
+            fileModel.highScore = score;
+            writeModelToFile(fileModel);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    private static void writeModelToFile(FileModel fileModel) throws IOException {
+        Files.writeString(WICHTEL_GAME_FILE, fileModel.parseFileModelToFileContent(), StandardCharsets.UTF_8);
+    }
+
+    private static String readModelFromFile() throws IOException {
+        return Files.readString(WICHTEL_GAME_FILE);
     }
 
     /**
@@ -40,6 +67,21 @@ public class FileAccess {
             return content.startsWith(Difficulty.EASY.toString()) ? Difficulty.EASY : Difficulty.STANDARD;
         } catch (IOException e) {
             return Difficulty.STANDARD;
+        }
+    }
+
+    /**
+     * Read the high score from the disc.
+     * If the file is not found, the high score will be set to 0.
+     *
+     * @return The high score that is stored on the disc.
+     */
+    public static int readHighScoreFromDisc() {
+        try {
+            FileModel fileModel = new FileModel(Files.readString(WICHTEL_GAME_FILE));
+            return fileModel.highScore;
+        } catch (IOException e) {
+            return 0;
         }
     }
 }
