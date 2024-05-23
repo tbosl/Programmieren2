@@ -33,7 +33,7 @@ public class HighScore extends BaseScore {
         addScoreNumbersToCanvas();
     }
 
-    protected void addScoreNumbersToCanvas() {
+    private void addScoreNumbersToCanvas() {
         List<Integer> scoreValues = createDigitsOfScoreInReversedOrder(score);
         int defaultOffset = 220;
         int yOffset = 10;

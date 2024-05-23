@@ -39,14 +39,15 @@ public abstract class BaseScore extends GameObject {
 
     protected List<Integer> createDigitsOfScoreInReversedOrder(int score) {
         var digits = new ArrayList<Integer>();
-        if (score == 0) {
+        int remainingScore = score;
+        if (remainingScore == 0) {
             digits.add(0);
             digits.add(0);
             return digits;
         }
-        while (score > 0) {
-            digits.add(score % 10);
-            score /= 10;
+        while (remainingScore > 0) {
+            digits.add(remainingScore % 10);
+            remainingScore /= 10;
         }
         return digits;
     }

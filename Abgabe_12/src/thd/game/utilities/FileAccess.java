@@ -2,7 +2,6 @@ package thd.game.utilities;
 
 import thd.game.level.Difficulty;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -15,7 +14,6 @@ public class FileAccess {
     private static final Path WICHTEL_GAME_FILE = Path.of(System.getProperty("user.home")).resolve("wichtelgame.txt");
     static final String HIGH_SCORE_KEY = "highScore";
 
-
     /**
      * Write a difficulty to the disc.
      *
@@ -26,6 +24,7 @@ public class FileAccess {
             FileModel fileModel = readModelFromFile();
             fileModel.difficulty = difficulty;
             writeModelToFile(fileModel);
+
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);

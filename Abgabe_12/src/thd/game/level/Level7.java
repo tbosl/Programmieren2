@@ -19,7 +19,8 @@ public class Level7 extends Level {
                   S    S      S         S       S      S          S        S        S   \s
                 S   S     S          S        S       S      S           S      S       \s
                   S     S  S   S    S       S      S      S       S            S       S\s
-                                                                                        \s
+                      S       S   S      S     S        S   S        S    S        S    \s
+                 S  S     S     S     S     S     S       S    S    S    S     S     S  \s
                 """;
         worldOffsetColumns = 0;
         worldOffsetLines = 0;

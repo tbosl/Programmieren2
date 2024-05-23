@@ -4,9 +4,7 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.BaseScore;
 import thd.gameobjects.base.ColorCycleManager;
-import thd.gameobjects.base.GameObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +37,7 @@ public class Score extends BaseScore {
         addScoreNumbersToCanvas(gamePlayManager.getPoints());
     }
 
-    protected void addScoreNumbersToCanvas(int score) {
+    private void addScoreNumbersToCanvas(int score) {
         List<Integer> scoreValues = createDigitsOfScoreInReversedOrder(score);
         for (int addedNumbers = 0; addedNumbers < scoreValues.size(); addedNumbers++) {
             int offset = addedNumbers * MARGIN_PER_NUMBER;

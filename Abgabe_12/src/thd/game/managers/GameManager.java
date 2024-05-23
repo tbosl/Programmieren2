@@ -36,7 +36,7 @@ class GameManager extends LevelManager {
                 overlay.stopShowing();
                 EndScreen endScreen = new EndScreen(gameView);
                 boolean highScore = points > FileAccess.readHighScoreFromDisc();
-                endScreen.showEndScreen(points, highScore);
+                endScreen.showEndScreen(points);
                 if (highScore) {
                     FileAccess.writeHighScoreToDisc(points);
                 }
