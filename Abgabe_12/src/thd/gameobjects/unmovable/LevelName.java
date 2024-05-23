@@ -23,7 +23,7 @@ public class LevelName extends GameObject {
         super(gameView, gamePlayManager);
         this.name = name;
         int xAlignment = 100;
-        int yAlignment = 50;
+        int yAlignment = 80;
         size = 20;
         position.updateCoordinates(GameView.WIDTH - xAlignment, yAlignment);
     }

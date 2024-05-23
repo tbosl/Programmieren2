@@ -2,6 +2,7 @@ package thd.game.utilities;
 
 import thd.game.level.Difficulty;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -22,7 +23,7 @@ public class FileAccess {
      */
     public static void writeDifficultyToDisc(Difficulty difficulty) {
         try {
-            FileModel fileModel = new FileModel(readModelFromFile());
+            FileModel fileModel = readModelFromFile();
             fileModel.difficulty = difficulty;
             writeModelToFile(fileModel);
         } catch (IOException e) {
@@ -38,7 +39,7 @@ public class FileAccess {
      */
     public static void writeHighScoreToDisc(int score) {
         try {
-            FileModel fileModel = new FileModel(readModelFromFile());
+            FileModel fileModel = readModelFromFile();
             fileModel.highScore = score;
             writeModelToFile(fileModel);
         } catch (IOException e) {
@@ -51,8 +52,8 @@ public class FileAccess {
         Files.writeString(WICHTEL_GAME_FILE, fileModel.parseFileModelToFileContent(), StandardCharsets.UTF_8);
     }
 
-    private static String readModelFromFile() throws IOException {
-        return Files.readString(WICHTEL_GAME_FILE);
+    private static FileModel readModelFromFile() throws IOException {
+        return new FileModel(Files.readString(WICHTEL_GAME_FILE));
     }
 
     /**
@@ -63,8 +64,8 @@ public class FileAccess {
      */
     public static Difficulty readDifficultyFromDisc() {
         try {
-            String content = Files.readString(WICHTEL_GAME_FILE);
-            return content.startsWith(Difficulty.EASY.toString()) ? Difficulty.EASY : Difficulty.STANDARD;
+            FileModel fileModel = readModelFromFile();
+            return fileModel.difficulty;
         } catch (IOException e) {
             return Difficulty.STANDARD;
         }
@@ -78,7 +79,7 @@ public class FileAccess {
      */
     public static int readHighScoreFromDisc() {
         try {
-            FileModel fileModel = new FileModel(Files.readString(WICHTEL_GAME_FILE));
+            FileModel fileModel = readModelFromFile();
             return fileModel.highScore;
         } catch (IOException e) {
             return 0;

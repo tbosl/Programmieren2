@@ -8,9 +8,11 @@ import thd.screens.EndScreen;
 import thd.screens.StartScreen;
 
 class GameManager extends LevelManager {
+    private int themeSoundId;
 
     GameManager(GameView gameView) {
         super(gameView);
+        themeSoundId = -1;
     }
 
     @Override
@@ -22,13 +24,22 @@ class GameManager extends LevelManager {
     private void gameManagement() {
         if (endOfGame()) {
             if (!overlay.isMessageShown()) {
-                overlay.showMessage("Game Over");
-                gameView.playSound("game_over.wav", false);
+                if (gameWon()) {
+                    overlay.showMessage("Good Job! You saved the astronauts!");
+                    gameView.playSound("winner.wav", false);
+                } else {
+                    overlay.showMessage("Game Over");
+                    gameView.playSound("game_over.wav", false);
+                }
             }
             if (gameView.timer(2000, this)) {
                 overlay.stopShowing();
                 EndScreen endScreen = new EndScreen(gameView);
-                endScreen.showEndScreen(points);
+                boolean highScore = points > FileAccess.readHighScoreFromDisc();
+                endScreen.showEndScreen(points, highScore);
+                if (highScore) {
+                    FileAccess.writeHighScoreToDisc(points);
+                }
                 startNewGame();
             }
         } else if (endOfLevel()) {
@@ -54,7 +65,9 @@ class GameManager extends LevelManager {
         FileAccess.writeDifficultyToDisc(difficulty);
         Level.difficulty = difficulty;
         initializeGame();
-        gameView.playSound("theme.wav", true);
+        if (themeSoundId == -1) {
+            themeSoundId = gameView.playSound("theme.wav", true);
+        }
     }
 
     @Override
@@ -76,5 +89,9 @@ class GameManager extends LevelManager {
 
     private boolean endOfLevel() {
         return provideAllActiveEnemies().isEmpty() && provideAllEnemiesInToBeAdded().isEmpty() && spawnedEnemiesDuringLevel == level.amountOfEnemiesToSpawnDuringGame;
+    }
+
+    private boolean gameWon() {
+        return lives > 0 && (!hasNextLevel() && endOfLevel()) && (!provideAllAstronauts().isEmpty() || level.amountOfAstronauts > 0);
     }
 }

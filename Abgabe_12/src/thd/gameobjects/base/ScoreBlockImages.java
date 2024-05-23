@@ -1,4 +1,4 @@
-package thd.gameobjects.unmovable;
+package thd.gameobjects.base;
 
 /**
  * These block images can be used for the representation of the user score.

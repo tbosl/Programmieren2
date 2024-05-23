@@ -1,6 +1,7 @@
 package thd.game.managers;
 
 import thd.game.level.EnemyLevelMapper;
+import thd.game.utilities.FileAccess;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.base.GameObject;
@@ -94,6 +95,7 @@ class GameWorldManager extends GamePlayManager {
         spawnGameObject(new ScannerFrame(gameView, this));
         spawnRemainingLives();
         spawnSmartBombs();
+        spawnGameObject(new HighScore(gameView, this, FileAccess.readHighScoreFromDisc()));
     }
 
     private void spawnRemainingLives() {
