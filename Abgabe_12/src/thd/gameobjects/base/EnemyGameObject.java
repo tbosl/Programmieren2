@@ -2,7 +2,6 @@ package thd.gameobjects.base;
 
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.movable.AlienInvadersRandomMovementPattern;
 import thd.gameobjects.movable.LaserProjectile;
 import thd.gameobjects.movable.Spaceship;
 
@@ -19,10 +18,9 @@ public abstract class EnemyGameObject extends ScannedGameObject implements Shift
     private int randomMovementIntervall;
     private final List<String> directions;
     private String currentDirection;
-    private final Random random;
+    protected final Random random;
     private static final int MINIMUM_RANDOM_MOVEMENT_DURATION = 1000;
     private static final int MAXIMUM_RANDOM_MOVEMENT_DURATION = 3000;
-    protected final AlienInvadersRandomMovementPattern randomMovementPattern;
     /**
      * The maximum amount of pixel an enemy may be away from the spaceship before it loses the focus.
      */
@@ -31,7 +29,6 @@ public abstract class EnemyGameObject extends ScannedGameObject implements Shift
     protected EnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointsOnDestruction, Color scanColor) {
         super(gameView, gamePlayManager, scanColor);
         this.pointsOnDestruction = pointsOnDestruction;
-        randomMovementPattern = new AlienInvadersRandomMovementPattern();
         random = new Random();
         randomMovementIntervall = random.nextInt(MINIMUM_RANDOM_MOVEMENT_DURATION, MAXIMUM_RANDOM_MOVEMENT_DURATION);
         directions = new ArrayList<>(List.of("l", "r", "u", "d", "lu", "ld", "ru", "rd"));

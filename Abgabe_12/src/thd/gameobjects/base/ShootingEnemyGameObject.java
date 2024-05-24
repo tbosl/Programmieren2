@@ -6,7 +6,6 @@ import thd.gameobjects.movable.EnemyProjectile;
 import thd.gameobjects.movable.Spaceship;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * Represents an enemy game object with the ability to shoot.
@@ -14,7 +13,6 @@ import java.util.Random;
 public abstract class ShootingEnemyGameObject extends EnemyGameObject {
     protected final Spaceship spaceship;
     private int currentShootIntervalInMilliseconds;
-    private final Random random;
     private static final int DEFAULT_LOWER_INTERVAL_BOUND = 1000;
     private static final int DEFAULT_UPPER_INTERVAL_BOUND = 2000;
     private final int lowerIntervalBound;
@@ -45,7 +43,6 @@ public abstract class ShootingEnemyGameObject extends EnemyGameObject {
     public ShootingEnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointOnDestruction, Color scanColor, int lowerIntervalBound, int upperIntervalBound) {
         super(gameView, gamePlayManager, pointOnDestruction, scanColor);
         spaceship = gamePlayManager.getSpaceship();
-        random = new Random();
         this.lowerIntervalBound = lowerIntervalBound;
         this.upperIntervalBound = upperIntervalBound;
         generateNewShootInterval();

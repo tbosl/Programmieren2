@@ -1,8 +1,6 @@
 package thd.gameobjects.movable;
 
-import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
-import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 

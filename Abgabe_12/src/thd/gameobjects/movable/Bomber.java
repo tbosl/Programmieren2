@@ -7,7 +7,6 @@ import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.unmovable.BomberBomb;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * A gameobject that represents the alien invader called Bomber.
@@ -15,7 +14,6 @@ import java.util.Random;
 public class Bomber extends EnemyGameObject {
     private final BomberMovementPattern movementPattern;
     private int currentBombDroppingIntervallInMilliseconds;
-    private final Random random;
     private static final int LOWER_INTERVALL_BOUND = 8000;
     private static final int UPPER_INTERVAL_BOUND = 16000;
     private static final int POINTS_ON_DESTRUCTION = 250;
@@ -52,7 +50,6 @@ public class Bomber extends EnemyGameObject {
         movementPattern = new BomberMovementPattern();
         position.updateCoordinates(movementPattern.startPosition());
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(position));
-        random = new Random();
         currentBombDroppingIntervallInMilliseconds = generateNewBombDroppingIntervall();
         size = 0.1;
         speedInPixel = random.nextInt(2, 4);

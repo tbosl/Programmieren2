@@ -6,7 +6,7 @@ import thd.gameobjects.base.Position;
 /**
  * A random movement pattern for the enemies.
  */
-public class AlienInvadersRandomMovementPattern extends MovementPattern {
+class AlienInvadersRandomMovementPattern extends MovementPattern {
 
     /**
      * Create a new random postion within in the given boundaries
@@ -18,7 +18,7 @@ public class AlienInvadersRandomMovementPattern extends MovementPattern {
      *
      * @return The newly created position.
      */
-    public Position generateRandomPosition(double upBoundary, double rightBoundary, double lowBoundary, double leftBoundary) {
+    Position generateRandomPosition(double upBoundary, double rightBoundary, double lowBoundary, double leftBoundary) {
         return new Position(random.nextDouble(leftBoundary, rightBoundary), random.nextDouble(upBoundary, lowBoundary));
     }
 
@@ -31,11 +31,11 @@ public class AlienInvadersRandomMovementPattern extends MovementPattern {
      *
      * @return The newly created position.
      */
-    public Position generateRandomPosition(double leftBoundary, double rightBoundary) {
+    Position generateRandomPosition(double leftBoundary, double rightBoundary) {
         return generateRandomPosition(UPPER_BOUNDARY, rightBoundary, LOWER_BOUNDARY, leftBoundary);
     }
 
-    protected Position generateRandomPositionWithDistanceToSpaceship(double leftBoundary, double rightBoundary, Position spaceshipPosition, int minimumDistance) {
+    Position generateRandomPositionWithDistanceToSpaceship(double leftBoundary, double rightBoundary, Position spaceshipPosition, int minimumDistance) {
         Position generatedPosition;
         do {
             generatedPosition = generateRandomPosition(UPPER_BOUNDARY, rightBoundary, LOWER_BOUNDARY, leftBoundary);
@@ -43,7 +43,7 @@ public class AlienInvadersRandomMovementPattern extends MovementPattern {
         return generatedPosition;
     }
 
-    protected Position generatePositionWithRandomY(double xCoordinate, int upperBoundary, int lowerBoundary) {
+    Position generatePositionWithRandomY(double xCoordinate, int upperBoundary, int lowerBoundary) {
         return new Position(xCoordinate, random.nextInt(upperBoundary, lowerBoundary));
     }
 }

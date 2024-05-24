@@ -8,14 +8,12 @@ import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.EnemyGameObject;
 
 import java.awt.*;
-import java.util.Random;
 
 /**
  * A gameobject used to represent a Pod.
  */
 public class Pod extends EnemyGameObject {
     private final PodMovementPattern podMovementPattern;
-    private final Random random;
     private final Spaceship spaceship;
     private static final int POINTS_ON_DESTRUCTION = 1000;
     private static final int ANIMATION_INTERVALL = 300;
@@ -48,7 +46,6 @@ public class Pod extends EnemyGameObject {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.BLUE);
         this.spaceship = gamePlayManager.getSpaceship();
         podMovementPattern = new PodMovementPattern();
-        random = new Random();
         position.updateCoordinates(podMovementPattern.startPosition(spaceship.getAbsolutePosition()));
         targetPosition.updateCoordinates(podMovementPattern.nextTargetPosition());
         size = 0.06;
