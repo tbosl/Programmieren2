@@ -55,6 +55,6 @@ public class HighScore extends BaseScore {
 
     @Override
     public String toString() {
-        return "SCORE: " + position;
+        return "HIGH_SCORE: " + position;
     }
 }
