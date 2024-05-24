@@ -54,6 +54,10 @@ public class Baiter extends ShootingEnemyGameObject {
 
     @Override
     public void updatePosition() {
+        if (position.distance(spaceship.getPosition()) > MAXIMUM_ATTACK_FOCUS_DISTANCE) {
+            super.updatePosition();
+            return;
+        }
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition()));
         setupSpeedInPixelDependingOnDistanceToSpaceship();
         position.moveToPosition(targetPosition, speedInPixel);

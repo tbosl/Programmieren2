@@ -192,7 +192,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     @Override
     public void shoot() {
         updateShotAvailable();
-        if (shotAvailable) {
+        if (shotAvailable && gamePlayManager.getLives() > 0) {
             gamePlayManager.spawnGameObject(new LaserProjectile(gameView, gamePlayManager, position, shootingRight()));
             shotAvailable = false;
         }
@@ -206,7 +206,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
      * Detonates a smart bomb to kill all enemies, which are currently visible on the screen.
      */
     public void detonateSmartBomb() {
-        if (gameView.timer(SMART_BOMB_COOLDOWN_IN_MS, this) && gamePlayManager.getSmartBombs() > 0) {
+        if (gameView.timer(SMART_BOMB_COOLDOWN_IN_MS, this) && gamePlayManager.getSmartBombs() > 0 && gamePlayManager.getLives() > 0) {
             smartBombDetonatable = true;
         }
         if (smartBombDetonatable) {

@@ -50,6 +50,10 @@ class Mutant extends ShootingEnemyGameObject {
 
     @Override
     public void updatePosition() {
+        if (position.distance(spaceship.getPosition()) >= MAXIMUM_ATTACK_FOCUS_DISTANCE) {
+            super.updatePosition();
+            return;
+        }
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
         position.moveToPosition(movementPattern.shake(spaceship.getPosition(), position), speedInPixel);
         if (position.distance(targetPosition) > SPACESHIP_DISTANCE_THRESHOLD) {

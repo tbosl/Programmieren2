@@ -3,13 +3,35 @@ package thd.gameobjects.movable;
 import thd.gameobjects.base.MovementPattern;
 import thd.gameobjects.base.Position;
 
-class AlienInvadersRandomMovementPattern extends MovementPattern {
+/**
+ * A random movement pattern for the enemies.
+ */
+public class AlienInvadersRandomMovementPattern extends MovementPattern {
 
-    protected Position generateRandomPosition(double upBoundary, double rightBoundary, double lowBoundary, double leftBoundary) {
+    /**
+     * Create a new random postion within in the given boundaries
+     *
+     * @param upBoundary    The upper boundary.
+     * @param rightBoundary The right boundary.
+     * @param lowBoundary   The low boundary.
+     * @param leftBoundary  The left boundary.
+     *
+     * @return The newly created position.
+     */
+    public Position generateRandomPosition(double upBoundary, double rightBoundary, double lowBoundary, double leftBoundary) {
         return new Position(random.nextDouble(leftBoundary, rightBoundary), random.nextDouble(upBoundary, lowBoundary));
     }
 
-    Position generateRandomPosition(double leftBoundary, double rightBoundary) {
+    /**
+     * Create a new random postion within in the given boundaries.
+     * Upper and lower boundaries will be given by {@code LOWER_BOUNDARY} and the {@code UPPER_BOUNDARY}
+     *
+     * @param leftBoundary  The left boundary.
+     * @param rightBoundary The right boundary.
+     *
+     * @return The newly created position.
+     */
+    public Position generateRandomPosition(double leftBoundary, double rightBoundary) {
         return generateRandomPosition(UPPER_BOUNDARY, rightBoundary, LOWER_BOUNDARY, leftBoundary);
     }
 

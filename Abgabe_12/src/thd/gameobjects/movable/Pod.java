@@ -14,7 +14,7 @@ import java.util.Random;
  * A gameobject used to represent a Pod.
  */
 public class Pod extends EnemyGameObject {
-    private final RandomMovementPattern randomMovementPattern;
+    private final PodMovementPattern podMovementPattern;
     private final Random random;
     private final Spaceship spaceship;
     private static final int POINTS_ON_DESTRUCTION = 1000;
@@ -47,10 +47,10 @@ public class Pod extends EnemyGameObject {
     public Pod(GameView gameView, GamePlayManager gamePlayManager) {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.BLUE);
         this.spaceship = gamePlayManager.getSpaceship();
-        randomMovementPattern = new RandomMovementPattern();
+        podMovementPattern = new PodMovementPattern();
         random = new Random();
-        position.updateCoordinates(randomMovementPattern.startPosition());
-        targetPosition.updateCoordinates(randomMovementPattern.nextTargetPosition());
+        position.updateCoordinates(podMovementPattern.startPosition(spaceship.getAbsolutePosition()));
+        targetPosition.updateCoordinates(podMovementPattern.nextTargetPosition());
         size = 0.06;
         speedInPixel = 3;
         height = 20;
@@ -69,7 +69,7 @@ public class Pod extends EnemyGameObject {
     @Override
     public void updatePosition() {
         if (position.similarTo(targetPosition)) {
-            targetPosition.updateCoordinates(randomMovementPattern.nextTargetPosition());
+            targetPosition.updateCoordinates(podMovementPattern.nextTargetPosition());
         }
         position.moveToPosition(targetPosition, speedInPixel);
     }

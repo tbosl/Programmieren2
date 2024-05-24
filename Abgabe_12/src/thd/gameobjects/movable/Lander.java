@@ -85,7 +85,7 @@ public class Lander extends ShootingEnemyGameObject {
     @Override
     public void updateStatus() {
         super.updateStatus();
-        if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.isAttachedToLander() /*grabbedAstronaut.pickedUp*/) {
+        if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.isAttachedToLander()) {
             selfDestruction();
             grabbedAstronaut.selfDestruction();
             gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
