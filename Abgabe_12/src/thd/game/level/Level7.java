@@ -28,6 +28,6 @@ public class Level7 extends Level {
         enemyLevel = 1;
         amountOfEnemiesAtStart = difficultyEasy() ? 8 : 10;
         starColor = Color.blue;
-        amountOfEnemiesToSpawnDuringGame = difficultyEasy() ? 5 : 8;
+        amountOfEnemiesToSpawnDuringGame = difficultyEasy() ? 7 : 10;
     }
 }

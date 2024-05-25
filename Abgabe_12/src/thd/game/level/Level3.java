@@ -27,6 +27,6 @@ public class Level3 extends Level {
         enemyLevel = 2;
         amountOfEnemiesAtStart = difficultyEasy() ? 10 : 14;
         starColor = Color.red;
-        amountOfEnemiesToSpawnDuringGame = 3;
+        amountOfEnemiesToSpawnDuringGame = 5;
     }
 }
