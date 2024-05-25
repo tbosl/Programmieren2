@@ -14,7 +14,11 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
     private static final int FALL_SPEED_IN_PIXEL = 1;
     Lander lander;
     static final int SCORE_POINTS_FOR_RESCUE_AND_PICK_UP = 500;
-    boolean stopWalking;
+
+    /**
+     * Determines whether the astronaut should stop to walk.
+     */
+    public boolean stopWalking;
 
     private enum State {
         WALKING(0.25),

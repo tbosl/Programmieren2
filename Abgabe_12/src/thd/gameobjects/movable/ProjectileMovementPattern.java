@@ -8,5 +8,4 @@ class ProjectileMovementPattern extends MovementPattern {
     protected Position startPosition(Position... referencePositions) {
         return new Position(referencePositions[0].getX(), referencePositions[0].getY());
     }
-
 }

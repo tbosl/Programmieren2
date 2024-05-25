@@ -120,7 +120,6 @@ public class Lander extends ShootingEnemyGameObject {
 
     private void removeConnectionToAstronaut() {
         if (grabbedAstronaut != null) {
-            //grabbedAstronaut.pickedUp = false;
             grabbedAstronaut.updateStateToLFalling();
             grabbedAstronaut.lander = null;
         }
