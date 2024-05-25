@@ -137,8 +137,4 @@ public class Lander extends ShootingEnemyGameObject {
         grabbedAstronaut = null;
         landerMovementPattern.astronautGrabbed = false;
     }
-
-    Astronaut getGrabbedAstronaut() {
-        return grabbedAstronaut;
-    }
 }

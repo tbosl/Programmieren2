@@ -9,7 +9,7 @@ public class SpaceshipStateManager {
     /**
      * The different states.
      */
-    public enum State {
+    private enum State {
         LEFT("spaceship_left.png", "default_exhaust_left.png", 78, 10, 0.1),
         RIGHT("spaceship_right.png", "default_exhaust_right.png", -12, 10, 0.1),
         LEFT_ACCELERATING("spaceship_left.png", "accelerated_exhaust_left.png", 78, 10, 0.1),
@@ -37,6 +37,9 @@ public class SpaceshipStateManager {
         this.currentState = State.RIGHT;
     }
 
+    /**
+     * Resets the current state.
+     */
     public void resetStatus() {
         if (currentState == State.LEFT_ACCELERATING) {
             currentState = State.LEFT;
@@ -70,6 +73,8 @@ public class SpaceshipStateManager {
 
     /**
      * Provides the spaceship image of the current state.
+     *
+     * @return The spaceship image.
      */
     public String currentSpaceshipImage() {
         return currentState.spaceshipImage;
@@ -77,6 +82,8 @@ public class SpaceshipStateManager {
 
     /**
      * Provides the exhaust image of the current state.
+     *
+     * @return The exhaust image.
      */
     public String currentExhaustImage() {
         return currentState.exhaustImage;
@@ -84,6 +91,8 @@ public class SpaceshipStateManager {
 
     /**
      * Provides the x exhaust offset of the current state.
+     *
+     * @return The x offset of the exhaust.
      */
     public int currentExhaustOffsetX() {
         return currentState.exhaustOffsetX;
@@ -91,6 +100,8 @@ public class SpaceshipStateManager {
 
     /**
      * Provides the y exhaust offset of the current state.
+     *
+     * @return The y offset of the exhaust.
      */
     public int currentExhaustOffsetY() {
         return currentState.exhaustOffsetY;
@@ -98,6 +109,8 @@ public class SpaceshipStateManager {
 
     /**
      * Provides the exhaust size of the current state.
+     *
+     * @return The size of the exhaust.
      */
     public double currentExhaustSize() {
         return currentState.exhaustSize;
