@@ -25,7 +25,12 @@ class PodMovementPattern extends MovementPattern {
 
     @Override
     protected Position startPosition(Position... referencePositions) {
-        return generateNewRandomPosition(UPPER_BOUNDARY, GamePlayManager.ABSOLUTE_WORLD_LENGTH - INNER_MARGIN_TO_SIDE_BORDERS, LOWER_BOUNDARY, INNER_MARGIN_TO_SIDE_BORDERS);
+        Position startPosition;
+        int minimumDistance = 250;
+        do {
+            startPosition = generateNewRandomPosition(UPPER_BOUNDARY, GamePlayManager.ABSOLUTE_WORLD_LENGTH - INNER_MARGIN_TO_SIDE_BORDERS, LOWER_BOUNDARY, INNER_MARGIN_TO_SIDE_BORDERS);
+        } while (startPosition.distance(referencePositions[1]) < minimumDistance);
+        return startPosition;
     }
 
     @Override

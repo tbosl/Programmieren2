@@ -46,7 +46,7 @@ public class Pod extends EnemyGameObject {
         super(gameView, gamePlayManager, POINTS_ON_DESTRUCTION, Color.BLUE);
         this.spaceship = gamePlayManager.getSpaceship();
         podMovementPattern = new PodMovementPattern();
-        position.updateCoordinates(podMovementPattern.startPosition(spaceship.getAbsolutePosition()));
+        position.updateCoordinates(podMovementPattern.startPosition(spaceship.getAbsolutePosition(), spaceship.getPosition()));
         targetPosition.updateCoordinates(podMovementPattern.nextTargetPosition());
         size = 0.06;
         speedInPixel = 3;
