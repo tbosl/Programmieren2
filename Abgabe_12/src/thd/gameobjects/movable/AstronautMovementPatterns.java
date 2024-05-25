@@ -10,10 +10,12 @@ class AstronautMovementPatterns extends MovementPattern {
     private final boolean spawnLeft;
     private boolean walkingRight;
     private static final int DISTANCE_TO_WALK_IN_PIXEL = 50;
+    private final GamePlayManager gamePlayManager;
 
-    AstronautMovementPatterns(boolean spawnLeft) {
+    AstronautMovementPatterns(boolean spawnLeft, GamePlayManager gamePlayManager) {
         walkingRight = true;
         this.spawnLeft = spawnLeft;
+        this.gamePlayManager = gamePlayManager;
     }
 
     @Override
@@ -42,13 +44,23 @@ class AstronautMovementPatterns extends MovementPattern {
 
     // TODO Absolute position
     private double adjustIfIllegalXCoordinate(double targetXCoordinate) {
-        if (targetXCoordinate < 0) {
-            return 0;
+        double leftBorder = leftBorder();
+        if (targetXCoordinate < leftBorder) {
+            return leftBorder;
         }
-        int margin = 50;
-        if (targetXCoordinate > GamePlayManager.ABSOLUTE_WORLD_LENGTH - margin) {
-            return GamePlayManager.ABSOLUTE_WORLD_LENGTH - margin;
+        double rightBorder = rightBorder();
+        if (targetXCoordinate > rightBorder) {
+            return rightBorder;
         }
         return targetXCoordinate;
+    }
+
+    private double leftBorder() {
+        return -gamePlayManager.getSpaceship().getAbsolutePosition().getX();
+    }
+
+    private double rightBorder() {
+        int margin = 50;
+        return GamePlayManager.ABSOLUTE_WORLD_LENGTH - gamePlayManager.getSpaceship().getAbsolutePosition().getX() - margin;
     }
 }

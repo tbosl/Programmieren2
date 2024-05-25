@@ -39,7 +39,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
      */
     public Astronaut(GameView gameView, GamePlayManager gamePlayManager, boolean spawnLeftHalf) {
         super(gameView, gamePlayManager, Color.GRAY.brighter());
-        astronautMovementPatterns = new AstronautMovementPatterns(spawnLeftHalf);
+        astronautMovementPatterns = new AstronautMovementPatterns(spawnLeftHalf, gamePlayManager);
         position.updateCoordinates(astronautMovementPatterns.startPosition());
         targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
         size = 0.08;
@@ -85,8 +85,7 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         if (position.similarTo(targetPosition) || position.getY() < MovementPattern.LOWER_BOUNDARY) {
             targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
         }
-        double speedToBeUsed = position.getY() < MovementPattern.LOWER_BOUNDARY ? FALL_SPEED_IN_PIXEL : speedInPixel;
-        position.moveToPosition(targetPosition, speedToBeUsed);
+        position.moveToPosition(targetPosition, currentState.speed);
     }
 
     private void followLander() {
@@ -114,6 +113,9 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
         super.updateStatus();
         if (currentState == State.FALLING && position.getY() >= MovementPattern.LOWER_BOUNDARY) {
             currentState = State.WALKING;
+        }
+        if (position.getX() + gamePlayManager.getSpaceship().getAbsolutePosition().getX() - gamePlayManager.getSpaceship().getPosition().getX() > GamePlayManager.ABSOLUTE_WORLD_LENGTH) {
+            selfDestruction();
         }
     }
 
