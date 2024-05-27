@@ -6,13 +6,14 @@ import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
 import thd.gameobjects.base.EnemyGameObject;
+import thd.gameobjects.base.ShiftableTargetPostion;
 
 import java.awt.*;
 
 /**
  * A gameobject used to represent a Pod.
  */
-public class Pod extends EnemyGameObject {
+public class Pod extends EnemyGameObject implements ShiftableTargetPostion {
     private final PodMovementPattern podMovementPattern;
     private final Spaceship spaceship;
     private static final int POINTS_ON_DESTRUCTION = 1000;
@@ -69,6 +70,12 @@ public class Pod extends EnemyGameObject {
             targetPosition.updateCoordinates(podMovementPattern.nextTargetPosition());
         }
         position.moveToPosition(targetPosition, speedInPixel);
+    }
+
+    @Override
+    public void shiftTargetPosition(double shiftX, double shiftY) {
+        targetPosition.right(shiftX);
+        targetPosition.down(shiftY);
     }
 
     @Override

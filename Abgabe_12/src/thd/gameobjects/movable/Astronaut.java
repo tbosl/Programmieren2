@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * A gameobject that represents the astronauts that get kidnapped by the alien invaders.
  */
-public class Astronaut extends ScannedGameObject implements ShiftableGameObject {
+public class Astronaut extends ScannedGameObject implements ShiftableGameObject, ShiftableTargetPostion {
     private final AstronautMovementPatterns astronautMovementPatterns;
     private static final int FALL_SPEED_IN_PIXEL = 1;
     Lander lander;
@@ -75,6 +75,12 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject 
                 gameView.playSound("thank_you.wav", false);
             }
         }
+    }
+
+    @Override
+    public void shiftTargetPosition(double shiftX, double shiftY) {
+        targetPosition.right(shiftX);
+        targetPosition.down(shiftY);
     }
 
     private void detachFromSpaceship() {

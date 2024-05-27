@@ -3,6 +3,7 @@ package thd.game.managers;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 import thd.gameobjects.base.ShiftableGameObject;
+import thd.gameobjects.base.ShiftableTargetPostion;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -80,6 +81,9 @@ public class WorldShiftManager extends UserControlledGameObjectPool {
         for (GameObject gameObject : shiftableGameObjects) {
             gameObject.getPosition().right(shiftX);
             gameObject.getPosition().down(shiftY);
+            if(gameObject instanceof ShiftableTargetPostion shiftableTargetPostionGameObject){
+                shiftableTargetPostionGameObject.shiftTargetPosition(shiftX,shiftY);
+            }
         }
     }
 }
