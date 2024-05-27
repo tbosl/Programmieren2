@@ -115,5 +115,4 @@ public class SpaceshipStateManager {
     public double currentExhaustSize() {
         return currentState.exhaustSize;
     }
-
 }
