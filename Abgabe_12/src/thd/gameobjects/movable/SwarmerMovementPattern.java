@@ -6,12 +6,12 @@ import thd.gameobjects.base.Position;
 class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
     private static final int SPAWN_MARGIN = 150;
     private boolean left;
-    private final Position lastSpaceshipPosition;
+    private final Position spaceshipPosition;
     private final double swarmerWidth;
 
     SwarmerMovementPattern(Position spaceship, double swarmerWidth) {
         left = spaceship.getX() <= GameView.WIDTH / 2f;
-        lastSpaceshipPosition = new Position(spaceship);
+        spaceshipPosition = spaceship;
         this.swarmerWidth = swarmerWidth;
     }
 
@@ -30,15 +30,16 @@ class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
         Position spaceship = referencePositions[0];
         Position currentPosition = referencePositions[1];
         Position targetPosition = referencePositions[2];
-        if ((currentPosition.getX() - swarmerWidth <= 0 || currentPosition.getX() + swarmerWidth >= GameView.WIDTH)) {
+        if (targetPosition.similarTo(new Position(0, 0))) {
+            return generatePositionAtOtherSide(spaceship);
+        }
+        if (currentPosition.getX() - swarmerWidth <= 0 || currentPosition.getX() + swarmerWidth >= GameView.WIDTH) {
             left = !left;
-            lastSpaceshipPosition.updateCoordinates(spaceship);
-            if (!targetOnOtherSide(currentPosition, targetPosition)){
+            if (!targetOnOtherSide(currentPosition, targetPosition)) {
                 return generatePositionAtOtherSide(spaceship);
             }
         }
         validateNewTargetPosition(targetPosition);
-        lastSpaceshipPosition.updateCoordinates(spaceship);
         return targetPosition;
     }
 
