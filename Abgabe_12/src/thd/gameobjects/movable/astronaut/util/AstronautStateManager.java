@@ -43,7 +43,7 @@ public class AstronautStateManager {
      * Resets the state of the astronaut to falling if the followed lander does no longer exist.
      */
     public void resetToFallingIfFollowedLanderDoesNoLongerExist() {
-        if (currentState == State.FOLLOW_LANDER && astronaut.getLander() == null) {
+        if (currentState == State.FOLLOW_LANDER && astronaut.lander == null) {
             currentState = State.FALLING;
         }
     }
@@ -57,10 +57,7 @@ public class AstronautStateManager {
         }
     }
 
-    /**
-     * Detaches the astronaut from the spaceship.
-     */
-    public void detachFromSpaceship() {
+    void detachFromSpaceship() {
         position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
         gamePlayManager.getSpaceship().attachedAstronaut = null;
         gamePlayManager.addPoints(astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
@@ -74,12 +71,7 @@ public class AstronautStateManager {
         currentState = State.WALKING;
     }
 
-    /**
-     * Checks if the current state of the astronaut is set to walking.
-     *
-     * @return {@code true} if the current state is walking, else {@code false}.
-     */
-    public boolean checkIfAstronautIsWalking() {
+    boolean checkIfAstronautIsWalking() {
         return currentState == State.WALKING;
     }
 
@@ -106,20 +98,11 @@ public class AstronautStateManager {
         currentState = State.FALLING;
     }
 
-    /**
-     * Checks if the current state of the astronaut is set falling
-     *
-     * @return {@code true} if the current state is falling, else {@code false}.
-     */
-    public boolean checkIfAstronautIsFalling() {
+    boolean checkIfAstronautIsFalling() {
         return currentState == State.FALLING;
     }
 
-
-    /**
-     * Sets the current state to follow the spaceship.
-     */
-    public void updateStateToFollowSpaceship() {
+    void updateStateToFollowSpaceship() {
         currentState = State.FOLLOW_SPACESHIP;
     }
 
@@ -132,12 +115,7 @@ public class AstronautStateManager {
         return currentState == State.FOLLOW_SPACESHIP;
     }
 
-    /**
-     * Provides the speed of the current state.
-     *
-     * @return The speed of the current state.
-     */
-    public double provideSpeedOfCurrentState() {
+    double provideSpeedOfCurrentState() {
         return currentState.speed;
     }
 

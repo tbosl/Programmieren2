@@ -48,8 +48,8 @@ public class AstronautCollisionManager {
     private void handleLaserCollision(CollidingGameObject other) {
         if (other instanceof LaserProjectile) {
             astronaut.selfDestruction();
-            if (astronaut.getLander() != null) {
-                astronaut.getLander().detachAstronautIfHeGotDestroyed();
+            if (astronaut.lander != null) {
+                astronaut.lander.detachAstronautIfHeGotDestroyed();
             }
         }
     }

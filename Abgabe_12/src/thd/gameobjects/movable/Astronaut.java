@@ -17,7 +17,10 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject,
     private final AstronautStateManager astronautStateManager;
     private final AstronautMovementManager astronautMovementManager;
     private final AstronautCollisionManager astronautCollisionManager;
-    Lander lander;
+    /**
+     * The lander to which the astronaut is attached. {@code null} if the astronaut is not attached to a lander.
+     */
+    public Lander lander;
 
     /**
      * The amount of points which will be added to the score after the astronaut got rescued and picked up.
@@ -99,15 +102,6 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject,
      */
     public boolean isAttachedToLander() {
         return lander != null && astronautStateManager.checkIfAstronautFollowsLander();
-    }
-
-    /**
-     * Gets the lander that the astronaut is currently following.
-     *
-     * @return The lander that the astronaut is currently following.
-     */
-    public Lander getLander() {
-        return lander;
     }
 
     AstronautStateManager getAstronautStateManager() {

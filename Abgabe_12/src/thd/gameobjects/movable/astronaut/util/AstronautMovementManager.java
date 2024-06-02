@@ -47,7 +47,7 @@ public class AstronautMovementManager {
     public void updatePosition() {
         if ((astronautStateManager.checkIfAstronautIsWalking() && !astronaut.stopWalking) || astronautStateManager.checkIfAstronautIsFalling()) {
             walk(astronautStateManager.provideSpeedOfCurrentState());
-        } else if (astronautStateManager.checkIfAstronautFollowsLander() || astronaut.getLander() != null) {
+        } else if (astronautStateManager.checkIfAstronautFollowsLander() || astronaut.lander != null) {
             followLander();
         } else if (astronautStateManager.checkIfAstronautFollowsSpaceship() || gamePlayManager.getSpaceship().attachedAstronaut == astronaut) {
             if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
@@ -69,7 +69,7 @@ public class AstronautMovementManager {
     private void followLander() {
         int horizontalOffset = 2;
         int verticalOffset = 30;
-        Lander lander = astronaut.getLander();
+        Lander lander = astronaut.lander;
         position.moveToPosition(new Position(lander.getPosition().getX() + horizontalOffset, lander.getPosition().getY() + verticalOffset), lander.getSpeedInPixel());
 
     }
