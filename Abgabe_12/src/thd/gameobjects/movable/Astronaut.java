@@ -3,6 +3,9 @@ package thd.gameobjects.movable;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.*;
+import thd.gameobjects.movable.astronaut.util.AstronautCollisionManager;
+import thd.gameobjects.movable.astronaut.util.AstronautMovementManager;
+import thd.gameobjects.movable.astronaut.util.AstronautStateManager;
 
 import java.awt.*;
 
@@ -11,28 +14,21 @@ import java.awt.*;
  */
 public class Astronaut extends ScannedGameObject implements ShiftableGameObject, ShiftableTargetPostion {
     private final AstronautMovementPatterns astronautMovementPatterns;
-    private static final int FALL_SPEED_IN_PIXEL = 1;
+    private final AstronautStateManager astronautStateManager;
+    private final AstronautMovementManager astronautMovementManager;
+    private final AstronautCollisionManager astronautCollisionManager;
     Lander lander;
-    static final int SCORE_POINTS_FOR_RESCUE_AND_PICK_UP = 500;
+
+    /**
+     * The amount of points which will be added to the score after the astronaut got rescued and picked up.
+     */
+    public static final int SCORE_POINTS_FOR_RESCUE_AND_PICK_UP = 500;
 
     /**
      * Determines whether the astronaut should stop to walk.
      */
     public boolean stopWalking;
 
-    private enum State {
-        WALKING(0.25),
-        FALLING(FALL_SPEED_IN_PIXEL),
-        FOLLOW_LANDER(0),
-        FOLLOW_SPACESHIP(0);
-        private double speed;
-
-        State(double speed) {
-            this.speed = speed;
-        }
-    }
-
-    private State currentState;
 
     /**
      * Creates an Astronaut with a reference of the gameview.
@@ -46,12 +42,15 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject,
         astronautMovementPatterns = new AstronautMovementPatterns(spawnLeftHalf, gamePlayManager);
         position.updateCoordinates(astronautMovementPatterns.startPosition());
         targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
+        this.astronautStateManager = new AstronautStateManager(this, gamePlayManager);
+        this.astronautMovementManager = new AstronautMovementManager(gameView, gamePlayManager, this, astronautMovementPatterns, astronautStateManager);
+        this.astronautCollisionManager = new AstronautCollisionManager(gameView, gamePlayManager, this, astronautStateManager);
         size = 0.08;
         speedInPixel = 0.25;
         height = 40;
         width = 15;
         distanceToBackground = 1;
-        currentState = State.WALKING;
+        astronautStateManager.updateStateToWalking();
         int hitBoxOffsetWidth = 5;
         hitBoxOffsets(hitBoxOffsetWidth, 0, 0, 0);
     }
@@ -63,54 +62,13 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject,
 
     @Override
     public void updatePosition() {
-        if ((currentState == State.WALKING && !stopWalking) || currentState == State.FALLING) {
-            walk();
-        } else if (currentState == State.FOLLOW_LANDER || lander != null) {
-            followLander();
-        } else if (currentState == State.FOLLOW_SPACESHIP || gamePlayManager.getSpaceship().attachedAstronaut == this) {
-            if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
-                followSpaceship();
-            } else {
-                detachFromSpaceship();
-                gameView.playSound("thank_you.wav", false);
-            }
-        }
+        astronautMovementManager.updatePosition();
     }
 
     @Override
     public void shiftTargetPosition(double shiftX, double shiftY) {
         targetPosition.right(shiftX);
         targetPosition.down(shiftY);
-    }
-
-    private void detachFromSpaceship() {
-        position.updateCoordinates(position.getX(), MovementPattern.LOWER_BOUNDARY);
-        gamePlayManager.getSpaceship().attachedAstronaut = null;
-        gamePlayManager.addPoints(SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
-        currentState = State.WALKING;
-    }
-
-
-    private void walk() {
-        if (position.similarTo(targetPosition) || position.getY() < MovementPattern.LOWER_BOUNDARY) {
-            targetPosition.updateCoordinates(astronautMovementPatterns.nextTargetPosition(position));
-        }
-        position.moveToPosition(targetPosition, currentState.speed);
-    }
-
-    private void followLander() {
-        if (lander != null) {
-            int horizontalOffset = 2;
-            int verticalOffset = 30;
-            position.moveToPosition(new Position(lander.getPosition().getX() + horizontalOffset, lander.getPosition().getY() + verticalOffset), lander.getSpeedInPixel());
-        }
-    }
-
-    private void followSpaceship() {
-        int horizontalOffset = 10;
-        int verticalOffset = 40;
-        Position spaceshipPosition = gamePlayManager.getSpaceship().getPosition();
-        position.updateCoordinates(spaceshipPosition.getX() + horizontalOffset, spaceshipPosition.getY() + verticalOffset);
     }
 
     @Override
@@ -121,45 +79,38 @@ public class Astronaut extends ScannedGameObject implements ShiftableGameObject,
     @Override
     public void updateStatus() {
         super.updateStatus();
-        if (currentState == State.FALLING && position.getY() >= MovementPattern.LOWER_BOUNDARY) {
-            currentState = State.WALKING;
-        }
-        if (position.getX() + gamePlayManager.getSpaceship().getAbsolutePosition().getX() - gamePlayManager.getSpaceship().getPosition().getX() > GamePlayManager.ABSOLUTE_WORLD_LENGTH) {
-            selfDestruction();
-        }
+        astronautStateManager.resetToFallingIfFollowedLanderDoesNoLongerExist();
+        astronautStateManager.checkForLandingAndStartWalking();
     }
 
     @Override
     public void reactToCollisionWith(CollidingGameObject other) {
-        if (other instanceof LaserProjectile) {
-            selfDestruction();
-            if (lander != null) {
-                lander.detachAstronautIfHeGotDestroyed();
-            }
-        }
-        if (other instanceof Spaceship spaceship && !isAttachedToLander()) {
-            if (position.getY() < MovementPattern.LOWER_BOUNDARY) {
-                spaceship.attachedAstronaut = this;
-                gamePlayManager.addPoints(Astronaut.SCORE_POINTS_FOR_RESCUE_AND_PICK_UP);
-                currentState = State.FOLLOW_SPACESHIP;
-                gameView.playSound("pick_astronaut.wav", false);
-            }
-        }
-    }
-
-    void updateStateToLander() {
-        currentState = State.FOLLOW_LANDER;
-    }
-
-    void updateStateToLFalling() {
-        currentState = State.FALLING;
+        astronautCollisionManager.reactToCollisionWith(other);
     }
 
     boolean canBeGrabbed() {
-        return currentState != State.FOLLOW_LANDER && currentState != State.FOLLOW_SPACESHIP;
+        return !astronautStateManager.checkIfAstronautFollowsLander() && !astronautStateManager.checkIfAstronautFollowsSpaceship();
     }
 
-    boolean isAttachedToLander() {
-        return lander != null && currentState == State.FOLLOW_LANDER;
+    /**
+     * Checks if the astronaut is currently attached to a lander.
+     *
+     * @return {@code true} if the astronaut is attached to a lander, else {@code false}.
+     */
+    public boolean isAttachedToLander() {
+        return lander != null && astronautStateManager.checkIfAstronautFollowsLander();
+    }
+
+    /**
+     * Gets the lander that the astronaut is currently following.
+     *
+     * @return The lander that the astronaut is currently following.
+     */
+    public Lander getLander() {
+        return lander;
+    }
+
+    AstronautStateManager getAstronautStateManager() {
+        return astronautStateManager;
     }
 }

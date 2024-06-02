@@ -6,7 +6,10 @@ import thd.gameobjects.base.Position;
 
 import java.util.Random;
 
-class AstronautMovementPatterns extends MovementPattern {
+/**
+ * Represents the movement patterns of the astronaut.
+ */
+public class AstronautMovementPatterns extends MovementPattern {
     private final boolean spawnLeft;
     private boolean walkingRight;
     private static final int DISTANCE_TO_WALK_IN_PIXEL = 50;
@@ -27,8 +30,14 @@ class AstronautMovementPatterns extends MovementPattern {
     }
 
 
+    /**
+     * Returns the next target position of the astronaut.
+     *
+     * @param referencePositions The reference positions. Position 0 is the current position of the astronaut.
+     * @return The next target position of the astronaut.
+     */
     @Override
-    protected Position nextTargetPosition(Position... referencePositions) {
+    public Position nextTargetPosition(Position... referencePositions) {
         if (referencePositions[0].getY() < LOWER_BOUNDARY) {
             return new Position(referencePositions[0].getX(), LOWER_BOUNDARY);
         }
@@ -42,7 +51,6 @@ class AstronautMovementPatterns extends MovementPattern {
         return adjustIfIllegalXCoordinate(targetXCoordinate);
     }
 
-    // TODO Absolute position
     private double adjustIfIllegalXCoordinate(double targetXCoordinate) {
         double leftBorder = leftBorder();
         if (targetXCoordinate < leftBorder) {

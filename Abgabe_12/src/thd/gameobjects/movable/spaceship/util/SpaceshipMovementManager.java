@@ -12,7 +12,6 @@ import thd.gameobjects.movable.Spaceship;
  */
 public class SpaceshipMovementManager {
     private final Spaceship spaceship;
-    private final GameView gameView;
     private static final int LEFT_SCROLL_THRESHOLD = 340;
     private static final int RIGHT_SCROLL_THRESHOLD = 940;
     private final GamePlayManager gamePlayManager;
@@ -20,12 +19,10 @@ public class SpaceshipMovementManager {
     /**
      * Creates a new manager for the spaceship movement.
      *
-     * @param gameView        The game view.
      * @param gamePlayManager The gameplay manager.
      * @param spaceship       The player's spaceship.
      */
-    public SpaceshipMovementManager(GameView gameView, GamePlayManager gamePlayManager, Spaceship spaceship) {
-        this.gameView = gameView;
+    public SpaceshipMovementManager(GamePlayManager gamePlayManager, Spaceship spaceship) {
         this.gamePlayManager = gamePlayManager;
         this.spaceship = spaceship;
     }

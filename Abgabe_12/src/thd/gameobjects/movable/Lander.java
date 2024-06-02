@@ -86,8 +86,8 @@ public class Lander extends ShootingEnemyGameObject {
     public void updateStatus() {
         super.updateStatus();
         if (position.getY() <= MovementPattern.UPPER_BOUNDARY && grabbedAstronaut != null && grabbedAstronaut.isAttachedToLander()) {
-            selfDestruction();
             grabbedAstronaut.selfDestruction();
+            selfDestruction();
             gamePlayManager.spawnGameObject(new Mutant(gameView, gamePlayManager, spaceship, this));
         }
         if (!attackingAllowed && gameView.gameTimeInMilliseconds() > waitTimeBeforeAttackingAstronaut + spawnTime) {
@@ -120,7 +120,7 @@ public class Lander extends ShootingEnemyGameObject {
 
     private void removeConnectionToAstronaut() {
         if (grabbedAstronaut != null) {
-            grabbedAstronaut.updateStateToLFalling();
+            grabbedAstronaut.getAstronautStateManager().updateStateToFalling();
             grabbedAstronaut.lander = null;
         }
         landerMovementPattern.astronautGrabbed = false;
@@ -129,11 +129,14 @@ public class Lander extends ShootingEnemyGameObject {
     private void pickUpAstronaut(Astronaut astronaut) {
         grabbedAstronaut = astronaut;
         grabbedAstronaut.lander = this;
-        grabbedAstronaut.updateStateToLander();
+        grabbedAstronaut.getAstronautStateManager().updateStateToFollowLander();
         landerMovementPattern.astronautGrabbed = true;
     }
 
-    void detachAstronautIfHeGotDestroyed() {
+    /**
+     * Detaches the astronaut from the lander if the astronaut got destroyed.
+     */
+    public void detachAstronautIfHeGotDestroyed() {
         grabbedAstronaut = null;
         landerMovementPattern.astronautGrabbed = false;
     }

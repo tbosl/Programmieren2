@@ -17,7 +17,10 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
     private final int shotDurationInMilliseconds;
     private boolean shotAvailable;
     private final Position absolutePosition;
-    Astronaut attachedAstronaut;
+    /**
+     * The astronaut which is currently attached to the spaceship.
+     */
+    public Astronaut attachedAstronaut;
     private final SmartBombManager smartBombManager;
     private final SpaceshipMovementManager spaceshipMovementManager;
     private final SpaceshipStateManager spaceshipStateManager;
@@ -44,7 +47,7 @@ public class Spaceship extends ScannedGameObject implements MainCharacter {
         int hitBoxOffsetY = 12;
         hitBoxOffsets(0, hitBoxOffsetY, 0, 0);
         smartBombManager = new SmartBombManager(gameView, gamePlayManager);
-        spaceshipMovementManager = new SpaceshipMovementManager(gameView, gamePlayManager, this);
+        spaceshipMovementManager = new SpaceshipMovementManager(gamePlayManager, this);
         spaceshipStateManager = new SpaceshipStateManager();
     }
 

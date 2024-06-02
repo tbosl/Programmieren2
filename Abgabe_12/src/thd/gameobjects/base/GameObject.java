@@ -55,6 +55,15 @@ public abstract class GameObject {
     }
 
     /**
+     * Returns the current target position of the game object.
+     *
+     * @return target position of the game object.
+     */
+    public Position getTargetPosition() {
+        return targetPosition;
+    }
+
+    /**
      * Returns width of game object.
      *
      * @return Width of game object
@@ -106,13 +115,13 @@ public abstract class GameObject {
         }
         GameObject other = (GameObject) o;
         return position.equals(other.position)
-               && targetPosition.equals(other.targetPosition)
-               && Double.compare(speedInPixel, other.speedInPixel) == 0
-               && Double.compare(rotation, other.rotation) == 0
-               && Double.compare(size, other.size) == 0
-               && Double.compare(width, other.width) == 0
-               && Double.compare(height, other.height) == 0
-               && distanceToBackground == other.distanceToBackground;
+                && targetPosition.equals(other.targetPosition)
+                && Double.compare(speedInPixel, other.speedInPixel) == 0
+                && Double.compare(rotation, other.rotation) == 0
+                && Double.compare(size, other.size) == 0
+                && Double.compare(width, other.width) == 0
+                && Double.compare(height, other.height) == 0
+                && distanceToBackground == other.distanceToBackground;
     }
 
     @Override
