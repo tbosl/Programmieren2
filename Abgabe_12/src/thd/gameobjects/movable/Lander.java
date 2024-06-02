@@ -112,12 +112,6 @@ public class Lander extends ShootingEnemyGameObject {
         }
     }
 
-    @Override
-    public void selfDestruction() {
-        super.selfDestruction();
-        removeConnectionToAstronaut();
-    }
-
     private void removeConnectionToAstronaut() {
         if (grabbedAstronaut != null) {
             grabbedAstronaut.getAstronautStateManager().updateStateToFalling();
@@ -131,6 +125,12 @@ public class Lander extends ShootingEnemyGameObject {
         grabbedAstronaut.lander = this;
         grabbedAstronaut.getAstronautStateManager().updateStateToFollowLander();
         landerMovementPattern.astronautGrabbed = true;
+    }
+
+    @Override
+    public void selfDestruction() {
+        super.selfDestruction();
+        removeConnectionToAstronaut();
     }
 
     /**

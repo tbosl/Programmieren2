@@ -8,10 +8,6 @@ import thd.gameobjects.base.GameObject;
  * Represents a smart bomb.
  */
 public class SmartBomb extends GameObject {
-    /**
-     * The amount of smart bombs the player has at the beginning of a new game.
-     */
-    public static final int AMOUNT_OF_SMART_BOMBS_AT_START = 3;
     private final int smartBombIndex;
 
     /**

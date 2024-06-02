@@ -6,12 +6,10 @@ import thd.gameobjects.base.Position;
 class SwarmerMovementPattern extends AlienInvadersRandomMovementPattern {
     private static final int SPAWN_MARGIN = 150;
     private boolean left;
-    private final Position spaceshipPosition;
     private final double swarmerWidth;
 
     SwarmerMovementPattern(Position spaceship, double swarmerWidth) {
         left = spaceship.getX() <= GameView.WIDTH / 2f;
-        spaceshipPosition = spaceship;
         this.swarmerWidth = swarmerWidth;
     }
 
