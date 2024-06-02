@@ -39,7 +39,7 @@ class GameManager extends LevelManager {
                 if (highScore) {
                     FileAccess.writeHighScoreToDisc(points);
                 }
-                endScreen.showEndScreen(points);
+                endScreen.showEndScreen(points, highScore);
                 startNewGame();
             }
         } else if (endOfLevel()) {
@@ -92,6 +92,6 @@ class GameManager extends LevelManager {
     }
 
     private boolean gameWon() {
-        return lives > 0 && (!hasNextLevel() && endOfLevel()) && (!provideAllAstronauts().isEmpty() || level.amountOfAstronauts > 0);
+        return lives > 0 && (!hasNextLevel() && endOfLevel()) && (!provideAllAstronauts().isEmpty() || level.amountOfAstronauts == 0);
     }
 }
