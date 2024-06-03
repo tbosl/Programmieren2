@@ -20,7 +20,8 @@ public class EndScreen {
     /**
      * Shows the end screen.
      *
-     * @param score The amount of points the user scored throughout the game.
+     * @param score     The amount of points the user scored throughout the game.
+     * @param highScore Whether the user has achieved a new high score.
      */
     public void showEndScreen(int score, boolean highScore) {
         String message = String.format("You have scored %d points.", score);

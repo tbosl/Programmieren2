@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Defender_Tobias_Bosl.jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Defender_Tobias_Bosl_jar</output-path>
+    <root id="archive" name="Defender_Tobias_Bosl.jar">
+      <element id="module-output" name="Abgabe_13" />
+    </root>
+  </artifact>
+</component>
