@@ -50,7 +50,7 @@ class GameManager extends LevelManager {
         FileAccess.writeDifficultyToDisc(difficulty); // Abspeichern der neuen Auswahl.
 
         Level.difficulty = difficulty;
-
+        pointsRequiredForNewLife = Level.difficulty == Difficulty.EASY ? POINTS_REQUIRED_FOR_NEW_LIFE_EASY : POINTS_REQUIRED_FOR_NEW_LIFE_STANDARD;
         initializeGame();
         gameView.playSound("theme.wav", true);
     }

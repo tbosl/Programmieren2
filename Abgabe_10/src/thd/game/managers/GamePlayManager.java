@@ -16,8 +16,11 @@ public class GamePlayManager extends WorldShiftManager {
 
     protected int smartBombs;
     protected int lives;
+    private int livesToAdd;
     protected int points;
-    private boolean addNewLife;
+    static final int POINTS_REQUIRED_FOR_NEW_LIFE_EASY = 1_000;
+    static final int POINTS_REQUIRED_FOR_NEW_LIFE_STANDARD = 2_500;
+    int pointsRequiredForNewLife;
     private final GameObjectManager gameObjectManager;
     /**
      * The absolute length of the game world.
@@ -27,7 +30,7 @@ public class GamePlayManager extends WorldShiftManager {
     protected GamePlayManager(GameView gameView) {
         super(gameView);
         this.gameObjectManager = new GameObjectManager();
-        addNewLife = false;
+        livesToAdd = 0;
     }
 
     /**
@@ -85,9 +88,9 @@ public class GamePlayManager extends WorldShiftManager {
     }
 
     private void gamePlayManagement() {
-        if (addNewLife) {
+        while (livesToAdd > 0) {
             lifeGained();
-            addNewLife = false;
+            livesToAdd--;
         }
     }
 
@@ -97,8 +100,23 @@ public class GamePlayManager extends WorldShiftManager {
      * @param amount The amount of points to be added.
      */
     public void addPoints(int amount) {
-        addNewLife = points / RemainingLive.POINTS_REQUIRED_FOR_NEW_LIFE < (points + amount) / RemainingLive.POINTS_REQUIRED_FOR_NEW_LIFE;
+        updateLivesToAdd(amount);
         points += amount;
+    }
+
+    private void updateLivesToAdd(int amount) {
+        int desiredAmountToAdd = calculateAmountOfLivesToAdd(amount);
+        if (livesToAdd == 0) {
+            livesToAdd = desiredAmountToAdd;
+        } else {
+            livesToAdd += desiredAmountToAdd;
+        }
+    }
+
+    private int calculateAmountOfLivesToAdd(int amount) {
+        int currentLiveLevel = points / pointsRequiredForNewLife;
+        int upcomingLiveLevel = (points + amount) / pointsRequiredForNewLife;
+        return upcomingLiveLevel - currentLiveLevel;
     }
 
     /**

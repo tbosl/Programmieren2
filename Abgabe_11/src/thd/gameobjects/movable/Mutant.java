@@ -1,5 +1,7 @@
 package thd.gameobjects.movable;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
@@ -35,7 +37,7 @@ class Mutant extends ShootingEnemyGameObject {
         position.updateCoordinates(movementPattern.startPosition(preMutation.getPosition()));
         targetPosition.updateCoordinates(movementPattern.nextTargetPosition(spaceship.getPosition(), position));
         size = 0.08;
-        speedInPixel = 4;
+        speedInPixel = Level.difficulty == Difficulty.EASY ? 3.5 : 5;
         width = 25;
         height = 40;
         distanceToBackground = 1;

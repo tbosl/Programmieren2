@@ -42,6 +42,7 @@ class GameManager extends LevelManager {
      */
     void startNewGame() {
         Level.difficulty = Difficulty.EASY;
+        pointsRequiredForNewLife = Level.difficulty == Difficulty.EASY ? POINTS_REQUIRED_FOR_NEW_LIFE_EASY : POINTS_REQUIRED_FOR_NEW_LIFE_STANDARD;
         initializeGame();
     }
 

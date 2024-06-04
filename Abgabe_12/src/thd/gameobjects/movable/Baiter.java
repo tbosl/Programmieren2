@@ -15,8 +15,8 @@ import java.awt.*;
 public class Baiter extends ShootingEnemyGameObject {
     private final BaiterMovementPattern movementPattern;
     private static final int THRESHOLD_TO_SPACESHIP = 200;
-    private static final int SLOW_SPEED_IN_PIXEL_EASY = 3;
-    private static final int FAST_SPEED_IN_PIXEL_EASY = 5;
+    private static final int SLOW_SPEED_IN_PIXEL_EASY = 2;
+    private static final int FAST_SPEED_IN_PIXEL_EASY = 4;
     private static final int SLOW_SPEED_IN_PIXEL_STANDARD = 4;
     private static final int FAST_SPEED_IN_PIXEL_STANDARD = 6;
     private static final int POINTS_ON_DESTRUCTION = 200;

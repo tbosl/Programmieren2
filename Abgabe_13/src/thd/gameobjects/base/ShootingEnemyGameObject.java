@@ -1,5 +1,7 @@
 package thd.gameobjects.base;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.movable.EnemyProjectile;
@@ -33,18 +35,19 @@ public abstract class ShootingEnemyGameObject extends EnemyGameObject {
     /**
      * Creates a new instance of a shooting enemy.
      *
-     * @param gameView           The gameview.
-     * @param gamePlayManager    The gameplay manager.
-     * @param pointOnDestruction The amount of points, the score will be increased after the enemy is shot.
-     * @param scanColor          The color in which the enemy will appear in the scan area.
-     * @param lowerIntervalBound The lower intervall bound of the shoot timer.
-     * @param upperIntervalBound The upper intervall bound of the shoot timer.
+     * @param gameView                The gameview.
+     * @param gamePlayManager         The gameplay manager.
+     * @param pointOnDestruction      The amount of points, the score will be increased after the enemy is shot.
+     * @param scanColor               The color in which the enemy will appear in the scan area.
+     * @param lowerShootIntervalBound The lower intervall bound of the shoot timer.
+     * @param upperShootIntervalBound The upper intervall bound of the shoot timer.
      */
-    public ShootingEnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointOnDestruction, Color scanColor, int lowerIntervalBound, int upperIntervalBound) {
+    public ShootingEnemyGameObject(GameView gameView, GamePlayManager gamePlayManager, int pointOnDestruction, Color scanColor, int lowerShootIntervalBound, int upperShootIntervalBound) {
         super(gameView, gamePlayManager, pointOnDestruction, scanColor);
         spaceship = gamePlayManager.getSpaceship();
-        this.lowerIntervalBound = lowerIntervalBound;
-        this.upperIntervalBound = upperIntervalBound;
+        int easyModeIntervalDelay = Level.difficulty == Difficulty.EASY ? 1500 : 0;
+        this.lowerIntervalBound = lowerShootIntervalBound + easyModeIntervalDelay;
+        this.upperIntervalBound = upperShootIntervalBound + easyModeIntervalDelay;
         generateNewShootInterval();
     }
 

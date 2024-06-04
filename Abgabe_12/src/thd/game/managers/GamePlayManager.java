@@ -18,6 +18,9 @@ public class GamePlayManager extends WorldShiftManager {
     protected int lives;
     protected int points;
     private int livesToAdd;
+    static final int POINTS_REQUIRED_FOR_NEW_LIFE_EASY = 1_000;
+    static final int POINTS_REQUIRED_FOR_NEW_LIFE_STANDARD = 2_500;
+    int pointsRequiredForNewLife;
     private final GameObjectManager gameObjectManager;
     /**
      * The absolute length of the game world.
@@ -75,7 +78,7 @@ public class GamePlayManager extends WorldShiftManager {
         return gameObjectManager.provideAllActiveEnemies();
     }
 
-    List<EnemyGameObject> provideAllEnemiesInToBeAdded(){
+    List<EnemyGameObject> provideAllEnemiesInToBeAdded() {
         return gameObjectManager.provideAllEnemiesInToBeAdded();
     }
 
@@ -115,8 +118,8 @@ public class GamePlayManager extends WorldShiftManager {
     }
 
     private int calculateAmountOfLivesToAdd(int amount) {
-        int currentLiveLevel = points / RemainingLive.POINTS_REQUIRED_FOR_NEW_LIFE;
-        int upcomingLiveLevel = (points + amount) / RemainingLive.POINTS_REQUIRED_FOR_NEW_LIFE;
+        int currentLiveLevel = points / pointsRequiredForNewLife;
+        int upcomingLiveLevel = (points + amount) / pointsRequiredForNewLife;
         return upcomingLiveLevel - currentLiveLevel;
     }
 

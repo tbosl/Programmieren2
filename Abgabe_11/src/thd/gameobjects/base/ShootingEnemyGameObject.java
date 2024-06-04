@@ -1,5 +1,7 @@
 package thd.gameobjects.base;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.movable.EnemyProjectile;
@@ -46,8 +48,9 @@ public abstract class ShootingEnemyGameObject extends EnemyGameObject {
         super(gameView, gamePlayManager, pointOnDestruction, scanColor);
         spaceship = gamePlayManager.getSpaceship();
         random = new Random();
-        this.lowerIntervalBound = lowerIntervalBound;
-        this.upperIntervalBound = upperIntervalBound;
+        int easyModeIntervalDelay = Level.difficulty == Difficulty.EASY ? 1500 : 0;
+        this.lowerIntervalBound = lowerIntervalBound + easyModeIntervalDelay;
+        this.upperIntervalBound = upperIntervalBound + easyModeIntervalDelay;
         generateNewShootInterval();
     }
 

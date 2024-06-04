@@ -1,5 +1,7 @@
 package thd.gameobjects.movable;
 
+import thd.game.level.Difficulty;
+import thd.game.level.Level;
 import thd.game.managers.GamePlayManager;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.CollidingGameObject;
@@ -41,7 +43,7 @@ public class Lander extends ShootingEnemyGameObject {
         int outerMarginToSideBorders = 100;
         targetPosition.updateCoordinates(landerMovementPattern.generateRandomPosition(-outerMarginToSideBorders, GameView.WIDTH + outerMarginToSideBorders));
         size = 0.08;
-        speedInPixel = 5;
+        speedInPixel = Level.difficulty == Difficulty.EASY ? 3.5 : 5;
         width = 25;
         height = 40;
         spawnTime = gameView.gameTimeInMilliseconds();

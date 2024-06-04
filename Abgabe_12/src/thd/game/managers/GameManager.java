@@ -64,6 +64,7 @@ class GameManager extends LevelManager {
         difficulty = startScreen.getSelectedDifficulty();
         FileAccess.writeDifficultyToDisc(difficulty);
         Level.difficulty = difficulty;
+        pointsRequiredForNewLife = Level.difficulty == Difficulty.EASY ? POINTS_REQUIRED_FOR_NEW_LIFE_EASY : POINTS_REQUIRED_FOR_NEW_LIFE_STANDARD;
         initializeGame();
         if (themeSoundId == -1) {
             themeSoundId = gameView.playSound("theme.wav", true);
