@@ -1,9 +1,7 @@
 package thd.gameobjects.unmovable;
 
-import thd.game.level.Difficulty;
 import thd.game.managers.GamePlayManager;
 import thd.game.managers.TooManyRemainingLivesException;
-import thd.game.utilities.FileAccess;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.GameObject;
 

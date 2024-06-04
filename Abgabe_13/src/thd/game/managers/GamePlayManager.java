@@ -1,7 +1,5 @@
 package thd.game.managers;
 
-import thd.game.level.Difficulty;
-import thd.game.utilities.FileAccess;
 import thd.game.utilities.GameView;
 import thd.gameobjects.base.EnemyGameObject;
 import thd.gameobjects.base.GameObject;
