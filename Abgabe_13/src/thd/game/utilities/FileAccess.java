@@ -52,7 +52,7 @@ public class FileAccess {
     }
 
     private static FileModel readModelFromFile() throws IOException {
-        return new FileModel(Files.readString(WICHTEL_GAME_FILE));
+        return new FileModel(Files.readString(WICHTEL_GAME_FILE.toAbsolutePath()));
     }
 
     /**
