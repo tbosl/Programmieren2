@@ -2,9 +2,11 @@ package thd.game.utilities;
 
 import thd.game.level.Difficulty;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 
 /**
@@ -24,7 +26,6 @@ public class FileAccess {
             FileModel fileModel = readModelFromFile();
             fileModel.difficulty = difficulty;
             writeModelToFile(fileModel);
-
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -51,8 +52,12 @@ public class FileAccess {
         Files.writeString(WICHTEL_GAME_FILE, fileModel.parseFileModelToFileContent(), StandardCharsets.UTF_8);
     }
 
-    private static FileModel readModelFromFile() throws IOException {
-        return new FileModel(Files.readString(WICHTEL_GAME_FILE));
+    private static FileModel readModelFromFile(){
+        try {
+            return new FileModel(Files.readString(WICHTEL_GAME_FILE.toAbsolutePath()));
+        } catch (IOException e) {
+            return new FileModel("");
+        }
     }
 
     /**
@@ -62,12 +67,8 @@ public class FileAccess {
      * @return The difficulty that is stored on the disc.
      */
     public static Difficulty readDifficultyFromDisc() {
-        try {
-            FileModel fileModel = readModelFromFile();
-            return fileModel.difficulty;
-        } catch (IOException e) {
-            return Difficulty.STANDARD;
-        }
+        FileModel fileModel = readModelFromFile();
+        return fileModel.difficulty;
     }
 
     /**
@@ -77,11 +78,7 @@ public class FileAccess {
      * @return The high score that is stored on the disc.
      */
     public static int readHighScoreFromDisc() {
-        try {
-            FileModel fileModel = readModelFromFile();
-            return fileModel.highScore;
-        } catch (IOException e) {
-            return 0;
-        }
+        FileModel fileModel = readModelFromFile();
+        return fileModel.highScore;
     }
 }
