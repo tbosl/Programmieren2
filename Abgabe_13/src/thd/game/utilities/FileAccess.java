@@ -50,9 +50,9 @@ public class FileAccess {
         Files.writeString(WICHTEL_GAME_FILE, fileModel.parseFileModelToFileContent(), StandardCharsets.UTF_8);
     }
 
-    private static FileModel readModelFromFile(){
+    private static FileModel readModelFromFile() {
         try {
-            return new FileModel(Files.readString(WICHTEL_GAME_FILE.toAbsolutePath()));
+            return new FileModel(Files.readString(WICHTEL_GAME_FILE.toAbsolutePath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
             return new FileModel("");
         }

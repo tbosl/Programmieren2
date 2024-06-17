@@ -52,7 +52,7 @@ public class FileAccess {
 
     private static FileModel readModelFromFile(){
         try {
-            return new FileModel(Files.readString(WICHTEL_GAME_FILE.toAbsolutePath()));
+            return new FileModel(Files.readString(WICHTEL_GAME_FILE.toAbsolutePath(), StandardCharsets.UTF_8));
         } catch (IOException e) {
             return new FileModel("");
         }
